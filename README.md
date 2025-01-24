@@ -4,15 +4,29 @@ This is a loot filter app for Path of Exile 2.
 
 ## Development
 
-The app is built with [Tauri](https://tauri.app/) and Vue/TypeScript.
+The app code uses Rust-Tauri backend and TypeScript-Vue frontend.
 
-## Run in development
+### Install prerequisites
+
+* Node.js with [NVM for Windows](https://github.com/coreybutler/nvm-windows) or [nvm](https://github.com/nvm-sh/nvm) for Linux/Mac. Node version is specified in [`.nvmrc`](.nvmrc).
+* [Yarn](https://yarnpkg.com/)
+* [Rust](https://www.rust-lang.org/)
+
+### Clone the repository
+
+```sh
+git clone https://github.com/evgenyneu/filturd.git
+```
+
+
+
+### Run in development
 
 ```sh
 yarn tauri dev
 ```
 
-## Build
+### Build
 
 ```sh
 yarn tauri build
