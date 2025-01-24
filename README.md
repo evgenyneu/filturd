@@ -9,7 +9,7 @@ The app code uses Rust-Tauri backend and TypeScript-Vue frontend.
 ### Install prerequisites
 
 * Node.js with [NVM for Windows](https://github.com/coreybutler/nvm-windows) or [nvm](https://github.com/nvm-sh/nvm) for Linux/Mac. Node version is specified in [`.nvmrc`](.nvmrc).
-* [Yarn](https://yarnpkg.com/)
+* [Yarn](https://yarnpkg.com) with `corepack enable`.
 * [Rust](https://www.rust-lang.org/)
 
 ### Clone the repository
