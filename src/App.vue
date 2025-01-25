@@ -22,6 +22,7 @@ register(key, async (event: ShortcutEvent) => {
 
   if (textFromClipboard.startsWith('Item Class:')) {
     itemDescription.value = textFromClipboard;
+    invoke('play_sound', { file: 'camera_snap1.wav' });
   }
 });
 

@@ -4,9 +4,24 @@ use enigo::{
     Enigo, Key, Keyboard, Settings,
 };
 
+use rodio::{Decoder, OutputStream, Sink};
+use std::fs::File;
+use std::io::BufReader;
+use std::path::Path;
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+fn play_sound(file: &str) {
+    let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
+    let sink = rodio::Sink::try_new(&handle).unwrap();
+    let path = Path::new("resources/sounds/").join(file);
+    let file = std::fs::File::open(path).unwrap();
+    sink.append(rodio::Decoder::new(BufReader::new(file)).unwrap());
+    sink.sleep_until_end();
 }
 
 #[tauri::command]
@@ -23,7 +38,7 @@ pub fn run() {
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, simulate_copy])
+        .invoke_handler(tauri::generate_handler![greet, simulate_copy, play_sound])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
