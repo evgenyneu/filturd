@@ -13,7 +13,7 @@ async function greet() {
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 
-const key = 'CommandOrControl+/'
+const key = 'CommandOrControl+1'
 
 register(key, async (event: ShortcutEvent) => {
   if (event.state !== 'Pressed') { return; }
@@ -22,10 +22,7 @@ register(key, async (event: ShortcutEvent) => {
 
   if (textFromClipboard.startsWith('Item Class:')) {
     itemDescription.value = textFromClipboard;
-    // invoke('play_sound', { file: 'camera_snap1.mp3' });
-    invoke('play_sound', { file: '785640__litesaturation__cinematic-trailer-15-sec.mp3' }).then(() =>
-      console.log('Sound play completed!')
-    );
+    invoke('play_sound', { file: 'camera_snap1.mp3' });
   }
 });
 
