@@ -12,10 +12,10 @@ async function greet() {
 </script>
 
 <template>
-  <main class="m-0 pt-[10vh] flex flex-col justify-center text-center">
+  <main class="m-0 h-screen flex flex-col justify-center items-center">
     <h1 class="text-center">Welcome to Tauri + Vue</h1>
 
-    <div class="flex justify-center">
+    <div class="flex">
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" class="h-24 p-6 transition-all duration-750 hover:drop-shadow-[0_0_2em_#747bff]"
           alt="Vite logo" />
