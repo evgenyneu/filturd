@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
-import { register, ShortcutEvent } from '@tauri-apps/plugin-global-shortcut';
+import { register, ShortcutEvent, isRegistered, unregister } from '@tauri-apps/plugin-global-shortcut';
+import { readText } from '@tauri-apps/plugin-clipboard-manager'
 
 const greetMsg = ref("");
 const name = ref("");
+const itemDescription = ref("");
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 
-register('CommandOrControl+Shift+L', async (event: ShortcutEvent) => {
+const key = 'CommandOrControl+/'
+
+register(key, async (event: ShortcutEvent) => {
   if (event.state !== 'Pressed') { return; }
-  greetMsg.value = `Shortcut triggered ${event.state}`;
-  let copied = await invoke('simulate_copy');
+  await invoke('simulate_copy');
+  let textFromClipboard = await readText();
+
+  if (textFromClipboard.startsWith('Item Class:')) {
+    itemDescription.value = textFromClipboard;
+  }
 });
+
 </script>
 
 <template>
@@ -49,5 +58,6 @@ register('CommandOrControl+Shift+L', async (event: ShortcutEvent) => {
       </button>
     </form>
     <p>{{ greetMsg }}</p>
+    <pre class="text-left whitespace-pre-wrap">{{ itemDescription }}</pre>
   </main>
 </template>
