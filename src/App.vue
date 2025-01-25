@@ -15,6 +15,8 @@ async function greet() {
   <main class="container">
     <h1>Welcome to Tauri + Vue</h1>
 
+    <div class="bg-blue-500 text-white p-4 rounded-md">This is a test for TailwindCSS</div>
+
     <div class="row">
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" class="logo vite" alt="Vite logo" />
