@@ -11,8 +11,9 @@ async function greet() {
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 
-register('CommandOrControl+Shift+L', () => {
+register('CommandOrControl+Shift+L', async () => {
   console.log('Shortcut triggered');
+  await invoke('simulate_copy');
 });
 </script>
 
