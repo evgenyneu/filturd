@@ -1,0 +1,12 @@
+{
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar",
+    "editor.formatOnSave": true,
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+  },
+  "[rust]": {
+    "editor.formatOnSave": true,
+  }
+}

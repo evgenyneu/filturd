@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
-import { register } from '@tauri-apps/plugin-global-shortcut';
+import { register, ShortcutEvent } from '@tauri-apps/plugin-global-shortcut';
 
 const greetMsg = ref("");
 const name = ref("");
@@ -11,9 +11,10 @@ async function greet() {
   greetMsg.value = await invoke("greet", { name: name.value });
 }
 
-register('CommandOrControl+Shift+L', async () => {
-  console.log('Shortcut triggered');
-  await invoke('simulate_copy');
+register('CommandOrControl+Shift+L', async (event: ShortcutEvent) => {
+  if (event.state !== 'Pressed') { return; }
+  greetMsg.value = `Shortcut triggered ${event.state}`;
+  let copied = await invoke('simulate_copy');
 });
 </script>
 
