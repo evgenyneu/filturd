@@ -13,13 +13,15 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn play_sound(file: &str) {
+async fn play_sound(file: String) -> Result<(), ()> {
     let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
     let sink = rodio::Sink::try_new(&handle).unwrap();
     let path = Path::new("resources/sounds/").join(file);
     let file = std::fs::File::open(path).unwrap();
-    sink.append(rodio::Decoder::new(BufReader::new(file)).unwrap());
+    let source = rodio::Decoder::new(BufReader::new(file)).unwrap();
+    sink.append(source);
     sink.sleep_until_end();
+    Ok(())
 }
 
 #[tauri::command]
