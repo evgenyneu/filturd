@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
-import { register, ShortcutEvent, isRegistered, unregister } from '@tauri-apps/plugin-global-shortcut';
+import { register, ShortcutEvent } from '@tauri-apps/plugin-global-shortcut';
 import { readText } from '@tauri-apps/plugin-clipboard-manager'
 
 const greetMsg = ref("");
@@ -22,7 +22,7 @@ register(key, async (event: ShortcutEvent) => {
 
   if (textFromClipboard.startsWith('Item Class:')) {
     itemDescription.value = textFromClipboard;
-    invoke('play_sound', { file: 'camera_snap1.wav' });
+    invoke('play_sound', { file: 'camera_snap1.mp3' });
   }
 });
 
