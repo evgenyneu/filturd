@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent } from '@tauri-apps/plugin-global-shortcut';
-import { readText } from '@tauri-apps/plugin-clipboard-manager'
 
 const greetMsg = ref("");
 const name = ref("");
@@ -17,13 +16,10 @@ const key = 'CommandOrControl+1'
 
 register(key, async (event: ShortcutEvent) => {
   if (event.state !== 'Pressed') { return; }
-  await invoke('simulate_copy');
-  let textFromClipboard = await readText();
-
-  if (textFromClipboard.startsWith('Item Class:')) {
-    itemDescription.value = textFromClipboard;
-    invoke('play_sound', { file: 'camera_snap1.mp3' });
-  }
+  let descriptionFromClipboard: string | null = await invoke('copy_item_description_under_cursor');
+  if (!descriptionFromClipboard) { return; }
+  itemDescription.value = descriptionFromClipboard;
+  invoke('play_sound', { file: 'camera_snap1.mp3' });
 });
 
 </script>
