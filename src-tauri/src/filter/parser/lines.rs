@@ -1,13 +1,19 @@
 use super::remove_comment::remove_comment;
-use std::error::Error;
 
 /// Parses content of a loot filter file into a vector of lines.
-pub fn content_to_lines(content: &str) -> Result<Vec<String>, Box<dyn Error>> {
-    Ok(content
-        .lines()
-        .map(|line| remove_comment(line).trim().to_string())
-        .filter(|line| !line.is_empty())
-        .collect())
+pub fn content_to_lines(content: &str) -> Vec<String> {
+    let mut lines = Vec::new();
+
+    for line in content.lines() {
+        let line = remove_comment(line);
+        let line = line.trim();
+
+        if !line.is_empty() {
+            lines.push(line.to_string());
+        }
+    }
+
+    lines
 }
 
 #[cfg(test)]
@@ -23,7 +29,7 @@ SetFontSize 45 # Big size
 Hide # Not interesting
 BaseType "Scroll of Wisdom""#;
 
-        let lines = content_to_lines(content).unwrap();
+        let lines = content_to_lines(content);
 
         assert_eq!(
             lines,
@@ -40,14 +46,14 @@ BaseType "Scroll of Wisdom""#;
     #[test]
     fn test_empty_content() {
         let content = "";
-        let lines = content_to_lines(content).unwrap();
+        let lines = content_to_lines(content);
         assert!(lines.is_empty());
     }
 
     #[test]
     fn test_tabs_and_spaces() {
         let content = "\t  Show  \t\n\t\tBaseType \"Mirror\"  \t";
-        let lines = content_to_lines(content).unwrap();
+        let lines = content_to_lines(content);
         assert_eq!(lines, vec!["Show", "BaseType \"Mirror\""]);
     }
 
@@ -61,7 +67,7 @@ BaseType "Scroll of Wisdom""#;
 
 "#;
 
-        let lines = content_to_lines(content).unwrap();
+        let lines = content_to_lines(content);
         assert_eq!(lines, vec!["Show", "BaseType \"Mirror\""]);
     }
 }
