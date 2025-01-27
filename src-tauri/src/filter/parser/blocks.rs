@@ -1,14 +1,26 @@
 use std::error::Error;
 
 #[derive(Debug, PartialEq)]
+pub enum BlockName {
+    Show,
+    Hide,
+}
+
+#[derive(Debug, PartialEq)]
 pub struct Block {
-    pub name: String,
+    pub name: BlockName,
     pub lines: Vec<String>,
 }
 
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
+    let name = match lines[start].as_str() {
+        "Show" => BlockName::Show,
+        "Hide" => BlockName::Hide,
+        _ => panic!("Invalid block name"), // We might want to handle this more gracefully later
+    };
+
     Block {
-        name: lines[start].to_string(),
+        name,
         lines: lines[start + 1..=end].to_vec(),
     }
 }
@@ -59,21 +71,21 @@ mod tests {
         assert_eq!(blocks.len(), 3);
 
         // First block
-        assert_eq!(blocks[0].name, "Show");
+        assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(
             blocks[0].lines,
             vec!["BaseType == \"Mirror of Kalandra\"", "SetFontSize 45"]
         );
 
         // Second block
-        assert_eq!(blocks[1].name, "Hide");
+        assert_eq!(blocks[1].name, BlockName::Hide);
         assert_eq!(
             blocks[1].lines,
             vec!["BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
         );
 
         // Third block
-        assert_eq!(blocks[2].name, "Show");
+        assert_eq!(blocks[2].name, BlockName::Show);
         assert_eq!(
             blocks[2].lines,
             vec!["Class \"Currency\"", "SetFontSize 40"]
@@ -90,7 +102,7 @@ mod tests {
         let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
-        assert_eq!(blocks[0].name, "Show");
+        assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(blocks[0].lines, vec!["BaseType == \"Mirror\""]);
     }
 
