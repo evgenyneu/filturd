@@ -14,8 +14,7 @@ pub struct Block {
 }
 
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
-    let first_line = lines[start].trim();
-    let is_show = first_line.starts_with("Show");
+    let is_show = lines[start].starts_with("Show");
 
     Block {
         is_show,
@@ -32,9 +31,7 @@ pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     let mut current_block_start = None;
 
     for (i, line) in lines.iter().enumerate() {
-        let trimmed = line.trim();
-
-        if trimmed.starts_with("Show") || trimmed.starts_with("Hide") {
+        if line.starts_with("Show") || line.starts_with("Hide") {
             if let Some(start) = current_block_start {
                 blocks.push(create_block(lines, start, i - 1));
             }
