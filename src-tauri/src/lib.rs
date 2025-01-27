@@ -3,25 +3,15 @@ use std::path::Path;
 
 mod commands {
     pub mod copy_item_desc;
+    pub mod play_sound;
 }
 
 use commands::copy_item_desc::copy_item_description_under_cursor;
+use commands::play_sound::play_sound;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
-#[tauri::command]
-async fn play_sound(file: String) -> Result<(), ()> {
-    let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
-    let sink = rodio::Sink::try_new(&handle).unwrap();
-    let path = Path::new("resources/sounds/").join(file);
-    let file = std::fs::File::open(path).unwrap();
-    let source = rodio::Decoder::new(BufReader::new(file)).unwrap();
-    sink.append(source);
-    sink.sleep_until_end();
-    Ok(())
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
