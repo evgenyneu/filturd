@@ -1,27 +1,14 @@
 use std::error::Error;
 
 #[derive(Debug, PartialEq)]
-pub struct BlockPosition {
-    pub start_line: usize,
-    pub end_line: usize,
-}
-
-#[derive(Debug, PartialEq)]
 pub struct Block {
-    pub is_show: bool,
-    pub position: BlockPosition,
+    pub name: String,
     pub lines: Vec<String>,
 }
 
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
-    let is_show = lines[start].starts_with("Show");
-
     Block {
-        is_show,
-        position: BlockPosition {
-            start_line: start,
-            end_line: end,
-        },
+        name: lines[start].to_string(),
         lines: lines[start..=end].to_vec(),
     }
 }
@@ -72,9 +59,7 @@ mod tests {
         assert_eq!(blocks.len(), 3);
 
         // First block
-        assert!(blocks[0].is_show);
-        assert_eq!(blocks[0].position.start_line, 0);
-        assert_eq!(blocks[0].position.end_line, 2);
+        assert_eq!(blocks[0].name, "Show");
         assert_eq!(
             blocks[0].lines,
             vec![
@@ -85,18 +70,14 @@ mod tests {
         );
 
         // Second block
-        assert!(!blocks[1].is_show);
-        assert_eq!(blocks[1].position.start_line, 3);
-        assert_eq!(blocks[1].position.end_line, 5);
+        assert_eq!(blocks[1].name, "Hide");
         assert_eq!(
             blocks[1].lines,
             vec!["Hide", "BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
         );
 
         // Third block
-        assert!(blocks[2].is_show);
-        assert_eq!(blocks[2].position.start_line, 6);
-        assert_eq!(blocks[2].position.end_line, 8);
+        assert_eq!(blocks[2].name, "Show");
         assert_eq!(
             blocks[2].lines,
             vec!["Show", "Class \"Currency\"", "SetFontSize 40"]
@@ -113,9 +94,7 @@ mod tests {
         let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
-        assert!(blocks[0].is_show);
-        assert_eq!(blocks[0].position.start_line, 0);
-        assert_eq!(blocks[0].position.end_line, 1);
+        assert_eq!(blocks[0].name, "Show");
         assert_eq!(blocks[0].lines, vec!["Show", "BaseType == \"Mirror\""]);
     }
 
