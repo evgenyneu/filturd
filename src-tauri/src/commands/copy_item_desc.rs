@@ -23,7 +23,6 @@ pub fn copy_item_description_under_cursor() -> Option<String> {
     let text = match clipboard.get_text() {
         Ok(text) => text,
         Err(e) => {
-            eprintln!("Failed to get clipboard text: {}", e);
             return None;
         }
     };
