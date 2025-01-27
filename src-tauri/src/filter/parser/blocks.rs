@@ -6,6 +6,18 @@ pub enum BlockName {
     Hide,
 }
 
+const BLOCK_NAMES: [&str; 2] = ["Show", "Hide"];
+
+impl BlockName {
+    fn from_str(s: &str) -> Option<Self> {
+        match s {
+            "Show" => Some(BlockName::Show),
+            "Hide" => Some(BlockName::Hide),
+            _ => None,
+        }
+    }
+}
+
 #[derive(Debug, PartialEq)]
 pub struct Block {
     pub name: BlockName,
@@ -13,16 +25,16 @@ pub struct Block {
 }
 
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
-    let name = match lines[start].as_str() {
-        "Show" => BlockName::Show,
-        "Hide" => BlockName::Hide,
-        _ => panic!("Invalid block name"), // We might want to handle this more gracefully later
-    };
+    let name = BlockName::from_str(lines[start].as_str()).expect("Invalid block name"); // We already validated this in is_block_start
 
     Block {
         name,
         lines: lines[start + 1..=end].to_vec(),
     }
+}
+
+fn is_block_start(line: &str) -> bool {
+    BLOCK_NAMES.iter().any(|&name| line.starts_with(name))
 }
 
 fn try_add_block_if_exists(
@@ -45,7 +57,7 @@ pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     let mut current_block_start = None;
 
     for (i, line) in lines.iter().enumerate() {
-        if line.starts_with("Show") || line.starts_with("Hide") {
+        if is_block_start(line) {
             try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1));
             current_block_start = Some(i);
         }
