@@ -29,8 +29,7 @@ isRegistered(key).then((isRegistered) => {
       itemDescription.value = descriptionFromClipboard;
       invoke('play_sound', { file: 'camera_snap1.mp3' });
       const window = getCurrentWindow();
-      window.setFocus();
-
+      await window.setFocus();
     });
   }
 });
