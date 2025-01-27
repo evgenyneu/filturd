@@ -1,15 +1,20 @@
 use std::error::Error;
-use strum::{AsRefStr, EnumIter, IntoEnumIterator};
 
-#[derive(Debug, PartialEq, EnumIter, AsRefStr)]
+#[derive(Debug, PartialEq)]
 pub enum BlockName {
     Show,
     Hide,
 }
 
+const BLOCK_NAMES: [&str; 2] = ["Show", "Hide"];
+
 impl BlockName {
     fn from_str(s: &str) -> Option<Self> {
-        BlockName::iter().find(|name| name.as_ref() == s)
+        match s {
+            "Show" => Some(BlockName::Show),
+            "Hide" => Some(BlockName::Hide),
+            _ => None,
+        }
     }
 }
 
@@ -29,7 +34,7 @@ fn create_block(lines: &[String], start: usize, end: usize) -> Block {
 }
 
 fn is_block_start(line: &str) -> bool {
-    BlockName::iter().any(|name| line.starts_with(name.as_ref()))
+    BLOCK_NAMES.iter().any(|&name| line.starts_with(name))
 }
 
 fn try_add_block_if_exists(
