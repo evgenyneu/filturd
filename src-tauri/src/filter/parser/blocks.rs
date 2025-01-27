@@ -25,26 +25,38 @@ fn create_block(lines: &[String], start: usize, end: usize) -> Block {
     }
 }
 
+fn try_add_block_if_exists(
+    blocks: &mut Vec<Block>,
+    lines: &[String],
+    start: Option<usize>,
+    end: usize,
+) {
+    if let Some(start) = start {
+        let line_count = end.saturating_sub(start);
+
+        if line_count > 0 {
+            blocks.push(create_block(lines, start, end));
+        }
+    }
+}
+
 pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
 
     for (i, line) in lines.iter().enumerate() {
         if line.starts_with("Show") || line.starts_with("Hide") {
-            if let Some(start) = current_block_start {
-                if i - start > 1 {
-                    blocks.push(create_block(lines, start, i - 1));
-                }
-            }
+            try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1));
             current_block_start = Some(i);
         }
     }
 
-    if let Some(start) = current_block_start {
-        if lines.len() - start > 1 {
-            blocks.push(create_block(lines, start, lines.len() - 1));
-        }
-    }
+    try_add_block_if_exists(
+        &mut blocks,
+        lines,
+        current_block_start,
+        lines.len().saturating_sub(1),
+    );
 
     Ok(blocks)
 }
