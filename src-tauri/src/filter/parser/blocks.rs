@@ -10,7 +10,7 @@ pub struct BlockPosition {
 pub struct Block {
     pub is_show: bool,
     pub position: BlockPosition,
-    pub text: String,
+    pub lines: Vec<String>,
 }
 
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
@@ -22,7 +22,7 @@ fn create_block(lines: &[String], start: usize, end: usize) -> Block {
             start_line: start,
             end_line: end,
         },
-        text: lines[start..=end].join("\n"),
+        lines: lines[start..=end].to_vec(),
     }
 }
 
@@ -75,25 +75,32 @@ mod tests {
         assert!(blocks[0].is_show);
         assert_eq!(blocks[0].position.start_line, 0);
         assert_eq!(blocks[0].position.end_line, 2);
-
-        let expected_text = "Show\nBaseType == \"Mirror of Kalandra\"\nSetFontSize 45";
-        assert_eq!(blocks[0].text, expected_text);
+        assert_eq!(
+            blocks[0].lines,
+            vec![
+                "Show",
+                "BaseType == \"Mirror of Kalandra\"",
+                "SetFontSize 45"
+            ]
+        );
 
         // Second block
         assert!(!blocks[1].is_show);
         assert_eq!(blocks[1].position.start_line, 3);
         assert_eq!(blocks[1].position.end_line, 5);
-
-        let expected_text = "Hide\nBaseType == \"Scroll of Wisdom\"\nSetFontSize 18";
-        assert_eq!(blocks[1].text, expected_text);
+        assert_eq!(
+            blocks[1].lines,
+            vec!["Hide", "BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
+        );
 
         // Third block
         assert!(blocks[2].is_show);
         assert_eq!(blocks[2].position.start_line, 6);
         assert_eq!(blocks[2].position.end_line, 8);
-
-        let expected_text = "Show\nClass \"Currency\"\nSetFontSize 40";
-        assert_eq!(blocks[2].text, expected_text);
+        assert_eq!(
+            blocks[2].lines,
+            vec!["Show", "Class \"Currency\"", "SetFontSize 40"]
+        );
     }
 
     #[test]
@@ -109,9 +116,7 @@ mod tests {
         assert!(blocks[0].is_show);
         assert_eq!(blocks[0].position.start_line, 0);
         assert_eq!(blocks[0].position.end_line, 1);
-
-        let expected_text = "Show\nBaseType == \"Mirror\"";
-        assert_eq!(blocks[0].text, expected_text);
+        assert_eq!(blocks[0].lines, vec!["Show", "BaseType == \"Mirror\""]);
     }
 
     #[test]
