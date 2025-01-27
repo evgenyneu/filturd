@@ -24,33 +24,33 @@ pub struct Block {
     pub lines: Vec<String>,
 }
 
-fn create_block(lines: &[String], start: usize, end: usize) -> Block {
-    let name = BlockName::from_str(lines[start].as_str()).expect("Invalid block name"); // We already validated this in is_block_start
-
-    Block {
-        name,
-        lines: lines[start + 1..=end].to_vec(),
-    }
-}
-
-fn is_block_start(line: &str) -> bool {
-    BLOCK_NAMES.iter().any(|&name| line.starts_with(name))
+fn is_block_start(line: &str) -> Option<BlockName> {
+    BLOCK_NAMES
+        .iter()
+        .find(|&&name| line.starts_with(name))
+        .and_then(|&name| BlockName::from_str(name))
 }
 
 fn try_add_block_if_exists(
     blocks: &mut Vec<Block>,
     lines: &[String],
-    start: Option<usize>,
+    start: Option<(usize, BlockName)>,
     end: usize,
 ) {
-    let Some(start) = start else { return };
+    let Some((start, block_name)) = start else {
+        return;
+    };
+
     let line_count = end.saturating_sub(start);
 
     if line_count == 0 {
         return;
     }
 
-    blocks.push(create_block(lines, start, end));
+    blocks.push(Block {
+        name: block_name,
+        lines: lines[start + 1..=end].to_vec(),
+    });
 }
 
 pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
@@ -58,10 +58,12 @@ pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     let mut current_block_start = None;
 
     for (i, line) in lines.iter().enumerate() {
-        if is_block_start(line) {
-            try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1));
-            current_block_start = Some(i);
-        }
+        let Some(block_name) = is_block_start(line) else {
+            continue;
+        };
+
+        try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1));
+        current_block_start = Some((i, block_name));
     }
 
     try_add_block_if_exists(
