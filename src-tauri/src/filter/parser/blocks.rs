@@ -55,18 +55,21 @@ mod tests {
 
     #[test]
     fn test_parse_basic_blocks() {
-        let content = vec![
-            "Show".to_string(),
-            "    BaseType == \"Mirror of Kalandra\"".to_string(),
-            "    SetFontSize 45".to_string(),
-            "".to_string(),
-            " Hide".to_string(),
-            "BaseType == \"Scroll of Wisdom\"".to_string(),
-            "      SetFontSize 18".to_string(),
-            "Show".to_string(),
-            "    Class \"Currency\"".to_string(),
-            "    SetFontSize 40".to_string(),
-        ];
+        let content: Vec<String> = vec![
+            "Show",
+            "    BaseType == \"Mirror of Kalandra\"",
+            "    SetFontSize 45",
+            "",
+            " Hide",
+            "BaseType == \"Scroll of Wisdom\"",
+            "      SetFontSize 18",
+            "Show",
+            "    Class \"Currency\"",
+            "    SetFontSize 40",
+        ]
+        .into_iter()
+        .map(Into::into)
+        .collect();
 
         let blocks = parse_blocks(&content).unwrap();
 
@@ -99,15 +102,18 @@ mod tests {
 
     #[test]
     fn test_parse_with_comments() {
-        let content = vec![
-            "# Comment at start".to_string(),
-            "Show # Comment after Show".to_string(),
-            "    BaseType == \"Mirror\" # Comment after rule".to_string(),
-            "".to_string(),
-            "# Comment between blocks".to_string(),
-            "Hide".to_string(),
-            "    BaseType == \"Wisdom\"".to_string(),
-        ];
+        let content: Vec<String> = vec![
+            "# Comment at start",
+            "Show # Comment after Show",
+            "    BaseType == \"Mirror\" # Comment after rule",
+            "",
+            "# Comment between blocks",
+            "Hide",
+            "    BaseType == \"Wisdom\"",
+        ]
+        .into_iter()
+        .map(Into::into)
+        .collect();
 
         let blocks = parse_blocks(&content).unwrap();
 
@@ -132,7 +138,10 @@ mod tests {
 
     #[test]
     fn test_single_block() {
-        let content = vec!["Show".to_string(), "    BaseType == \"Mirror\"".to_string()];
+        let content: Vec<String> = vec!["Show", "    BaseType == \"Mirror\""]
+            .into_iter()
+            .map(Into::into)
+            .collect();
 
         let blocks = parse_blocks(&content).unwrap();
 
@@ -147,11 +156,10 @@ mod tests {
 
     #[test]
     fn test_tabs() {
-        let content = vec![
-            "".to_string(),
-            "\t\t Hide".to_string(),
-            "\t\tBaseType == \"Mirror\"".to_string(),
-        ];
+        let content: Vec<String> = vec!["", "\t\t Hide", "\t\tBaseType == \"Mirror\""]
+            .into_iter()
+            .map(Into::into)
+            .collect();
 
         let blocks = parse_blocks(&content).unwrap();
 
@@ -166,11 +174,10 @@ mod tests {
 
     #[test]
     fn test_no_blocks() {
-        let content = vec![
-            "".to_string(),
-            "    nothing to see here".to_string(),
-            "    ".to_string(),
-        ];
+        let content: Vec<String> = vec!["", "    nothing to see here", "    "]
+            .into_iter()
+            .map(Into::into)
+            .collect();
 
         let blocks = parse_blocks(&content).unwrap();
 
