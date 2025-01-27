@@ -1,18 +1,8 @@
-use std::io::BufReader;
-use std::path::Path;
-
-mod commands {
-    pub mod copy_item_desc;
-    pub mod play_sound;
-}
+mod commands;
 
 use commands::copy_item_desc::copy_item_description_under_cursor;
+use commands::greet::greet;
 use commands::play_sound::play_sound;
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
