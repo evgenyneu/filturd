@@ -25,6 +25,10 @@ serde_json = "1"
 enigo = "0.3"
 rodio = { version = "0.20.1", default-features = false, features = ["mp3"] }
 arboard = { version = "3.4.1", default-features = false }
+tokio = { version = "1.0", features = ["fs", "rt", "macros"] }
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-global-shortcut = "2"
+
+[dev-dependencies]
+tempfile = "3.2"

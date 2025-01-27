@@ -1,4 +1,5 @@
 mod commands;
+pub mod filter;
 
 use commands::copy_item_desc::copy_item_description_under_cursor;
 use commands::greet::greet;
