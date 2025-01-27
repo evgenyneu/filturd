@@ -43,13 +43,14 @@ fn try_add_block_if_exists(
     start: Option<usize>,
     end: usize,
 ) {
-    if let Some(start) = start {
-        let line_count = end.saturating_sub(start);
+    let Some(start) = start else { return };
+    let line_count = end.saturating_sub(start);
 
-        if line_count > 0 {
-            blocks.push(create_block(lines, start, end));
-        }
+    if line_count == 0 {
+        return;
     }
+
+    blocks.push(create_block(lines, start, end));
 }
 
 pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
