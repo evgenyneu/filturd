@@ -15,23 +15,20 @@ async function greet() {
 
 const key = 'CommandOrControl+1'
 
+async function didPressCopyShortcut(event: ShortcutEvent) {
+  if (event.state !== 'Pressed') { return; }
+  let descriptionFromClipboard: string | null = await invoke('copy_item_description_under_cursor');
+  if (!descriptionFromClipboard) { return; }
+  itemDescription.value = descriptionFromClipboard;
+  invoke('play_sound', { file: 'camera_snap1.mp3' });
+  const window = getCurrentWindow();
+  await window.setFocus();
+}
 
 isRegistered(key).then((isRegistered) => {
-  if (isRegistered) {
-    console.log('Shortcut is registered');
-  } else {
-    console.log('Shortcut is not registered');
+  if (isRegistered) { return }
 
-    register(key, async (event: ShortcutEvent) => {
-      if (event.state !== 'Pressed') { return; }
-      let descriptionFromClipboard: string | null = await invoke('copy_item_description_under_cursor');
-      if (!descriptionFromClipboard) { return; }
-      itemDescription.value = descriptionFromClipboard;
-      invoke('play_sound', { file: 'camera_snap1.mp3' });
-      const window = getCurrentWindow();
-      await window.setFocus();
-    });
-  }
+  register(key, didPressCopyShortcut);
 });
 
 </script>
