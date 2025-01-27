@@ -32,14 +32,18 @@ pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     for (i, line) in lines.iter().enumerate() {
         if line.starts_with("Show") || line.starts_with("Hide") {
             if let Some(start) = current_block_start {
-                blocks.push(create_block(lines, start, i - 1));
+                if i - start > 1 {
+                    blocks.push(create_block(lines, start, i - 1));
+                }
             }
             current_block_start = Some(i);
         }
     }
 
     if let Some(start) = current_block_start {
-        blocks.push(create_block(lines, start, lines.len() - 1));
+        if lines.len() - start > 1 {
+            blocks.push(create_block(lines, start, lines.len() - 1));
+        }
     }
 
     Ok(blocks)
@@ -103,6 +107,20 @@ mod tests {
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Show);
+        assert_eq!(blocks[0].lines, vec!["BaseType == \"Mirror\""]);
+    }
+
+    #[test]
+    fn test_ignore_block_without_content() {
+        let content: Vec<String> = vec!["Show", "Hide", "BaseType == \"Mirror\""]
+            .into_iter()
+            .map(Into::into)
+            .collect();
+
+        let blocks = parse_blocks(&content).unwrap();
+
+        assert_eq!(blocks.len(), 1);
+        assert_eq!(blocks[0].name, BlockName::Hide);
         assert_eq!(blocks[0].lines, vec!["BaseType == \"Mirror\""]);
     }
 
