@@ -27,8 +27,7 @@ fn create_block(lines: &[&str], start: usize, end: usize) -> Block {
     }
 }
 
-pub fn parse_blocks(content: &str) -> Result<Vec<Block>, Box<dyn Error>> {
-    let lines: Vec<&str> = content.lines().collect();
+pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
 
@@ -38,7 +37,7 @@ pub fn parse_blocks(content: &str) -> Result<Vec<Block>, Box<dyn Error>> {
         if trimmed.starts_with("Show") || trimmed.starts_with("Hide") {
             // If we already have a block in progress, finish it
             if let Some(start) = current_block_start {
-                blocks.push(create_block(&lines, start, i - 1));
+                blocks.push(create_block(&lines.iter().map(|s| s.as_str()).collect::<Vec<_>>(), start, i - 1));
             }
             current_block_start = Some(i);
         }
@@ -46,7 +45,7 @@ pub fn parse_blocks(content: &str) -> Result<Vec<Block>, Box<dyn Error>> {
 
     // Handle the last block
     if let Some(start) = current_block_start {
-        blocks.push(create_block(&lines, start, lines.len() - 1));
+        blocks.push(create_block(&lines.iter().map(|s| s.as_str()).collect::<Vec<_>>(), start, lines.len() - 1));
     }
 
     Ok(blocks)
@@ -58,18 +57,20 @@ mod tests {
 
     #[test]
     fn test_parse_basic_blocks() {
-        let content = r#"Show
-    BaseType == "Mirror of Kalandra"
-    SetFontSize 45
+        let content = vec![
+            "Show".to_string(),
+            "    BaseType == \"Mirror of Kalandra\"".to_string(),
+            "    SetFontSize 45".to_string(),
+            "".to_string(),
+            " Hide".to_string(),
+            "BaseType == \"Scroll of Wisdom\"".to_string(),
+            "      SetFontSize 18".to_string(),
+            "Show".to_string(),
+            "    Class \"Currency\"".to_string(),
+            "    SetFontSize 40".to_string(),
+        ];
 
- Hide
-BaseType == "Scroll of Wisdom"
-      SetFontSize 18
-Show
-    Class "Currency"
-    SetFontSize 40"#;
-
-        let blocks = parse_blocks(content).unwrap();
+        let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 3);
 
@@ -78,11 +79,7 @@ Show
         assert_eq!(blocks[0].position.start_line, 0);
         assert_eq!(blocks[0].position.end_line, 3);
 
-        let expected_text = r#"Show
-    BaseType == "Mirror of Kalandra"
-    SetFontSize 45
-"#;
-
+        let expected_text = "Show\n    BaseType == \"Mirror of Kalandra\"\n    SetFontSize 45\n";
         assert_eq!(blocks[0].text, expected_text);
 
         // Second block
@@ -90,10 +87,7 @@ Show
         assert_eq!(blocks[1].position.start_line, 4);
         assert_eq!(blocks[1].position.end_line, 6);
 
-        let expected_text = r#" Hide
-BaseType == "Scroll of Wisdom"
-      SetFontSize 18"#;
-
+        let expected_text = " Hide\nBaseType == \"Scroll of Wisdom\"\n      SetFontSize 18";
         assert_eq!(blocks[1].text, expected_text);
 
         // Third block
@@ -101,24 +95,23 @@ BaseType == "Scroll of Wisdom"
         assert_eq!(blocks[2].position.start_line, 7);
         assert_eq!(blocks[2].position.end_line, 9);
 
-        let expected_text = r#"Show
-    Class "Currency"
-    SetFontSize 40"#;
-
+        let expected_text = "Show\n    Class \"Currency\"\n    SetFontSize 40";
         assert_eq!(blocks[2].text, expected_text);
     }
 
     #[test]
     fn test_parse_with_comments() {
-        let content = r#"# Comment at start
-Show # Comment after Show
-    BaseType == "Mirror" # Comment after rule
+        let content = vec![
+            "# Comment at start".to_string(),
+            "Show # Comment after Show".to_string(),
+            "    BaseType == \"Mirror\" # Comment after rule".to_string(),
+            "".to_string(),
+            "# Comment between blocks".to_string(),
+            "Hide".to_string(),
+            "    BaseType == \"Wisdom\"".to_string(),
+        ];
 
-# Comment between blocks
-Hide
-    BaseType == "Wisdom""#;
-
-        let blocks = parse_blocks(content).unwrap();
+        let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 2);
 
@@ -127,11 +120,7 @@ Hide
         assert_eq!(blocks[0].position.start_line, 1);
         assert_eq!(blocks[0].position.end_line, 4);
 
-        let expected_text = r#"Show # Comment after Show
-    BaseType == "Mirror" # Comment after rule
-
-# Comment between blocks"#;
-
+        let expected_text = "Show # Comment after Show\n    BaseType == \"Mirror\" # Comment after rule\n\n# Comment between blocks";
         assert_eq!(blocks[0].text, expected_text);
 
         // Second block
@@ -139,35 +128,37 @@ Hide
         assert_eq!(blocks[1].position.start_line, 5);
         assert_eq!(blocks[1].position.end_line, 6);
 
-        let expected_text = r#"Hide
-    BaseType == "Wisdom""#;
-
+        let expected_text = "Hide\n    BaseType == \"Wisdom\"";
         assert_eq!(blocks[1].text, expected_text);
     }
 
     #[test]
     fn test_single_block() {
-        let content = r#"Show
-    BaseType == "Mirror""#;
+        let content = vec![
+            "Show".to_string(),
+            "    BaseType == \"Mirror\"".to_string(),
+        ];
 
-        let blocks = parse_blocks(content).unwrap();
+        let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
         assert!(blocks[0].is_show);
         assert_eq!(blocks[0].position.start_line, 0);
         assert_eq!(blocks[0].position.end_line, 1);
 
-        let expected_text = r#"Show
-    BaseType == "Mirror""#;
-
+        let expected_text = "Show\n    BaseType == \"Mirror\"";
         assert_eq!(blocks[0].text, expected_text);
     }
 
     #[test]
     fn test_tabs() {
-        let content = "\n\t\t Hide\n\t\tBaseType == \"Mirror\"";
+        let content = vec![
+            "".to_string(),
+            "\t\t Hide".to_string(),
+            "\t\tBaseType == \"Mirror\"".to_string(),
+        ];
 
-        let blocks = parse_blocks(content).unwrap();
+        let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
         assert!(!blocks[0].is_show);
@@ -180,11 +171,13 @@ Hide
 
     #[test]
     fn test_no_blocks() {
-        let content = r#"
-    nothing to see here
-    "#;
+        let content = vec![
+            "".to_string(),
+            "    nothing to see here".to_string(),
+            "    ".to_string(),
+        ];
 
-        let blocks = parse_blocks(content).unwrap();
+        let blocks = parse_blocks(&content).unwrap();
 
         assert_eq!(blocks.len(), 0);
     }
