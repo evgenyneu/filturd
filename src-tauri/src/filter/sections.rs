@@ -7,19 +7,17 @@ pub struct SectionPosition {
 }
 
 #[derive(Debug, PartialEq)]
-pub struct FileSection {
-    pub index: usize,
+pub struct Section {
     pub is_show: bool,
     pub position: SectionPosition,
     pub text: String,
 }
 
-fn create_section(lines: &[&str], start: usize, end: usize, index: usize) -> FileSection {
+fn create_section(lines: &[&str], start: usize, end: usize) -> Section {
     let first_line = lines[start].trim();
     let is_show = first_line.starts_with("Show");
 
-    FileSection {
-        index,
+    Section {
         is_show,
         position: SectionPosition {
             start_line: start,
@@ -29,11 +27,10 @@ fn create_section(lines: &[&str], start: usize, end: usize, index: usize) -> Fil
     }
 }
 
-pub fn parse_filter_file(content: &str) -> Result<Vec<FileSection>, Box<dyn Error>> {
+pub fn parse_sections(content: &str) -> Result<Vec<Section>, Box<dyn Error>> {
     let lines: Vec<&str> = content.lines().collect();
     let mut sections = Vec::new();
     let mut current_section_start = None;
-    let mut section_index = 0;
 
     for (i, line) in lines.iter().enumerate() {
         let trimmed = line.trim();
@@ -41,8 +38,7 @@ pub fn parse_filter_file(content: &str) -> Result<Vec<FileSection>, Box<dyn Erro
         if trimmed.starts_with("Show") || trimmed.starts_with("Hide") {
             // If we already have a section in progress, finish it
             if let Some(start) = current_section_start {
-                sections.push(create_section(&lines, start, i - 1, section_index));
-                section_index += 1;
+                sections.push(create_section(&lines, start, i - 1));
             }
             current_section_start = Some(i);
         }
@@ -50,12 +46,7 @@ pub fn parse_filter_file(content: &str) -> Result<Vec<FileSection>, Box<dyn Erro
 
     // Handle the last section
     if let Some(start) = current_section_start {
-        sections.push(create_section(
-            &lines,
-            start,
-            lines.len() - 1,
-            section_index,
-        ));
+        sections.push(create_section(&lines, start, lines.len() - 1));
     }
 
     Ok(sections)
@@ -78,12 +69,11 @@ Show
     Class "Currency"
     SetFontSize 40"#;
 
-        let sections = parse_filter_file(content).unwrap();
+        let sections = parse_sections(content).unwrap();
 
         assert_eq!(sections.len(), 3);
 
         // First section
-        assert_eq!(sections[0].index, 0);
         assert!(sections[0].is_show);
         assert_eq!(sections[0].position.start_line, 0);
         assert_eq!(sections[0].position.end_line, 3);
@@ -96,7 +86,6 @@ Show
         assert_eq!(sections[0].text, expected_text);
 
         // Second section
-        assert_eq!(sections[1].index, 1);
         assert!(!sections[1].is_show);
         assert_eq!(sections[1].position.start_line, 4);
         assert_eq!(sections[1].position.end_line, 6);
@@ -108,7 +97,6 @@ BaseType == "Scroll of Wisdom"
         assert_eq!(sections[1].text, expected_text);
 
         // Third section
-        assert_eq!(sections[2].index, 2);
         assert!(sections[2].is_show);
         assert_eq!(sections[2].position.start_line, 7);
         assert_eq!(sections[2].position.end_line, 9);
@@ -130,12 +118,11 @@ Show # Comment after Show
 Hide
     BaseType == "Wisdom""#;
 
-        let sections = parse_filter_file(content).unwrap();
+        let sections = parse_sections(content).unwrap();
 
         assert_eq!(sections.len(), 2);
 
         // First section
-        assert_eq!(sections[0].index, 0);
         assert!(sections[0].is_show);
         assert_eq!(sections[0].position.start_line, 1);
         assert_eq!(sections[0].position.end_line, 4);
@@ -148,7 +135,6 @@ Hide
         assert_eq!(sections[0].text, expected_text);
 
         // Second section
-        assert_eq!(sections[1].index, 1);
         assert!(!sections[1].is_show);
         assert_eq!(sections[1].position.start_line, 5);
         assert_eq!(sections[1].position.end_line, 6);
@@ -164,11 +150,10 @@ Hide
         let content = r#"Show
     BaseType == "Mirror""#;
 
-        let sections = parse_filter_file(content).unwrap();
+        let sections = parse_sections(content).unwrap();
 
         assert_eq!(sections.len(), 1);
         assert!(sections[0].is_show);
-        assert_eq!(sections[0].index, 0);
         assert_eq!(sections[0].position.start_line, 0);
         assert_eq!(sections[0].position.end_line, 1);
 
@@ -182,11 +167,10 @@ Hide
     fn test_tabs() {
         let content = "\n\t\t Hide\n\t\tBaseType == \"Mirror\"";
 
-        let sections = parse_filter_file(content).unwrap();
+        let sections = parse_sections(content).unwrap();
 
         assert_eq!(sections.len(), 1);
         assert!(!sections[0].is_show);
-        assert_eq!(sections[0].index, 0);
         assert_eq!(sections[0].position.start_line, 1);
         assert_eq!(sections[0].position.end_line, 2);
 
@@ -200,7 +184,7 @@ Hide
     nothing to see here
     "#;
 
-        let sections = parse_filter_file(content).unwrap();
+        let sections = parse_sections(content).unwrap();
 
         assert_eq!(sections.len(), 0);
     }
