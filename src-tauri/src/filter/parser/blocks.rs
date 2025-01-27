@@ -13,7 +13,7 @@ pub struct Block {
     pub text: String,
 }
 
-fn create_block(lines: &[&str], start: usize, end: usize) -> Block {
+fn create_block(lines: &[String], start: usize, end: usize) -> Block {
     let first_line = lines[start].trim();
     let is_show = first_line.starts_with("Show");
 
@@ -35,17 +35,15 @@ pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
         let trimmed = line.trim();
 
         if trimmed.starts_with("Show") || trimmed.starts_with("Hide") {
-            // If we already have a block in progress, finish it
             if let Some(start) = current_block_start {
-                blocks.push(create_block(&lines.iter().map(|s| s.as_str()).collect::<Vec<_>>(), start, i - 1));
+                blocks.push(create_block(lines, start, i - 1));
             }
             current_block_start = Some(i);
         }
     }
 
-    // Handle the last block
     if let Some(start) = current_block_start {
-        blocks.push(create_block(&lines.iter().map(|s| s.as_str()).collect::<Vec<_>>(), start, lines.len() - 1));
+        blocks.push(create_block(lines, start, lines.len() - 1));
     }
 
     Ok(blocks)
@@ -134,10 +132,7 @@ mod tests {
 
     #[test]
     fn test_single_block() {
-        let content = vec![
-            "Show".to_string(),
-            "    BaseType == \"Mirror\"".to_string(),
-        ];
+        let content = vec!["Show".to_string(), "    BaseType == \"Mirror\"".to_string()];
 
         let blocks = parse_blocks(&content).unwrap();
 
