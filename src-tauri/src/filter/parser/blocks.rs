@@ -9,7 +9,7 @@ pub struct Block {
 fn create_block(lines: &[String], start: usize, end: usize) -> Block {
     Block {
         name: lines[start].to_string(),
-        lines: lines[start..=end].to_vec(),
+        lines: lines[start + 1..=end].to_vec(),
     }
 }
 
@@ -62,25 +62,21 @@ mod tests {
         assert_eq!(blocks[0].name, "Show");
         assert_eq!(
             blocks[0].lines,
-            vec![
-                "Show",
-                "BaseType == \"Mirror of Kalandra\"",
-                "SetFontSize 45"
-            ]
+            vec!["BaseType == \"Mirror of Kalandra\"", "SetFontSize 45"]
         );
 
         // Second block
         assert_eq!(blocks[1].name, "Hide");
         assert_eq!(
             blocks[1].lines,
-            vec!["Hide", "BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
+            vec!["BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
         );
 
         // Third block
         assert_eq!(blocks[2].name, "Show");
         assert_eq!(
             blocks[2].lines,
-            vec!["Show", "Class \"Currency\"", "SetFontSize 40"]
+            vec!["Class \"Currency\"", "SetFontSize 40"]
         );
     }
 
@@ -95,7 +91,7 @@ mod tests {
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, "Show");
-        assert_eq!(blocks[0].lines, vec!["Show", "BaseType == \"Mirror\""]);
+        assert_eq!(blocks[0].lines, vec!["BaseType == \"Mirror\""]);
     }
 
     #[test]
