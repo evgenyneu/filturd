@@ -6,8 +6,12 @@ use std::str::FromStr;
 #[derive(Debug, PartialEq, Eq, strum_macros::EnumString)]
 #[strum(serialize_all = "PascalCase")]
 pub enum KnownBlockLineName {
+    AreaLevel,
     Class,
+    Corrupted,
     BaseType,
+    ItemLevel,
+    Mirrored,
     Rarity,
     SetFontSize,
     SetTextColor,
@@ -15,6 +19,7 @@ pub enum KnownBlockLineName {
     SetBackgroundColor,
     PlayAlertSound,
     PlayEffect,
+    Quality,
     MinimapIcon,
 }
 

@@ -97,7 +97,7 @@
 #   [3002] Tier 1 and 2 uniques
 #   [3003] Multi-Unique bases.
 #   [3004] Low tier exceptions
-#   [3005] Tier 3 uniques 
+#   [3005] Tier 3 uniques
 #   [3006] Tier 4 uniques
 # [[3100]] Leveling - Salvagable
 # [[3200]] Leveling - Hide outdated leveling flasks
@@ -3039,7 +3039,7 @@ Show # $type->uniques $tier->corrupteduniques
 	MinimapIcon 1 Brown Star
 
 #------------------------------------
-#   [3005] Tier 3 uniques 
+#   [3005] Tier 3 uniques
 #------------------------------------
 
 Show # %H5 $type->uniques $tier->t3boss
@@ -3893,4 +3893,3 @@ Show # $type->anyremaining $tier->restex
 	PlayAlertSound 3 300
 	PlayEffect Pink
 	MinimapIcon 0 Pink Pentagon
-
