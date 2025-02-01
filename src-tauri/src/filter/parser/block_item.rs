@@ -14,6 +14,7 @@ pub enum KnownBlockLineName {
     Class,
     Continue,
     Corrupted,
+    CustomAlertSound,
     DisableDropSound,
     DropLevel,
     Height,
