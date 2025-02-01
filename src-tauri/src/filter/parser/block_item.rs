@@ -5,7 +5,7 @@ use std::str::FromStr;
 /// of known variants (using the same name as in the source file).
 #[derive(Debug, PartialEq, Eq, strum_macros::EnumString)]
 #[strum(serialize_all = "PascalCase")]
-pub enum KnownBlockLineName {
+pub enum KnownBlockItemName {
     AreaLevel,
     BaseArmour,
     BaseEnergyShield,
@@ -36,22 +36,22 @@ pub enum KnownBlockLineName {
     WaystoneTier,
 }
 
-/// BlockLineName wraps known names (using the enum above) and falls back to Unknown.
+/// BlockItemName wraps known names (using the enum above) and falls back to Unknown.
 #[derive(Debug, PartialEq, Eq)]
-pub enum BlockLineName {
-    Known(KnownBlockLineName),
+pub enum BlockItemName {
+    Known(KnownBlockItemName),
     Unknown(String),
 }
 
-impl FromStr for BlockLineName {
+impl FromStr for BlockItemName {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        // Try parsing into a KnownBlockLineName with strum.
-        if let Ok(known) = s.parse::<KnownBlockLineName>() {
-            Ok(BlockLineName::Known(known))
+        // Try parsing into a KnownBlockItemName with strum.
+        if let Ok(known) = s.parse::<KnownBlockItemName>() {
+            Ok(BlockItemName::Known(known))
         } else {
-            Ok(BlockLineName::Unknown(s.to_owned()))
+            Ok(BlockItemName::Unknown(s.to_owned()))
         }
     }
 }
@@ -59,30 +59,30 @@ impl FromStr for BlockLineName {
 /// Represents a line in the loot filter block.
 /// The `name` field is the parsed enum variant; `params` holds all following parameters.
 #[derive(Debug, PartialEq, Eq)]
-pub struct BlockLine {
-    pub name: BlockLineName,
+pub struct BlockItem {
+    pub name: BlockItemName,
     pub params: Vec<String>,
 }
 
-/// Parses a loot filter block line into a BlockLine struct.
-/// Splits the line into tokens (handling double quotes) and maps the first token into a BlockLineName.
-pub fn parse_block_line(line: &str) -> BlockLine {
+/// Parses a loot filter block line into a BlockItem struct.
+/// Splits the line into tokens (handling double quotes) and maps the first token into a BlockItemName.
+pub fn parse_block_item(line: &str) -> BlockItem {
     let tokens = tokenize_line(line);
 
     if tokens.is_empty() {
-        return BlockLine {
-            name: BlockLineName::Unknown(String::new()),
+        return BlockItem {
+            name: BlockItemName::Unknown(String::new()),
             params: Vec::new(),
         };
     }
 
     let name = tokens[0]
         .parse()
-        .unwrap_or(BlockLineName::Unknown(tokens[0].clone()));
+        .unwrap_or(BlockItemName::Unknown(tokens[0].clone()));
 
-    // All tokens after the line name are parsed as parameters.
+    // All tokens after the item name are parsed as parameters.
     let params = tokens[1..].to_vec();
-    BlockLine { name, params }
+    BlockItem { name, params }
 }
 
 /// Tokenizes a given line into parts.
@@ -166,24 +166,24 @@ mod tests {
     #[test]
     fn test_parse_block_line_rarity() {
         let line = "Rarity Normal Magic Rare";
-        let block_line = parse_block_line(line);
+        let block_item = parse_block_item(line);
         assert_eq!(
-            block_line.name,
-            BlockLineName::Known(KnownBlockLineName::Rarity)
+            block_item.name,
+            BlockItemName::Known(KnownBlockItemName::Rarity)
         );
-        assert_eq!(block_line.params, vec!["Normal", "Magic", "Rare"]);
+        assert_eq!(block_item.params, vec!["Normal", "Magic", "Rare"]);
     }
 
     #[test]
     fn test_parse_block_line_basetype() {
         let line = "BaseType == \"Time-Lost Emerald\" \"Time-Lost Ruby\" \"Time-Lost Sapphire\"";
-        let block_line = parse_block_line(line);
+        let block_item = parse_block_item(line);
         assert_eq!(
-            block_line.name,
-            BlockLineName::Known(KnownBlockLineName::BaseType)
+            block_item.name,
+            BlockItemName::Known(KnownBlockItemName::BaseType)
         );
         assert_eq!(
-            block_line.params,
+            block_item.params,
             vec![
                 "==",
                 "Time-Lost Emerald",
@@ -196,11 +196,11 @@ mod tests {
     #[test]
     fn test_parse_block_line_unknown() {
         let line = "UnknownName param1 param2";
-        let block_line = parse_block_line(line);
+        let block_item = parse_block_item(line);
         assert_eq!(
-            block_line.name,
-            BlockLineName::Unknown("UnknownName".to_string())
+            block_item.name,
+            BlockItemName::Unknown("UnknownName".to_string())
         );
-        assert_eq!(block_line.params, vec!["param1", "param2"]);
+        assert_eq!(block_item.params, vec!["param1", "param2"]);
     }
 }
