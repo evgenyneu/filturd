@@ -19,7 +19,7 @@ impl BlockName {
 }
 
 #[derive(Debug, PartialEq)]
-pub struct Block {
+pub struct BlockWithLines {
     pub name: BlockName,
     pub lines: Vec<String>,
 }
@@ -32,7 +32,7 @@ fn is_block_start(line: &str) -> Option<BlockName> {
 }
 
 fn try_add_block_if_exists(
-    blocks: &mut Vec<Block>,
+    blocks: &mut Vec<BlockWithLines>,
     lines: &[String],
     start: Option<(usize, BlockName)>,
     end: usize,
@@ -47,13 +47,13 @@ fn try_add_block_if_exists(
         return;
     }
 
-    blocks.push(Block {
+    blocks.push(BlockWithLines {
         name: block_name,
         lines: lines[start + 1..=end].to_vec(),
     });
 }
 
-pub fn parse_blocks(lines: &[String]) -> Result<Vec<Block>, Box<dyn Error>> {
+pub fn parse_blocks_with_lines(lines: &[String]) -> Result<Vec<BlockWithLines>, Box<dyn Error>> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
 
@@ -97,7 +97,7 @@ mod tests {
         .map(Into::into)
         .collect();
 
-        let blocks = parse_blocks(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content).unwrap();
 
         assert_eq!(blocks.len(), 3);
 
@@ -130,7 +130,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Show);
@@ -144,7 +144,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content).unwrap();
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Hide);
@@ -158,14 +158,14 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content).unwrap();
 
         assert_eq!(blocks.len(), 0);
     }
 
     #[test]
     fn test_empty_content() {
-        let blocks = parse_blocks(&[]).unwrap();
+        let blocks = parse_blocks_with_lines(&[]).unwrap();
 
         assert_eq!(blocks.len(), 0);
     }
