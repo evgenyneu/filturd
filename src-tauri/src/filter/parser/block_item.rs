@@ -15,6 +15,7 @@ pub enum KnownBlockLineName {
     Continue,
     Corrupted,
     DisableDropSound,
+    DropLevel,
     Height,
     Identified,
     ItemLevel,
