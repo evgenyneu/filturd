@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use crate::filter::parser::blocks_with_lines::parse_blocks_with_lines;
+use crate::filter::parser::blocks_with_lines::parse_lines;
 use crate::filter::parser::blocks_with_lines::BlockWithLines;
 use crate::filter::parser::lines::content_to_lines;
 use crate::filter::parser::read_from_disk::read_filter_from_disk;
@@ -14,7 +14,7 @@ use crate::filter::parser::read_from_disk::read_filter_from_disk;
 pub async fn parse_file(path: &Path) -> Result<Vec<BlockWithLines>, Box<dyn std::error::Error>> {
     let content = read_filter_from_disk(path).await?;
     let lines = content_to_lines(&content);
-    let blocks_with_lines = parse_blocks_with_lines(&lines);
+    let blocks_with_lines = parse_lines(&lines);
 
     Ok(blocks_with_lines)
 }

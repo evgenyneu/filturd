@@ -52,7 +52,7 @@ fn try_add_block_if_exists(
     });
 }
 
-pub fn parse_blocks_with_lines(lines: &[String]) -> Vec<BlockWithLines> {
+pub fn parse_lines(lines: &[String]) -> Vec<BlockWithLines> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
 
@@ -96,7 +96,7 @@ mod tests {
         .map(Into::into)
         .collect();
 
-        let blocks = parse_blocks_with_lines(&content);
+        let blocks = parse_lines(&content);
 
         assert_eq!(blocks.len(), 3);
 
@@ -129,7 +129,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content);
+        let blocks = parse_lines(&content);
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Show);
@@ -143,7 +143,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content);
+        let blocks = parse_lines(&content);
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Hide);
@@ -157,14 +157,14 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content);
+        let blocks = parse_lines(&content);
 
         assert_eq!(blocks.len(), 0);
     }
 
     #[test]
     fn test_empty_content() {
-        let blocks = parse_blocks_with_lines(&[]);
+        let blocks = parse_lines(&[]);
 
         assert_eq!(blocks.len(), 0);
     }
