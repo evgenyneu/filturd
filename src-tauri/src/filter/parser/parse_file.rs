@@ -31,13 +31,8 @@ mod tests {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("filter_examples/example_001.filter");
 
-        // Call parse_file and print error for debugging if there's any.
         let result = parse_file(&path).await;
 
-        if let Err(err) = &result {
-            println!("Error in parse_file: {}", err);
-        }
-
-        // assert!(result.is_ok());
+        assert!(result.is_ok());
     }
 }

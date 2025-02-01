@@ -1,6 +1,5 @@
-use std::fmt;
 use std::str::FromStr;
-use std::error::Error;
+use crate::filter::parser::errors::ParseError;
 
 /// This enum holds only the known block line names.
 /// The `strum_macros::EnumVariantNames` derive makes available the list
@@ -134,20 +133,6 @@ fn tokenize_line(s: &str) -> Vec<String> {
 
     tokens
 }
-
-// New error type for parsing errors.
-#[derive(Debug, PartialEq, Eq)]
-pub enum ParseError {
-    EmptyLine,
-}
-
-impl fmt::Display for ParseError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", self)
-    }
-}
-
-impl Error for ParseError {}
 
 #[cfg(test)]
 mod tests {

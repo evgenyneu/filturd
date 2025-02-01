@@ -1,5 +1,6 @@
-use crate::filter::parser::block_item::{parse_block_item, BlockItem, ParseError};
+use crate::filter::parser::block_item::{parse_block_item, BlockItem};
 use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
+use crate::filter::parser::errors::ParseError;
 
 /// Represents a parsed Block which holds a block name and its parsed block items.
 #[derive(Debug, PartialEq)]
