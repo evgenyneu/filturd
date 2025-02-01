@@ -7,7 +7,7 @@
     "editor.formatOnSave": true,
   },
   "[rust]": {
-    "editor.formatOnSave": true,
+    // "editor.formatOnSave": true,
   },
   "rust-analyzer.cargo.extraEnv": {
     "RUSTC_BOOTSTRAP": "1"
