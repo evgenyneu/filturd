@@ -34,3 +34,10 @@ npm run tauri dev
 ```sh
 npm run tauri build
 ```
+
+
+### Run tests
+
+```sh
+npm run test_rust
+```
