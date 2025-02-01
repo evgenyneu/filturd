@@ -1,5 +1,3 @@
-use std::error::Error;
-
 #[derive(Debug, PartialEq)]
 pub enum BlockName {
     Show,
@@ -44,6 +42,7 @@ fn try_add_block_if_exists(
     let line_count = end.saturating_sub(start);
 
     if line_count == 0 {
+        // empty block
         return;
     }
 
@@ -53,7 +52,7 @@ fn try_add_block_if_exists(
     });
 }
 
-pub fn parse_blocks_with_lines(lines: &[String]) -> Result<Vec<BlockWithLines>, Box<dyn Error>> {
+pub fn parse_blocks_with_lines(lines: &[String]) -> Vec<BlockWithLines> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
 
@@ -73,7 +72,7 @@ pub fn parse_blocks_with_lines(lines: &[String]) -> Result<Vec<BlockWithLines>, 
         lines.len().saturating_sub(1),
     );
 
-    Ok(blocks)
+    blocks
 }
 
 #[cfg(test)]
@@ -97,7 +96,7 @@ mod tests {
         .map(Into::into)
         .collect();
 
-        let blocks = parse_blocks_with_lines(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content);
 
         assert_eq!(blocks.len(), 3);
 
@@ -130,7 +129,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content);
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Show);
@@ -144,7 +143,7 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content);
 
         assert_eq!(blocks.len(), 1);
         assert_eq!(blocks[0].name, BlockName::Hide);
@@ -158,14 +157,14 @@ mod tests {
             .map(Into::into)
             .collect();
 
-        let blocks = parse_blocks_with_lines(&content).unwrap();
+        let blocks = parse_blocks_with_lines(&content);
 
         assert_eq!(blocks.len(), 0);
     }
 
     #[test]
     fn test_empty_content() {
-        let blocks = parse_blocks_with_lines(&[]).unwrap();
+        let blocks = parse_blocks_with_lines(&[]);
 
         assert_eq!(blocks.len(), 0);
     }
