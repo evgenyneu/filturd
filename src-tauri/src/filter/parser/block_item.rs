@@ -1,3 +1,4 @@
+use std::fmt;
 use std::str::FromStr;
 
 /// This enum holds only the known block line names.
@@ -66,14 +67,11 @@ pub struct BlockItem {
 
 /// Parses a loot filter block line into a BlockItem struct.
 /// Splits the line into tokens (handling double quotes) and maps the first token into a BlockItemName.
-pub fn parse_block_item(line: &str) -> BlockItem {
+pub fn parse_block_item(line: &str) -> Result<BlockItem, ParseError> {
     let tokens = tokenize_line(line);
 
     if tokens.is_empty() {
-        return BlockItem {
-            name: BlockItemName::Unknown(String::new()),
-            params: Vec::new(),
-        };
+        return Err(ParseError::EmptyLine);
     }
 
     let name = tokens[0]
@@ -82,7 +80,7 @@ pub fn parse_block_item(line: &str) -> BlockItem {
 
     // All tokens after the item name are parsed as parameters.
     let params = tokens[1..].to_vec();
-    BlockItem { name, params }
+    Ok(BlockItem { name, params })
 }
 
 /// Tokenizes a given line into parts.
@@ -136,6 +134,20 @@ fn tokenize_line(s: &str) -> Vec<String> {
     tokens
 }
 
+// New error type for parsing errors.
+#[derive(Debug, PartialEq, Eq)]
+pub enum ParseError {
+    EmptyLine,
+}
+
+impl fmt::Display for ParseError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ParseError::EmptyLine => write!(f, "The line is empty"),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -151,6 +163,7 @@ mod tests {
     fn test_tokenize_line_with_quotes() {
         let line = "BaseType == \"Time-Lost Emerald\" \"Time-Lost Ruby\" \"Time-Lost Sapphire\"";
         let tokens = tokenize_line(line);
+
         assert_eq!(
             tokens,
             vec![
@@ -166,22 +179,26 @@ mod tests {
     #[test]
     fn test_parse_block_line_rarity() {
         let line = "Rarity Normal Magic Rare";
-        let block_item = parse_block_item(line);
+        let block_item = parse_block_item(line).unwrap();
+
         assert_eq!(
             block_item.name,
             BlockItemName::Known(KnownBlockItemName::Rarity)
         );
+
         assert_eq!(block_item.params, vec!["Normal", "Magic", "Rare"]);
     }
 
     #[test]
     fn test_parse_block_line_basetype() {
         let line = "BaseType == \"Time-Lost Emerald\" \"Time-Lost Ruby\" \"Time-Lost Sapphire\"";
-        let block_item = parse_block_item(line);
+        let block_item = parse_block_item(line).unwrap();
+
         assert_eq!(
             block_item.name,
             BlockItemName::Known(KnownBlockItemName::BaseType)
         );
+
         assert_eq!(
             block_item.params,
             vec![
@@ -196,11 +213,20 @@ mod tests {
     #[test]
     fn test_parse_block_line_unknown() {
         let line = "UnknownName param1 param2";
-        let block_item = parse_block_item(line);
+        let block_item = parse_block_item(line).unwrap();
+
         assert_eq!(
             block_item.name,
             BlockItemName::Unknown("UnknownName".to_string())
         );
+
         assert_eq!(block_item.params, vec!["param1", "param2"]);
+    }
+
+    #[test]
+    fn test_parse_block_line_empty() {
+        let line = "";
+        let result = parse_block_item(line);
+        assert_eq!(result, Err(ParseError::EmptyLine));
     }
 }
