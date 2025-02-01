@@ -81,13 +81,50 @@ mod tests {
         assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(blocks[0].items.len(), 2);
 
+        // First item
+        // ------------
+
         assert_eq!(
             blocks[0].items[0].name,
             BlockItemName::Known(KnownBlockItemName::BaseType)
         );
 
-        // Second block tests
+        assert_eq!(blocks[0].items[0].params, vec!["==", "Mirror of Kalandra"]);
+
+        // Second item
+        // ------------
+
+        assert_eq!(
+            blocks[0].items[1].name,
+            BlockItemName::Known(KnownBlockItemName::SetFontSize)
+        );
+
+        assert_eq!(blocks[0].items[1].params, vec!["45"]);
+
+        // Second block
+        // --------------
+
         assert_eq!(blocks[1].name, BlockName::Hide);
         assert_eq!(blocks[1].items.len(), 2);
+
+        // First item
+        // ------------
+
+        assert_eq!(
+            blocks[1].items[0].name,
+            BlockItemName::Known(KnownBlockItemName::Class)
+        );
+
+        assert_eq!(blocks[1].items[0].params, vec!["Currency"]);
+
+        // Second item
+        // ------------
+
+        assert_eq!(
+            blocks[1].items[1].name,
+            BlockItemName::Known(KnownBlockItemName::SetFontSize)
+        );
+
+        assert_eq!(blocks[1].items[1].params, vec!["40"]);
     }
 }
