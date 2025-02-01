@@ -7,20 +7,26 @@ use std::str::FromStr;
 #[strum(serialize_all = "PascalCase")]
 pub enum KnownBlockLineName {
     AreaLevel,
+    BaseArmour,
+    BaseEvasion,
+    BaseType,
     Class,
     Corrupted,
-    BaseType,
+    Height,
     ItemLevel,
+    MinimapIcon,
     Mirrored,
-    Rarity,
-    SetFontSize,
-    SetTextColor,
-    SetBorderColor,
-    SetBackgroundColor,
     PlayAlertSound,
     PlayEffect,
     Quality,
-    MinimapIcon,
+    Rarity,
+    SetBackgroundColor,
+    SetBorderColor,
+    SetFontSize,
+    SetTextColor,
+    Sockets,
+    StackSize,
+    Width,
 }
 
 /// BlockLineName wraps known names (using the enum above) and falls back to Unknown.
