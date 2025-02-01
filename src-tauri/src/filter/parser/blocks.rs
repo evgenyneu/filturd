@@ -46,7 +46,7 @@ pub fn parse_block_with_lines(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::filter::parser::block_item::{BlockItemName, KnownBlockItemName, ParseError};
+    use crate::filter::parser::block_item::{BlockItemName, KnownBlockItemName};
     use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
 
     #[test]
@@ -86,6 +86,8 @@ mod tests {
             }
             _ => panic!("Expected a Known BlockItemName"),
         }
+
+        assert_eq!(blocks[0].items[0].params, vec!["==", "Mirror of Kalandra"]);
 
         // Second block tests
         assert_eq!(blocks[1].name, BlockName::Hide);
