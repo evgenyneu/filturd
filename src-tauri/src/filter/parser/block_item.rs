@@ -32,6 +32,7 @@ pub enum KnownBlockLineName {
     Sockets,
     StackSize,
     Width,
+    WaystoneTier,
 }
 
 /// BlockLineName wraps known names (using the enum above) and falls back to Unknown.
