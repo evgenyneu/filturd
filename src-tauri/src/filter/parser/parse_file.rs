@@ -14,11 +14,8 @@ use crate::filter::parser::read_from_disk::read_filter_from_disk;
 /// Returns a vector of parsed Block on success or an error if processing fails.
 pub async fn parse_file(path: &Path) -> Result<Vec<Block>> {
     let content = read_filter_from_disk(path).await?;
-
     let lines = content_to_lines(&content);
-
     let blocks_with_lines = parse_lines(&lines);
-
     let blocks = parse_block_with_lines(&blocks_with_lines)?;
 
     Ok(blocks)
@@ -31,8 +28,6 @@ mod tests {
 
     #[tokio::test]
     async fn integration_test_parse_file_with_example_filter() {
-        // Build the path to the example filter file.
-        // Adjust the path if needed.
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         path.push("src-tauri/filter_examples/example_001.filter");
 

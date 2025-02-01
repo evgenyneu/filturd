@@ -1,5 +1,6 @@
 use std::fmt;
 use std::str::FromStr;
+use std::error::Error;
 
 /// This enum holds only the known block line names.
 /// The `strum_macros::EnumVariantNames` derive makes available the list
@@ -142,11 +143,11 @@ pub enum ParseError {
 
 impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            ParseError::EmptyLine => write!(f, "The line is empty"),
-        }
+        write!(f, "{:?}", self)
     }
 }
+
+impl Error for ParseError {}
 
 #[cfg(test)]
 mod tests {
