@@ -34,5 +34,8 @@ mod tests {
         let result = parse_file(&path).await;
 
         assert!(result.is_ok());
+
+        let blocks = result.unwrap();
+        assert_eq!(blocks.len(), 305);
     }
 }
