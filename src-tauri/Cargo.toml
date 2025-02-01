@@ -26,6 +26,8 @@ enigo = "0.3"
 rodio = { version = "0.20.1", default-features = false, features = ["mp3"] }
 arboard = { version = "3.4.1", default-features = false }
 tokio = { version = "1.0", features = ["fs", "rt", "macros"] }
+strum = "0.26"
+strum_macros = "0.26"
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-global-shortcut = "2"

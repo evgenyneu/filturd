@@ -1,7 +1,11 @@
-/// Enum for known block line names.
-/// For any unknown name, Unknown is used with its original String.
-#[derive(Debug, PartialEq, Eq)]
-pub enum BlockLineName {
+use std::str::FromStr;
+
+/// This enum holds only the known block line names.
+/// The `strum_macros::EnumVariantNames` derive makes available the list
+/// of known variants (using the same name as in the source file).
+#[derive(Debug, PartialEq, Eq, strum_macros::EnumString)]
+#[strum(serialize_all = "PascalCase")]
+pub enum KnownBlockLineName {
     Class,
     BaseType,
     Rarity,
@@ -12,7 +16,26 @@ pub enum BlockLineName {
     PlayAlertSound,
     PlayEffect,
     MinimapIcon,
+}
+
+/// BlockLineName wraps known names (using the enum above) and falls back to Unknown.
+#[derive(Debug, PartialEq, Eq)]
+pub enum BlockLineName {
+    Known(KnownBlockLineName),
     Unknown(String),
+}
+
+impl FromStr for BlockLineName {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        // Try parsing into a KnownBlockLineName with strum.
+        if let Ok(known) = s.parse::<KnownBlockLineName>() {
+            Ok(BlockLineName::Known(known))
+        } else {
+            Ok(BlockLineName::Unknown(s.to_owned()))
+        }
+    }
 }
 
 /// Represents a line in the loot filter block.
@@ -21,24 +44,6 @@ pub enum BlockLineName {
 pub struct BlockLine {
     pub name: BlockLineName,
     pub params: Vec<String>,
-}
-
-/// Maps a token to a known BlockLineName.
-/// Any token that is not one of the known names is wrapped inside BlockLineName::Unknown.
-fn map_block_line_name(token: &str) -> BlockLineName {
-    match token {
-        "Class" => BlockLineName::Class,
-        "BaseType" => BlockLineName::BaseType,
-        "Rarity" => BlockLineName::Rarity,
-        "SetFontSize" => BlockLineName::SetFontSize,
-        "SetTextColor" => BlockLineName::SetTextColor,
-        "SetBorderColor" => BlockLineName::SetBorderColor,
-        "SetBackgroundColor" => BlockLineName::SetBackgroundColor,
-        "PlayAlertSound" => BlockLineName::PlayAlertSound,
-        "PlayEffect" => BlockLineName::PlayEffect,
-        "MinimapIcon" => BlockLineName::MinimapIcon,
-        other => BlockLineName::Unknown(other.to_string()),
-    }
 }
 
 /// Parses a loot filter block line into a BlockLine struct.
@@ -53,7 +58,9 @@ pub fn parse_block_line(line: &str) -> BlockLine {
         };
     }
 
-    let name = map_block_line_name(&tokens[0]);
+    let name = tokens[0]
+        .parse()
+        .unwrap_or(BlockLineName::Unknown(tokens[0].clone()));
 
     // All tokens after the line name are parsed as parameters.
     let params = tokens[1..].to_vec();
@@ -142,7 +149,10 @@ mod tests {
     fn test_parse_block_line_rarity() {
         let line = "Rarity Normal Magic Rare";
         let block_line = parse_block_line(line);
-        assert_eq!(block_line.name, BlockLineName::Rarity);
+        assert_eq!(
+            block_line.name,
+            BlockLineName::Known(KnownBlockLineName::Rarity)
+        );
         assert_eq!(block_line.params, vec!["Normal", "Magic", "Rare"]);
     }
 
@@ -150,7 +160,10 @@ mod tests {
     fn test_parse_block_line_basetype() {
         let line = "BaseType == \"Time-Lost Emerald\" \"Time-Lost Ruby\" \"Time-Lost Sapphire\"";
         let block_line = parse_block_line(line);
-        assert_eq!(block_line.name, BlockLineName::BaseType);
+        assert_eq!(
+            block_line.name,
+            BlockLineName::Known(KnownBlockLineName::BaseType)
+        );
         assert_eq!(
             block_line.params,
             vec![
