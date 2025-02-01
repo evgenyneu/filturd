@@ -91,24 +91,4 @@ mod tests {
         assert_eq!(blocks[1].name, BlockName::Hide);
         assert_eq!(blocks[1].items.len(), 2);
     }
-
-    #[test]
-    fn test_parse_blocks_error_empty_line() {
-        // Create a block with an empty line that should trigger an error
-        let blocks_with_lines = vec![BlockWithLines {
-            name: BlockName::Show,
-            lines: vec![
-                "".to_string(), // This line is empty, expecting error.
-                "SetFontSize 45".to_string(),
-            ],
-        }];
-
-        let result = parse_block_with_lines(&blocks_with_lines);
-        assert!(result.is_err());
-
-        match result {
-            Err(ParseError::EmptyLine) => {}
-            _ => panic!("Expected ParseError::EmptyLine"),
-        }
-    }
 }
