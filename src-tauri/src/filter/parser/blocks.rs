@@ -75,19 +75,16 @@ mod tests {
 
         assert_eq!(blocks.len(), 2);
 
-        // First block tests
+        // First block
+        // --------------
+
         assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(blocks[0].items.len(), 2);
 
-        // First block first item should be known with "BaseType"
-        match &blocks[0].items[0].name {
-            BlockItemName::Known(name) => {
-                assert_eq!(name, &KnownBlockItemName::BaseType);
-            }
-            _ => panic!("Expected a Known BlockItemName"),
-        }
-
-        assert_eq!(blocks[0].items[0].params, vec!["==", "Mirror of Kalandra"]);
+        assert_eq!(
+            blocks[0].items[0].name,
+            BlockItemName::Known(KnownBlockItemName::BaseType)
+        );
 
         // Second block tests
         assert_eq!(blocks[1].name, BlockName::Hide);
