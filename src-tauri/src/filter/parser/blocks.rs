@@ -51,7 +51,6 @@ mod tests {
 
     #[test]
     fn test_parse_blocks_success() {
-        // Create test blocks with valid lines
         let blocks_with_lines = vec![
             BlockWithLines {
                 name: BlockName::Show,

@@ -1,4 +1,4 @@
-use crate::filter::read_from_disk::read_filter_from_disk;
+use crate::filter::parser::read_from_disk::read_filter_from_disk;
 
 #[tauri::command]
 pub async fn greet(name: &str) -> Result<String, String> {
