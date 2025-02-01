@@ -23,3 +23,22 @@ pub async fn parse_file(path: &Path) -> Result<Vec<Block>> {
 
     Ok(blocks)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::PathBuf;
+
+    #[tokio::test]
+    async fn integration_test_parse_file_with_example_filter() {
+        // Build the path to the example filter file.
+        // Adjust the path if needed.
+        let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        path.push("src-tauri/filter_examples/example_001.filter");
+
+        // Call the parse_file and assert successful results.
+        let result = parse_file(&path).await;
+
+        assert!(result.is_ok());
+    }
+}
