@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global-shortcut';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-const greetMsg = ref("");
-const name = ref("");
 const itemDescription = ref("");
-const isDark = ref(false);
-
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsg.value = await invoke("greet", { name: name.value });
-}
 
 const key = 'CommandOrControl+1'
 
@@ -36,20 +28,6 @@ async function openFile() {
   // TODO: Implement file opening logic
 }
 
-function toggleDarkMode() {
-  isDark.value = !isDark.value;
-  document.documentElement.classList.toggle('dark');
-}
-
-onMounted(() => {
-  // Check system preference on load
-  isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  if (isDark.value) {
-    document.documentElement.classList.add('dark');
-  }
-});
-
 </script>
 
 <template>
@@ -57,55 +35,17 @@ onMounted(() => {
     <nav
       class="p-4 bg-gray-100 dark:bg-gray-800 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
       <button @click="openFile"
-        class="rounded-lg border border-transparent px-4 py-2 text-base font-medium text-gray-900 bg-white shadow-sm cursor-pointer transition-colors duration-250 hover:border-blue-600 active:bg-gray-200 focus:outline-none dark:text-white dark:bg-gray-800 dark:hover:border-blue-400 dark:active:bg-gray-700">
+        class="rounded-lg border border-transparent px-4 py-2 text-base font-medium text-gray-900 bg-white shadow-sm cursor-pointer transition-colors duration-250 hover:border-blue-600 active:bg-gray-200 focus:outline-none dark:text-white dark:bg-gray-800 dark:hover:border-blue-400 dark:active:bg-gray-700 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+        </svg>
         Open
-      </button>
-
-      <button @click="toggleDarkMode"
-        class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors  cursor-pointer">
-        <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 dark:text-gray-200"
-          fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 dark:text-gray-200" fill="none"
-          viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
       </button>
     </nav>
 
     <main class="flex-1 flex flex-col justify-center items-center">
-      <h1 class="text-center text-gray-900 dark:text-white">Welcome to Tauri + Vue</h1>
-
-      <div class="flex">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="h-24 p-6 transition-all duration-750 hover:drop-shadow-[0_0_2em_#747bff]"
-            alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" class="h-24 p-6 transition-all duration-750 hover:drop-shadow-[0_0_2em_#24c8db]"
-            alt="Tauri logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="./assets/vue.svg" class="h-24 p-6 transition-all duration-750 hover:drop-shadow-[0_0_2em_#249b73]"
-            alt="Vue logo" />
-        </a>
-      </div>
-
-      <p class="mb-4 text-gray-700 dark:text-gray-300">Click on the Tauri, Vite, and Vue logos to learn more.</p>
-
-      <form class="flex justify-center mb-4" @submit.prevent="greet">
-        <input id="greet-input" v-model="name" placeholder="Enter a name..."
-          class="mr-2 rounded-lg border border-gray-300 dark:border-gray-600 px-4 py-2 text-base font-medium text-gray-900 bg-white shadow-sm transition-colors duration-250 hover:border-blue-600 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-gray-800 dark:placeholder-gray-400" />
-
-        <button type="submit"
-          class="rounded-lg border border-transparent px-4 py-2 text-base font-medium text-gray-900 bg-white shadow-sm cursor-pointer transition-colors duration-250 hover:border-blue-600 active:bg-gray-200 focus:outline-none dark:text-white dark:bg-gray-800 dark:hover:border-blue-400 dark:active:bg-gray-700">
-          Greet
-        </button>
-      </form>
-      <p class="text-gray-900 dark:text-white">{{ greetMsg }}</p>
       <pre class="text-left whitespace-pre-wrap text-gray-900 dark:text-white">{{ itemDescription }}</pre>
     </main>
   </div>
