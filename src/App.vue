@@ -30,7 +30,7 @@ async function openFile() {
   const documentsDir = await documentDir()
   const poe2Dir = await join(documentsDir, 'My Games', 'Path of Exile 2')
 
-  const file = await open({
+  const path = await open({
     multiple: false,
     directory: false,
     defaultPath: poe2Dir,
@@ -46,7 +46,9 @@ async function openFile() {
     ]
   });
 
-  console.log(file);
+
+  if (!path) return;
+  invoke('open_file', { path });
 }
 
 </script>
