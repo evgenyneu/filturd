@@ -11,6 +11,7 @@
   "permissions": [
     "global-shortcut:default",
     "core:window:allow-set-focus",
+    "core:window:allow-close",
     "dialog:default"
   ]
 }
