@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global-shortcut';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open } from '@tauri-apps/plugin-dialog';
 import { documentDir, join } from '@tauri-apps/api/path';
 import { useTheme } from './composables/useTheme';
-import { Menu } from '@tauri-apps/api/menu';
+import { useAppMenu } from './composables/useAppMenu';
 
 const itemDescription = ref("");
 
 const key = 'CommandOrControl+1'
 
 const { theme, updateTheme } = useTheme();
+useAppMenu();
 
 async function didPressCopyShortcut(event: ShortcutEvent) {
   if (event.state !== 'Pressed') { return; }
@@ -55,33 +56,6 @@ async function openFile() {
   const blocksCount = await invoke('open_file', { path });
   console.log(`blocksCount: ${blocksCount}`);
 }
-
-// Instead, create an initialization function
-async function initializeMenu() {
-  const menu = await Menu.new({
-    items: [
-      {
-        id: 'quit',
-        text: 'Quit',
-        action: () => {
-          console.log('quit pressed');
-        },
-      },
-    ],
-  });
-
-  menu.setAsAppMenu().then((res) => {
-    console.log('menu set success', res);
-  });
-
-  console.log('-------------menu loaded-------------');
-}
-
-// Call it when component mounts
-onMounted(() => {
-  initializeMenu();
-});
-
 
 </script>
 
