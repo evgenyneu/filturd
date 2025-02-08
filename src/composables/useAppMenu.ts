@@ -9,7 +9,8 @@ export function useAppMenu() {
     });
 
     const quit = await PredefinedMenuItem.new({
-      item: "Quit",
+      item: "CloseWindow",
+      text: "Exit",
     });
 
     const menu = await Menu.new({
@@ -20,7 +21,7 @@ export function useAppMenu() {
           items: [
             {
               id: "open",
-              text: "Open Filter",
+              text: "Open Filter...",
               action: () => {
                 openFile();
               },
