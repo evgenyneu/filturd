@@ -66,12 +66,13 @@ async function openFile() {
                active:bg-gray-200 dark:active:bg-poe-border
                shadow-sm cursor-pointer transition-colors duration-250
                focus:outline-none flex items-center gap-2">
+
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-5 h-5">
+          class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round"
-            d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l6 6v10a2 2 0 0 1-2 2z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v6h6 M8 11h8 M8 15h8" />
+            d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
         </svg>
+
         Open Filter
       </button>
     </nav>
