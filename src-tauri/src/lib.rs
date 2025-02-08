@@ -3,8 +3,8 @@ pub mod filter;
 
 use commands::copy_item_desc::copy_item_description_under_cursor;
 use commands::greet::greet;
+use commands::open_file::open_file;
 use commands::play_sound::play_sound;
-use commands::open_file::open;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -16,7 +16,7 @@ pub fn run() {
             greet,
             copy_item_description_under_cursor,
             play_sound,
-            open
+            open_file
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

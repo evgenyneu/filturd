@@ -48,7 +48,8 @@ async function openFile() {
 
 
   if (!path) return;
-  invoke('open_file', { path });
+  const blocksCount = await invoke('open_file', { path });
+  console.log(`blocksCount: ${blocksCount}`);
 }
 
 </script>
