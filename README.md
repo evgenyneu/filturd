@@ -16,6 +16,7 @@ git clone https://github.com/evgenyneu/filturd.git
 
 * Node.js with [NVM for Windows](https://github.com/coreybutler/nvm-windows) or [nvm](https://github.com/nvm-sh/nvm) for Linux/Mac. Node version is specified in [`.nvmrc`](.nvmrc).
 * [Rust](https://www.rust-lang.org/)
+* Tauri 2 [prerequisites](https://v2.tauri.app/start/prerequisites/).
 
 ### Install dependencies
 

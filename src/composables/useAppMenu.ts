@@ -1,16 +1,12 @@
 import { Menu, PredefinedMenuItem } from "@tauri-apps/api/menu";
 import { onMounted } from "vue";
 import { openFile } from "../utils/fileOpener";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 export function useAppMenu() {
   async function initializeMenu() {
     const separator = await PredefinedMenuItem.new({
       item: "Separator",
-    });
-
-    const quit = await PredefinedMenuItem.new({
-      item: "CloseWindow",
-      text: "Exit",
     });
 
     const menu = await Menu.new({
@@ -27,7 +23,13 @@ export function useAppMenu() {
               },
             },
             separator,
-            quit,
+            {
+              id: "exit",
+              text: "Exit",
+              action: async () => {
+                await getCurrentWindow().close();
+              },
+            },
           ],
         },
       ],
