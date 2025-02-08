@@ -35,3 +35,5 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
