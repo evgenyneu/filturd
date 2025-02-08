@@ -1,7 +1,7 @@
-use std::path::Path;
 use anyhow::Result;
+use std::path::Path;
 
-use crate::filter::parser::blocks::{Block, parse_block_with_lines};
+use crate::filter::parser::blocks::{parse_block_with_lines, Block};
 use crate::filter::parser::blocks_with_lines::parse_lines;
 use crate::filter::parser::lines::content_to_lines;
 use crate::filter::parser::read_from_disk::read_filter_from_disk;

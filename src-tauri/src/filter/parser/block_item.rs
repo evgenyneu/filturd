@@ -1,5 +1,5 @@
-use std::str::FromStr;
 use crate::filter::parser::errors::ParseError;
+use std::str::FromStr;
 
 /// This enum holds only the known block line names.
 /// The `strum_macros::EnumVariantNames` derive makes available the list

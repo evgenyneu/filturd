@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global-shortcut';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { open } from '@tauri-apps/plugin-dialog';
 
 const itemDescription = ref("");
 
@@ -25,7 +26,22 @@ isRegistered(key).then((isRegistered) => {
 });
 
 async function openFile() {
-  // TODO: Implement file opening logic
+  const file = await open({
+    multiple: false,
+    directory: false,
+    filters: [
+      {
+        name: 'Filter',
+        extensions: ['filter']
+      },
+      {
+        name: 'All files',
+        extensions: ['*']
+      }
+    ]
+  });
+
+  console.log(file);
 }
 
 </script>

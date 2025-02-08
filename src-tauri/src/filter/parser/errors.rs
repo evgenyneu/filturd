@@ -1,5 +1,5 @@
-use std::fmt;
 use std::error::Error;
+use std::fmt;
 
 /// Error type returned when parsing a block line fails.
 #[derive(Debug, PartialEq, Eq)]
