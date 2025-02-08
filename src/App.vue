@@ -36,7 +36,8 @@ async function openFile() {
       class="p-4 bg-gray-100 dark:bg-gray-800 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
       <button @click="openFile" class="rounded-lg border border-transparent px-4 py-2 text-base font-medium
                bg-white text-gray-900 dark:bg-poe-bg dark:text-poe-text-50
-               hover:border-poe-hover-300 hover:text-poe-hover-300
+               hover:border-poe-hover-600 hover:text-poe-hover-600
+               dark:hover:border-poe-hover-300 dark:hover:text-poe-hover-300
                active:bg-gray-200 dark:active:bg-poe-border
                shadow-sm cursor-pointer transition-colors duration-250
                focus:outline-none flex items-center gap-2">
