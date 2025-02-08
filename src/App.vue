@@ -5,7 +5,6 @@ import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open } from '@tauri-apps/plugin-dialog';
 import { documentDir, join } from '@tauri-apps/api/path';
-import scrollIcon from '/img/icons/scrollicon.svg'
 
 const itemDescription = ref("");
 
@@ -67,7 +66,12 @@ async function openFile() {
                active:bg-gray-200 dark:active:bg-poe-border
                shadow-sm cursor-pointer transition-colors duration-250
                focus:outline-none flex items-center gap-2">
-        <img :src="scrollIcon" class="w-5 h-5" alt="scroll icon" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l6 6v10a2 2 0 0 1-2 2z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v6h6 M8 11h8 M8 15h8" />
+        </svg>
         Open Filter
       </button>
     </nav>
