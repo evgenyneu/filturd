@@ -27,7 +27,6 @@ isRegistered(key).then((isRegistered) => {
 });
 
 async function openFile() {
-  // Open Documents\My Games\Path of Exile 2
   const documentsDir = await documentDir()
   const poe2Dir = await join(documentsDir, 'My Games', 'Path of Exile 2')
 
