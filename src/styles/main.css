@@ -1,25 +1,11 @@
 @import "tailwindcss";
 
-:root {
-  font-family: 'Fontin', Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color: var(--poe-text);
-  background-color: var(--poe-background);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
-  --poe-background: #1a1a1a;
-  --poe-border: #463c33;
-  --poe-text: #dfcfaf;
-  --poe-accent: #c17d3a;
-  --poe-hover: #ff6b3d;
+@theme {
+  --color-poe-bg: #1a1a1a;
+  --color-poe-border: #463c33;
+  --color-poe-text: #dfcfaf;
+  --color-poe-accent: #c17d3a;
+  --color-poe-hover: #ff6b3d;
 }
 
 @font-face {
@@ -27,4 +13,17 @@
   src: url('/fonts/Fontin-Regular.ttf.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+:root {
+  font-family: 'Fontin', Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
