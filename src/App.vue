@@ -48,7 +48,7 @@ async function openFile() {
             d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l6 6v10a2 2 0 0 1-2 2z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v6h6 M8 11h8 M8 15h8" />
         </svg>
-        Open
+        Open Filter
       </button>
     </nav>
 
