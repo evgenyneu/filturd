@@ -1,0 +1,11 @@
+---
+description: UI style guide
+globs: 
+---
+
+# UI Style guide
+
+- This is a windws/mac app built with Tauri and Vue, it's a loot filter for Path of Exile 2.
+- App needs to look like a game app, with colors, icons, borders that resemble the ones from the PoE2 game.
+- UI needs to be intuitive to people who play PoE2 and similar games.
+- UI needs to be simple and accessible.
