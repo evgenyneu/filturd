@@ -68,7 +68,8 @@ async function openFile() {
                dark:hover:border-poe-hover-300 dark:hover:text-poe-hover-300
                active:bg-gray-200 dark:active:bg-poe-border
                shadow-sm cursor-pointer transition-colors duration-250
-               focus:outline-none flex items-center gap-2">
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-poe-hover-600 dark:focus-visible:ring-poe-hover-300
+               flex items-center gap-2">
 
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6">
@@ -79,14 +80,16 @@ async function openFile() {
         Open Filter
       </button>
 
-      <button @click="updateTheme(theme === 'dark' ? 'light' : 'dark')" class="rounded-lg border p-2 text-base font-medium
+      <button @click="updateTheme(theme === 'dark' ? 'light' : 'dark')"
+        class="rounded-lg border p-2 text-base font-medium
                bg-white text-gray-900 dark:bg-poe-bg dark:text-poe-text-50
                border-transparent dark:border-poe-border
                hover:border-poe-hover-600 hover:text-poe-hover-600
                dark:hover:border-poe-hover-300 dark:hover:text-poe-hover-300
                active:bg-gray-200 dark:active:bg-poe-border
                shadow-sm cursor-pointer transition-colors duration-250
-               focus:outline-none" :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-poe-hover-600 dark:focus-visible:ring-poe-hover-300"
+        :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
         <svg v-if="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
