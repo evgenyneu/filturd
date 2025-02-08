@@ -4,6 +4,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global-shortcut';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { open } from '@tauri-apps/plugin-dialog';
+import { documentDir, join } from '@tauri-apps/api/path';
 
 const itemDescription = ref("");
 
@@ -26,9 +27,14 @@ isRegistered(key).then((isRegistered) => {
 });
 
 async function openFile() {
+  // Open Documents\My Games\Path of Exile 2
+  const documentsDir = await documentDir()
+  const poe2Dir = await join(documentsDir, 'My Games', 'Path of Exile 2')
+
   const file = await open({
     multiple: false,
     directory: false,
+    defaultPath: poe2Dir,
     filters: [
       {
         name: 'Filter',
