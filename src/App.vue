@@ -3,10 +3,9 @@ import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { register, ShortcutEvent, isRegistered } from '@tauri-apps/plugin-global-shortcut';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { open } from '@tauri-apps/plugin-dialog';
-import { documentDir, join } from '@tauri-apps/api/path';
 import { useTheme } from './composables/useTheme';
 import { useAppMenu } from './composables/useAppMenu';
+import { openFile } from "./utils/fileOpener";
 
 const itemDescription = ref("");
 
@@ -30,32 +29,6 @@ isRegistered(key).then((isRegistered) => {
 
   register(key, didPressCopyShortcut);
 });
-
-async function openFile() {
-  const documentsDir = await documentDir()
-  const poe2Dir = await join(documentsDir, 'My Games', 'Path of Exile 2')
-
-  const path = await open({
-    multiple: false,
-    directory: false,
-    defaultPath: poe2Dir,
-    filters: [
-      {
-        name: 'Filter',
-        extensions: ['filter']
-      },
-      {
-        name: 'All files',
-        extensions: ['*']
-      }
-    ]
-  });
-
-
-  if (!path) return;
-  const blocksCount = await invoke('open_file', { path });
-  console.log(`blocksCount: ${blocksCount}`);
-}
 
 </script>
 
