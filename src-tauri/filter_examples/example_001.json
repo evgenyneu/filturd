@@ -1,0 +1,1320 @@
+[
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Rarity",
+        "params": [
+          "Unique"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Amethyst Ring",
+          "Heavy Belt",
+          "Sapphire Ring",
+          "Stellar Amulet"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "42"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "188",
+          "96",
+          "37",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "3",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "Blue"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "1",
+          "Blue",
+          "Star"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "WaystoneTier",
+        "params": [
+          ">=",
+          "16"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Waystones"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "80"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "220",
+          "50",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "Continue",
+        "params": []
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "BaseEnergyShield",
+        "params": [
+          ">",
+          "0"
+        ]
+      },
+      {
+        "name": "BaseEvasion",
+        "params": [
+          ">",
+          "0"
+        ]
+      },
+      {
+        "name": "BaseArmour",
+        "params": [
+          "0"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "Shields"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Stackable Currency"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Artificer's Orb",
+          "Lesser Jeweller's Orb",
+          "Regal Orb"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "42"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "240",
+          "180",
+          "100",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "2",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "White"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "2",
+          "White",
+          "Circle"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "BaseEnergyShield",
+        "params": [
+          "0"
+        ]
+      },
+      {
+        "name": "BaseEvasion",
+        "params": [
+          ">",
+          "0"
+        ]
+      },
+      {
+        "name": "BaseArmour",
+        "params": [
+          "0"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Rare"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "Shields"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "20",
+          "20",
+          "0",
+          "255"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Socketable"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Body Rune",
+          "Desert Rune",
+          "Glacial Rune",
+          "Inspiration Rune",
+          "Mind Rune",
+          "Rebirth Rune",
+          "Stone Rune",
+          "Storm Rune",
+          "Vision Rune"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "38"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "220",
+          "175",
+          "132"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "220",
+          "175",
+          "132"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Life Flasks"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "Ultimate"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<=",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "100",
+          "100",
+          "100"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "10",
+          "60",
+          "40"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Quality",
+        "params": [
+          ">=",
+          "10"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Life Flasks",
+          "Mana Flasks"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "180",
+          "180",
+          "180"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "ItemLevel",
+        "params": [
+          ">=",
+          "70"
+        ]
+      },
+      {
+        "name": "ItemLevel",
+        "params": [
+          "<=",
+          "74"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Rare"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Bows",
+          "Crossbows",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "One Hand Maces",
+          "Quarterstaves",
+          "Quivers",
+          "Sceptres",
+          "Shields",
+          "Staves",
+          "Two Hand Maces",
+          "Wands"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Advanced Beaded Circlet",
+          "Advanced Bound Bracers",
+          "Advanced Brigand Mace",
+          "Advanced Bronze Greaves",
+          "Advanced Chiseled Targe",
+          "Advanced Cloaked Mail",
+          "Advanced Composite Bow",
+          "Advanced Construct Hammer",
+          "Advanced Cowled Helm",
+          "Advanced Crescent Quarterstaff",
+          "Advanced Crumbling Maul",
+          "Advanced Crystal Focus",
+          "Advanced Cultist Crown",
+          "Advanced Dyad Crossbow",
+          "Advanced Embossed Boots",
+          "Advanced Felt Cap",
+          "Advanced Firm Bracers",
+          "Advanced Forlorn Crossbow",
+          "Advanced Frayed Shoes",
+          "Advanced Gauze Wraps",
+          "Advanced Hooded Mask",
+          "Advanced Iron Greaves",
+          "Advanced Keth Raiment",
+          "Advanced Lace Hood",
+          "Advanced Laced Boots",
+          "Advanced Lattice Sandals",
+          "Advanced Leaden Greathammer",
+          "Advanced Mail Sabatons",
+          "Advanced Maraketh Cuirass",
+          "Advanced Martyr Crown",
+          "Advanced Padded Leggings",
+          "Advanced Plated Mace",
+          "Advanced Rampart Tower Shield",
+          "Advanced Rhoahide Coat",
+          "Advanced Ringmail Gauntlets",
+          "Advanced Riveted Mitts",
+          "Advanced Rope Cuffs",
+          "Advanced Sectarian Crest Shield",
+          "Advanced Shaman Mantle",
+          "Advanced Silk Robe",
+          "Advanced Slicing Quarterstaff",
+          "Advanced Soldier Greathelm",
+          "Advanced Sombre Gloves",
+          "Advanced Spiked Buckler",
+          "Advanced Steel Plate",
+          "Advanced Stitched Gloves",
+          "Advanced Studded Vest",
+          "Advanced Tempered Mitts",
+          "Advanced Veiled Mask",
+          "Advanced Visored Helm",
+          "Advanced Warden Bow",
+          "Advanced Wayfarer Jacket",
+          "Advanced Wicker Tiara",
+          "Advanced Wrapped Greathelm",
+          "Advanced Wrapped Sandals",
+          "Advanced Zealot Bow"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "38"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "35",
+          "35",
+          "35",
+          "240"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Stackable Currency"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Armourer's Scrap",
+          "Artificer's Orb",
+          "Chance Shard",
+          "Glassblower's Bauble",
+          "Lesser Jeweller's Orb",
+          "Orb of Alchemy",
+          "Regal Orb",
+          "Vaal Orb"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "240",
+          "180",
+          "100",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "2",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "White"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "2",
+          "White",
+          "Circle"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Mirrored",
+        "params": [
+          "False"
+        ]
+      },
+      {
+        "name": "Corrupted",
+        "params": [
+          "False"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Amulets",
+          "Rings"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          ">=",
+          "65"
+        ]
+      },
+      {
+        "name": "Continue",
+        "params": []
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Stackable Currency"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "Distilled "
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "45"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "255",
+          "255",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "255",
+          "255",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "255",
+          "0",
+          "255",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "3",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "Pink"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "0",
+          "Pink",
+          "Pentagon"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hide",
+    "items": [
+      {
+        "name": "DropLevel",
+        "params": [
+          "<",
+          "44"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Bows",
+          "Crossbows",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "One Hand Maces",
+          "Quarterstaves",
+          "Shields",
+          "Two Hand Maces"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          ">=",
+          "60"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "18"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "20",
+          "20",
+          "0",
+          "0"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Stackable Currency"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Arcanist's Etcher",
+          "Blacksmith's Whetstone"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "240",
+          "207",
+          "132"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "240",
+          "207",
+          "132"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "White",
+          "Temp"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "2",
+          "Grey",
+          "Circle"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Socketable"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Soul Core of Atmohua",
+          "Soul Core of Cholotl",
+          "Soul Core of Zantipi"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "42"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "245",
+          "139",
+          "87",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "2",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "White"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "1",
+          "Yellow",
+          "Circle"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Quality",
+        "params": [
+          ">=",
+          "1"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "Shields"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          ">=",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "35"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "127",
+          "127",
+          "127"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hide",
+    "items": [
+      {
+        "name": "Quality",
+        "params": [
+          "0"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Life Flasks",
+          "Mana Flasks"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "Transcendent"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          ">=",
+          "62"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "18"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "20",
+          "20",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "name": "DisableDropSound",
+        "params": [
+          "True"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Quality",
+        "params": [
+          ">=",
+          "1"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Bows",
+          "Crossbows",
+          "One Hand Maces",
+          "Quarterstaves",
+          "Two Hand Maces"
+        ]
+      },
+      {
+        "name": "AreaLevel",
+        "params": [
+          "<",
+          "65"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "40"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "180",
+          "180",
+          "180"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Mirrored",
+        "params": [
+          "False"
+        ]
+      },
+      {
+        "name": "Corrupted",
+        "params": [
+          "False"
+        ]
+      },
+      {
+        "name": "ItemLevel",
+        "params": [
+          ">=",
+          "82"
+        ]
+      },
+      {
+        "name": "Rarity",
+        "params": [
+          "Normal",
+          "Magic"
+        ]
+      },
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Body Armours",
+          "Boots",
+          "Bows",
+          "Crossbows",
+          "Foci",
+          "Gloves",
+          "Helmets",
+          "One Hand Maces",
+          "Quarterstaves",
+          "Quivers",
+          "Sceptres",
+          "Shields",
+          "Staves",
+          "Two Hand Maces",
+          "Wands"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Attuned Wand",
+          "Chiming Staff",
+          "Expert Altar Robe",
+          "Expert Barrier Quarterstaff",
+          "Expert Bombard Crossbow",
+          "Expert Brigand Mace",
+          "Expert Cloaked Mail",
+          "Expert Cultist Greathammer",
+          "Expert Doubled Gauntlets",
+          "Expert Dualstring Bow",
+          "Expert Edged Buckler",
+          "Expert Elite Greathelm",
+          "Expert Feathered Sandals",
+          "Expert Feathered Targe",
+          "Expert Feathered Tiara",
+          "Expert Forlorn Crossbow",
+          "Expert Goldcast Cuffs",
+          "Expert Heavy Crown",
+          "Expert Hexer's Robe",
+          "Expert Hunter Hood",
+          "Expert Hunting Shoes",
+          "Expert Intricate Gloves",
+          "Expert Iron Cuirass",
+          "Expert Keth Raiment",
+          "Expert Leaden Greathammer",
+          "Expert Lizardscale Boots",
+          "Expert Moulded Mitts",
+          "Expert Omen Crest Shield",
+          "Expert Pathfinder Coat",
+          "Expert Pelt Leggings",
+          "Expert Pelt Mantle",
+          "Expert Plumed Focus",
+          "Expert Rogue Armour",
+          "Expert Sacrificial Mantle",
+          "Expert Scale Mail",
+          "Expert Scalper's Jacket",
+          "Expert Serpentscale Coat",
+          "Expert Shaman Mantle",
+          "Expert Shielded Helm",
+          "Expert Slicing Quarterstaff",
+          "Expert Spined Bracers",
+          "Expert Spiral Wraps",
+          "Expert Stacked Sabatons",
+          "Expert Steel Plate",
+          "Expert Stone Greaves",
+          "Expert Stone Tower Shield",
+          "Expert Studded Vest",
+          "Expert Tribal Mask",
+          "Expert Vaal Cuirass",
+          "Expert Waxed Jacket",
+          "Expert Wayfarer Jacket",
+          "Omen Sceptre",
+          "Primed Quiver",
+          "Rattling Sceptre",
+          "Siphoning Wand",
+          "Voltaic Staff"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show",
+    "items": [
+      {
+        "name": "Class",
+        "params": [
+          "==",
+          "Omen"
+        ]
+      },
+      {
+        "name": "BaseType",
+        "params": [
+          "==",
+          "Omen of Greater Annulment",
+          "Omen of Resurgence",
+          "Omen of Sinistral Alchemy",
+          "Omen of Sinistral Coronation",
+          "Omen of Sinistral Exaltation"
+        ]
+      },
+      {
+        "name": "SetFontSize",
+        "params": [
+          "42"
+        ]
+      },
+      {
+        "name": "SetTextColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBorderColor",
+        "params": [
+          "0",
+          "0",
+          "0",
+          "255"
+        ]
+      },
+      {
+        "name": "SetBackgroundColor",
+        "params": [
+          "245",
+          "105",
+          "90",
+          "255"
+        ]
+      },
+      {
+        "name": "PlayAlertSound",
+        "params": [
+          "2",
+          "300"
+        ]
+      },
+      {
+        "name": "PlayEffect",
+        "params": [
+          "Yellow"
+        ]
+      },
+      {
+        "name": "MinimapIcon",
+        "params": [
+          "1",
+          "Yellow",
+          "Circle"
+        ]
+      }
+    ]
+  }
+]

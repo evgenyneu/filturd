@@ -2,7 +2,7 @@ use crate::filter::parser::errors::ParseError;
 
 /// Represents a line in the loot filter block.
 /// The `name` field is the line name; `params` holds all following parameters.
-#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize, Clone)]
 pub struct BlockItem {
     pub name: String,
     pub params: Vec<String>,
