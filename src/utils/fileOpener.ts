@@ -23,6 +23,6 @@ export async function openFile() {
   });
 
   if (!path) return;
-  const blocksCount = await invoke("open_file", { path });
-  return blocksCount;
+  const blocks = await invoke("open_file", { path });
+  return blocks;
 }

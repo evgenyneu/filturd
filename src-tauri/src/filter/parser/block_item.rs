@@ -1,5 +1,4 @@
 use crate::filter::parser::errors::ParseError;
-use serde_json;
 
 /// Represents a line in the loot filter block.
 /// The `name` field is the line name; `params` holds all following parameters.
