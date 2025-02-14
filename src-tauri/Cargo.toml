@@ -31,6 +31,7 @@ tauri-plugin-dialog = "2"
 tauri-plugin-opener = "2"
 tokio = { version = "1.0", features = ["fs", "rt", "macros"] }
 rand = "0.9"
+ts-rs = { version = "10.1.0", features = ["format", "serde-compat", "serde-json-impl"] }
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-global-shortcut = "2"

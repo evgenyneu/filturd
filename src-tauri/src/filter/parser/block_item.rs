@@ -1,8 +1,10 @@
 use crate::filter::parser::errors::ParseError;
+use ts_rs::TS;
 
 /// Represents a line in the loot filter block.
 /// The `name` field is the line name; `params` holds all following parameters.
-#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize, Clone)]
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize, Clone, TS)]
+#[ts(export)]
 pub struct BlockItem {
     pub name: String,
     pub params: Vec<String>,

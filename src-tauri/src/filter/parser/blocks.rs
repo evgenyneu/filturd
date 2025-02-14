@@ -1,9 +1,11 @@
 use crate::filter::parser::block_item::{parse_block_item, BlockItem};
 use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
 use crate::filter::parser::errors::ParseError;
+use ts_rs::TS;
 
 /// Represents a parsed Block which holds a block name and its parsed block items.
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, TS)]
+#[ts(export)]
 pub struct Block {
     // Position of the block in the file, starting from 1
     pub order: u16,

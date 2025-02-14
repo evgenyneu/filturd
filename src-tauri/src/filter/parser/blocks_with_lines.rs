@@ -1,4 +1,7 @@
-#[derive(Debug, PartialEq, Clone, serde::Serialize, serde::Deserialize)]
+use ts_rs::TS;
+
+#[derive(Debug, PartialEq, Clone, serde::Serialize, serde::Deserialize, TS)]
+#[ts(export)]
 pub enum BlockName {
     Show,
     Hide,
@@ -110,7 +113,7 @@ mod tests {
         // First block
         assert_eq!(blocks[0].order, 1);
         assert_eq!(blocks[0].name, BlockName::Show);
-        
+
         assert_eq!(
             blocks[0].lines,
             vec!["BaseType == \"Mirror of Kalandra\"", "SetFontSize 45"]
