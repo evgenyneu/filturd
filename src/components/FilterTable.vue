@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Block } from '../../src-tauri/bindings/Block';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const props = defineProps<{
   blocks: Block[]
@@ -9,8 +9,8 @@ const props = defineProps<{
 type SortKey = 'order' | 'name' | null;
 type Direction = 'asc' | 'desc' | null;
 
-const sortKey = ref<SortKey>(null);
-const sortDirection = ref<Direction>(null);
+const sortKey = ref<SortKey>('order');
+const sortDirection = ref<Direction>('asc');
 
 const sortedBlocks = computed(() => {
   if (!sortKey.value) return props.blocks;
@@ -21,6 +21,7 @@ const sortedBlocks = computed(() => {
     if (sortKey.value === 'order') {
       return (a.order - b.order) * modifier;
     }
+
     return (a.name.localeCompare(b.name)) * modifier;
   });
 });
@@ -33,6 +34,12 @@ function handleSort(key: SortKey) {
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
   }
 }
+
+watch(() => props.blocks, () => {
+  sortKey.value = 'order';
+  sortDirection.value = 'asc';
+});
+
 </script>
 
 <template>

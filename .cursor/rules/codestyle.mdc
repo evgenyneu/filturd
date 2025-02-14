@@ -9,6 +9,8 @@ globs: *.rs, *.ts, *.js
 
 For readability, always separate multiline blocks with empty lines. Multiline blocks are blocks that span more than one line (if statmenets, loops, functions with manu arguments that take multiple lines.
 
+### An example in Rust
+
 Incorrect:
 
 ```rust
@@ -29,7 +31,7 @@ assert_eq!(
 );
 ```
 
-Here is an example it Typescript.
+### An example it Typescript
 
 Incorrect:
 
@@ -53,5 +55,25 @@ const blocks = ref<Array<{
   name: string;
   items: Array<{ name: string; params: string[] }>;
 }>>([]);
+```
+
+### Another TypeScript example
+
+Incorrect:
+
+```TypeScript
+if (sortKey.value === 'order') {
+  return (a.order - b.order) * modifier;
+}
+return (a.name.localeCompare(b.name)) * modifier;
+```
+
+Correct (there is a blank line after the multi-line if statemnt):
+
+```TypeScript
+if (sortKey.value === 'order') {
+  return (a.order - b.order) * modifier;
+}
+return (a.name.localeCompare(b.name)) * modifier;
 ```
 
