@@ -4,8 +4,8 @@ import { useBlocks } from './composables/useBlocks';
 import AppNav from './components/AppNav.vue';
 import FilterTable from './components/FilterTable.vue';
 
-useAppMenu();
 const { blocks, loadBlocks } = useBlocks();
+useAppMenu(loadBlocks);
 </script>
 
 <template>

@@ -1,11 +1,8 @@
 import { Menu, PredefinedMenuItem } from "@tauri-apps/api/menu";
 import { onMounted } from "vue";
-import { useBlocks } from "./useBlocks";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
-export function useAppMenu() {
-  const { loadBlocks } = useBlocks();
-
+export function useAppMenu(loadBlocks: () => Promise<void>) {
   async function initializeMenu() {
     const separator = await PredefinedMenuItem.new({
       item: "Separator",
