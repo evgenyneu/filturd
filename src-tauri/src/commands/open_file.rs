@@ -29,8 +29,10 @@ pub async fn open_file(path: &str) -> Result<Vec<Block>, ()> {
     assert!(result.is_ok());
     let blocks = result.unwrap();
 
-    if let Err(e) = save_sample_json(blocks.clone()) {
-        eprintln!("Failed to save sample JSON: {}", e);
+    if blocks.len() == 3234 {
+        if let Err(e) = save_sample_json(blocks.clone()) {
+            eprintln!("Failed to save sample JSON: {}", e);
+        }
     }
 
     Ok(blocks)

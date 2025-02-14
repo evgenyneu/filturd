@@ -1,9 +1,11 @@
 import { Menu, PredefinedMenuItem } from "@tauri-apps/api/menu";
 import { onMounted } from "vue";
-import { openFile } from "../utils/fileOpener";
+import { useBlocks } from "./useBlocks";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
 export function useAppMenu() {
+  const { loadBlocks } = useBlocks();
+
   async function initializeMenu() {
     const separator = await PredefinedMenuItem.new({
       item: "Separator",
@@ -18,8 +20,8 @@ export function useAppMenu() {
             {
               id: "open",
               text: "Open Filter...",
-              action: () => {
-                openFile();
+              action: async () => {
+                await loadBlocks();
               },
             },
             separator,

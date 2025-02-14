@@ -3,12 +3,15 @@ import { useTheme } from '../composables/useTheme';
 import { openFile } from "../utils/fileOpener";
 
 const { theme, updateTheme } = useTheme();
+defineProps<{
+  onOpenFile?: () => void
+}>();
 </script>
 
 <template>
   <nav
     class="p-4 bg-gray-100 dark:bg-gray-800 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-    <button @click="openFile" class="rounded-lg border px-4 py-2 text-base font-medium
+    <button @click="onOpenFile" class="rounded-lg border px-4 py-2 text-base font-medium
              bg-white text-gray-900 dark:bg-poe-bg dark:text-poe-text-50
              border-transparent dark:border-poe-border
              hover:border-poe-hover-600 hover:text-poe-hover-600
