@@ -1,0 +1,31 @@
+---
+description: Code style
+globs: *.rs, *.ts, *.js
+---
+
+# Code style
+
+## Separate multiline blocks with empty lines
+
+For readability, always separate multiline blocks with empty lines. Multiline blocks are blocks that span more than one line (if statmenets, loops, functions with manu arguments that take multiple lines.
+
+Incorrect:
+
+```rust
+assert_eq!(blocks[2].name, BlockName::Show);
+assert_eq!(
+    blocks[2].lines,
+    vec!["Class \"Currency\"", "SetFontSize 40"]
+);
+```
+
+Correct:
+
+```rust
+assert_eq!(blocks[2].name, BlockName::Show);
+assert_eq!(
+    blocks[2].lines,
+    vec!["Class \"Currency\"", "SetFontSize 40"]
+);
+```
+

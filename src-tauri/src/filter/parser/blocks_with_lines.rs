@@ -18,6 +18,8 @@ impl BlockName {
 
 #[derive(Debug, PartialEq)]
 pub struct BlockWithLines {
+    // Position of the block in the file, starting from 1
+    pub order: u16,
     pub name: BlockName,
     pub lines: Vec<String>,
 }
@@ -34,6 +36,7 @@ fn try_add_block_if_exists(
     lines: &[String],
     start: Option<(usize, BlockName)>,
     end: usize,
+    order: &mut u16,
 ) {
     let Some((start, block_name)) = start else {
         return;
@@ -47,21 +50,24 @@ fn try_add_block_if_exists(
     }
 
     blocks.push(BlockWithLines {
+        order: *order,
         name: block_name,
         lines: lines[start + 1..=end].to_vec(),
     });
+    *order += 1;
 }
 
 pub fn parse_lines(lines: &[String]) -> Vec<BlockWithLines> {
     let mut blocks = Vec::new();
     let mut current_block_start = None;
+    let mut order = 1;
 
     for (i, line) in lines.iter().enumerate() {
         let Some(block_name) = is_block_start(line) else {
             continue;
         };
 
-        try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1));
+        try_add_block_if_exists(&mut blocks, lines, current_block_start, i.saturating_sub(1), &mut order);
         current_block_start = Some((i, block_name));
     }
 
@@ -70,6 +76,7 @@ pub fn parse_lines(lines: &[String]) -> Vec<BlockWithLines> {
         lines,
         current_block_start,
         lines.len().saturating_sub(1),
+        &mut order,
     );
 
     blocks
@@ -101,21 +108,27 @@ mod tests {
         assert_eq!(blocks.len(), 3);
 
         // First block
+        assert_eq!(blocks[0].order, 1);
         assert_eq!(blocks[0].name, BlockName::Show);
+        
         assert_eq!(
             blocks[0].lines,
             vec!["BaseType == \"Mirror of Kalandra\"", "SetFontSize 45"]
         );
 
         // Second block
+        assert_eq!(blocks[1].order, 2);
         assert_eq!(blocks[1].name, BlockName::Hide);
+
         assert_eq!(
             blocks[1].lines,
             vec!["BaseType == \"Scroll of Wisdom\"", "SetFontSize 18"]
         );
 
         // Third block
+        assert_eq!(blocks[2].order, 3);
         assert_eq!(blocks[2].name, BlockName::Show);
+
         assert_eq!(
             blocks[2].lines,
             vec!["Class \"Currency\"", "SetFontSize 40"]
@@ -132,6 +145,7 @@ mod tests {
         let blocks = parse_lines(&content);
 
         assert_eq!(blocks.len(), 1);
+        assert_eq!(blocks[0].order, 1);
         assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(blocks[0].lines, vec!["BaseType == \"Mirror\""]);
     }

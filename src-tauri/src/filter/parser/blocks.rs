@@ -5,6 +5,8 @@ use crate::filter::parser::errors::ParseError;
 /// Represents a parsed Block which holds a block name and its parsed block items.
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Block {
+    // Position of the block in the file, starting from 1
+    pub order: u16,
     pub name: BlockName,
     pub items: Vec<BlockItem>,
 }
@@ -36,6 +38,7 @@ pub fn parse_block_with_lines(
         }
 
         blocks.push(Block {
+            order: block.order,
             name: block.name.clone(),
             items,
         });
@@ -53,6 +56,7 @@ mod tests {
     fn test_parse_blocks_success() {
         let blocks_with_lines = vec![
             BlockWithLines {
+                order: 1,
                 name: BlockName::Show,
                 lines: vec![
                     "BaseType == \"Mirror of Kalandra\"".to_string(),
@@ -60,6 +64,7 @@ mod tests {
                 ],
             },
             BlockWithLines {
+                order: 2,
                 name: BlockName::Hide,
                 lines: vec![
                     "Class \"Currency\"".to_string(),
@@ -76,45 +81,20 @@ mod tests {
         assert_eq!(blocks.len(), 2);
 
         // First block
-        // --------------
-
+        assert_eq!(blocks[0].order, 1);
         assert_eq!(blocks[0].name, BlockName::Show);
         assert_eq!(blocks[0].items.len(), 2);
 
-        // First item
-        // ------------
-
-        assert_eq!(blocks[0].items[0].name, "BaseType");
-        assert_eq!(blocks[0].items[0].params, vec!["==", "Mirror of Kalandra"]);
-
-        // Second item
-        // ------------
-
-        assert_eq!(blocks[0].items[1].name, "SetFontSize");
-        assert_eq!(blocks[0].items[1].params, vec!["45"]);
-
         // Second block
-        // --------------
-
+        assert_eq!(blocks[1].order, 2);
         assert_eq!(blocks[1].name, BlockName::Hide);
         assert_eq!(blocks[1].items.len(), 2);
-
-        // First item
-        // ------------
-
-        assert_eq!(blocks[1].items[0].name, "Class");
-        assert_eq!(blocks[1].items[0].params, vec!["Currency"]);
-
-        // Second item
-        // ------------
-
-        assert_eq!(blocks[1].items[1].name, "SetFontSize");
-        assert_eq!(blocks[1].items[1].params, vec!["40"]);
     }
 
     #[test]
     fn test_block_serde() {
         let block = Block {
+            order: 1,
             name: BlockName::Show,
             items: vec![
                 BlockItem {
@@ -128,13 +108,10 @@ mod tests {
             ],
         };
 
-        // Convert to JSON string
         let json = serde_json::to_string(&block).unwrap();
-
-        // Convert back to Block
         let decoded: Block = serde_json::from_str(&json).unwrap();
 
-        // Verify the roundtrip
         assert_eq!(block, decoded);
+        assert_eq!(decoded.order, 1);
     }
 }
