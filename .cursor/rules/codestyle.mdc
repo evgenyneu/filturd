@@ -19,7 +19,7 @@ assert_eq!(
 );
 ```
 
-Correct:
+Correct (there is empty line before the second multiline assert):
 
 ```rust
 assert_eq!(blocks[2].name, BlockName::Show);
@@ -27,5 +27,31 @@ assert_eq!(
     blocks[2].lines,
     vec!["Class \"Currency\"", "SetFontSize 40"]
 );
+```
+
+Here is an example it Typescript.
+
+Incorrect:
+
+
+```TypeScript
+const { itemDescription } = useItemDescription();
+const blocks = ref<Array<{
+  order: number;
+  name: string;
+  items: Array<{ name: string; params: string[] }>;
+}>>([]);
+```
+
+Correct (there is an empty line before the `const blocks`):
+
+```TypeScript
+const { itemDescription } = useItemDescription();
+
+const blocks = ref<Array<{
+  order: number;
+  name: string;
+  items: Array<{ name: string; params: string[] }>;
+}>>([]);
 ```
 

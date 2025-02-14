@@ -6,8 +6,9 @@
   "[typescript]": {
     "editor.formatOnSave": true,
   },
-  "rust-analyzer.cargo.targetDir": "target",
   "[rust]": {
     "editor.tabSize": 4
-  }
+  },
+  "rust-analyzer.checkOnSave": false,
+  "rust-analyzer.diagnostics.styleLints.enable": true,
 }
