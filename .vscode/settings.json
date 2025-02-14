@@ -6,5 +6,5 @@
   "[typescript]": {
     "editor.formatOnSave": true,
   },
-  "rust-analyzer.cargo.targetDir": "target"
+  "rust-analyzer.cargo.targetDir": "target",
 }

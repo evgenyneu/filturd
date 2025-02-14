@@ -2,9 +2,7 @@ use crate::filter::parser::errors::ParseError;
 use std::str::FromStr;
 
 /// This enum holds only the known block line names.
-/// The `strum_macros::EnumVariantNames` derive makes available the list
-/// of known variants (using the same name as in the source file).
-#[derive(Debug, PartialEq, Eq, strum_macros::EnumString)]
+#[derive(Debug, PartialEq, Eq, strum_macros::EnumString, strum_macros::Display)]
 #[strum(serialize_all = "PascalCase")]
 pub enum KnownBlockItemName {
     AreaLevel,
