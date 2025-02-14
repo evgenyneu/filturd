@@ -3,7 +3,7 @@ use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
 use crate::filter::parser::errors::ParseError;
 
 /// Represents a parsed Block which holds a block name and its parsed block items.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Block {
     pub name: BlockName,
     pub items: Vec<BlockItem>,
@@ -127,5 +127,31 @@ mod tests {
         );
 
         assert_eq!(blocks[1].items[1].params, vec!["40"]);
+    }
+
+    #[test]
+    fn test_block_serde() {
+        let block = Block {
+            name: BlockName::Show,
+            items: vec![
+                BlockItem {
+                    name: BlockItemName::Known(KnownBlockItemName::BaseType),
+                    params: vec!["==".to_string(), "Mirror of Kalandra".to_string()],
+                },
+                BlockItem {
+                    name: BlockItemName::Known(KnownBlockItemName::SetFontSize),
+                    params: vec!["45".to_string()],
+                },
+            ],
+        };
+
+        // Convert to JSON string
+        let json = serde_json::to_string(&block).unwrap();
+
+        // Convert back to Block
+        let decoded: Block = serde_json::from_str(&json).unwrap();
+
+        // Verify the roundtrip
+        assert_eq!(block, decoded);
     }
 }

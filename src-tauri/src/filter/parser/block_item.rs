@@ -1,8 +1,9 @@
 use crate::filter::parser::errors::ParseError;
 use std::str::FromStr;
+use serde_json;
 
 /// This enum holds only the known block line names.
-#[derive(Debug, PartialEq, Eq, strum_macros::EnumString, strum_macros::Display)]
+#[derive(Debug, PartialEq, Eq, strum_macros::EnumString, serde::Serialize, serde::Deserialize)]
 #[strum(serialize_all = "PascalCase")]
 pub enum KnownBlockItemName {
     AreaLevel,
@@ -36,7 +37,7 @@ pub enum KnownBlockItemName {
 }
 
 /// BlockItemName wraps known names (using the enum above) and falls back to Unknown.
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum BlockItemName {
     Known(KnownBlockItemName),
     Unknown(String),
@@ -57,7 +58,7 @@ impl FromStr for BlockItemName {
 
 /// Represents a line in the loot filter block.
 /// The `name` field is the parsed enum variant; `params` holds all following parameters.
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct BlockItem {
     pub name: BlockItemName,
     pub params: Vec<String>,
@@ -212,5 +213,22 @@ mod tests {
         let line = "";
         let result = parse_block_item(line);
         assert_eq!(result, Err(ParseError::EmptyLine));
+    }
+
+    #[test]
+    fn test_block_item_serialization() {
+        let block_item = BlockItem {
+            name: BlockItemName::Known(KnownBlockItemName::Rarity),
+            params: vec!["Normal".to_string(), "Magic".to_string(), "Rare".to_string()],
+        };
+
+        // Convert to JSON string
+        let json = serde_json::to_string(&block_item).unwrap();
+
+        // Convert back to BlockItem
+        let decoded: BlockItem = serde_json::from_str(&json).unwrap();
+
+        // Verify the roundtrip
+        assert_eq!(block_item, decoded);
     }
 }
