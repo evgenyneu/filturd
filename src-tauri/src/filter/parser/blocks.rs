@@ -47,7 +47,6 @@ pub fn parse_block_with_lines(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::filter::parser::block_item::{BlockItemName, KnownBlockItemName};
     use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
 
     #[test]
@@ -85,21 +84,13 @@ mod tests {
         // First item
         // ------------
 
-        assert_eq!(
-            blocks[0].items[0].name,
-            BlockItemName::Known(KnownBlockItemName::BaseType)
-        );
-
+        assert_eq!(blocks[0].items[0].name, "BaseType");
         assert_eq!(blocks[0].items[0].params, vec!["==", "Mirror of Kalandra"]);
 
         // Second item
         // ------------
 
-        assert_eq!(
-            blocks[0].items[1].name,
-            BlockItemName::Known(KnownBlockItemName::SetFontSize)
-        );
-
+        assert_eq!(blocks[0].items[1].name, "SetFontSize");
         assert_eq!(blocks[0].items[1].params, vec!["45"]);
 
         // Second block
@@ -111,21 +102,13 @@ mod tests {
         // First item
         // ------------
 
-        assert_eq!(
-            blocks[1].items[0].name,
-            BlockItemName::Known(KnownBlockItemName::Class)
-        );
-
+        assert_eq!(blocks[1].items[0].name, "Class");
         assert_eq!(blocks[1].items[0].params, vec!["Currency"]);
 
         // Second item
         // ------------
 
-        assert_eq!(
-            blocks[1].items[1].name,
-            BlockItemName::Known(KnownBlockItemName::SetFontSize)
-        );
-
+        assert_eq!(blocks[1].items[1].name, "SetFontSize");
         assert_eq!(blocks[1].items[1].params, vec!["40"]);
     }
 
@@ -135,11 +118,11 @@ mod tests {
             name: BlockName::Show,
             items: vec![
                 BlockItem {
-                    name: BlockItemName::Known(KnownBlockItemName::BaseType),
+                    name: "BaseType".to_string(),
                     params: vec!["==".to_string(), "Mirror of Kalandra".to_string()],
                 },
                 BlockItem {
-                    name: BlockItemName::Known(KnownBlockItemName::SetFontSize),
+                    name: "SetFontSize".to_string(),
                     params: vec!["45".to_string()],
                 },
             ],

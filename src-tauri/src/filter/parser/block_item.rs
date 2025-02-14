@@ -1,71 +1,16 @@
 use crate::filter::parser::errors::ParseError;
-use std::str::FromStr;
 use serde_json;
 
-/// This enum holds only the known block line names.
-#[derive(Debug, PartialEq, Eq, strum_macros::EnumString, serde::Serialize, serde::Deserialize)]
-#[strum(serialize_all = "PascalCase")]
-pub enum KnownBlockItemName {
-    AreaLevel,
-    BaseArmour,
-    BaseEnergyShield,
-    BaseEvasion,
-    BaseType,
-    Class,
-    Continue,
-    Corrupted,
-    CustomAlertSound,
-    DisableDropSound,
-    DropLevel,
-    Height,
-    Identified,
-    ItemLevel,
-    MinimapIcon,
-    Mirrored,
-    PlayAlertSound,
-    PlayEffect,
-    Quality,
-    Rarity,
-    SetBackgroundColor,
-    SetBorderColor,
-    SetFontSize,
-    SetTextColor,
-    Sockets,
-    StackSize,
-    Width,
-    WaystoneTier,
-}
-
-/// BlockItemName wraps known names (using the enum above) and falls back to Unknown.
-#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
-pub enum BlockItemName {
-    Known(KnownBlockItemName),
-    Unknown(String),
-}
-
-impl FromStr for BlockItemName {
-    type Err = ();
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        // Try parsing into a KnownBlockItemName with strum.
-        if let Ok(known) = s.parse::<KnownBlockItemName>() {
-            Ok(BlockItemName::Known(known))
-        } else {
-            Ok(BlockItemName::Unknown(s.to_owned()))
-        }
-    }
-}
-
 /// Represents a line in the loot filter block.
-/// The `name` field is the parsed enum variant; `params` holds all following parameters.
+/// The `name` field is the line name; `params` holds all following parameters.
 #[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct BlockItem {
-    pub name: BlockItemName,
+    pub name: String,
     pub params: Vec<String>,
 }
 
 /// Parses a loot filter block line into a BlockItem struct.
-/// Splits the line into tokens (handling double quotes) and maps the first token into a BlockItemName.
+/// Splits the line into tokens (handling double quotes) and maps the first token into the name.
 pub fn parse_block_item(line: &str) -> Result<BlockItem, ParseError> {
     let tokens = tokenize_line(line);
 
@@ -73,13 +18,10 @@ pub fn parse_block_item(line: &str) -> Result<BlockItem, ParseError> {
         return Err(ParseError::EmptyLine);
     }
 
-    let name = tokens[0]
-        .parse()
-        .unwrap_or(BlockItemName::Unknown(tokens[0].clone()));
-
-    // All tokens after the item name are parsed as parameters.
-    let params = tokens[1..].to_vec();
-    Ok(BlockItem { name, params })
+    Ok(BlockItem {
+        name: tokens[0].clone(),
+        params: tokens[1..].to_vec(),
+    })
 }
 
 /// Tokenizes a given line into parts.
@@ -166,11 +108,7 @@ mod tests {
         let line = "Rarity Normal Magic Rare";
         let block_item = parse_block_item(line).unwrap();
 
-        assert_eq!(
-            block_item.name,
-            BlockItemName::Known(KnownBlockItemName::Rarity)
-        );
-
+        assert_eq!(block_item.name, "Rarity");
         assert_eq!(block_item.params, vec!["Normal", "Magic", "Rare"]);
     }
 
@@ -179,11 +117,7 @@ mod tests {
         let line = "BaseType == \"Time-Lost Emerald\" \"Time-Lost Ruby\" \"Time-Lost Sapphire\"";
         let block_item = parse_block_item(line).unwrap();
 
-        assert_eq!(
-            block_item.name,
-            BlockItemName::Known(KnownBlockItemName::BaseType)
-        );
-
+        assert_eq!(block_item.name, "BaseType");
         assert_eq!(
             block_item.params,
             vec![
@@ -200,11 +134,7 @@ mod tests {
         let line = "UnknownName param1 param2";
         let block_item = parse_block_item(line).unwrap();
 
-        assert_eq!(
-            block_item.name,
-            BlockItemName::Unknown("UnknownName".to_string())
-        );
-
+        assert_eq!(block_item.name, "UnknownName");
         assert_eq!(block_item.params, vec!["param1", "param2"]);
     }
 
@@ -218,17 +148,12 @@ mod tests {
     #[test]
     fn test_block_item_serialization() {
         let block_item = BlockItem {
-            name: BlockItemName::Known(KnownBlockItemName::Rarity),
+            name: "Rarity".to_string(),
             params: vec!["Normal".to_string(), "Magic".to_string(), "Rare".to_string()],
         };
 
-        // Convert to JSON string
         let json = serde_json::to_string(&block_item).unwrap();
-
-        // Convert back to BlockItem
         let decoded: BlockItem = serde_json::from_str(&json).unwrap();
-
-        // Verify the roundtrip
         assert_eq!(block_item, decoded);
     }
 }
