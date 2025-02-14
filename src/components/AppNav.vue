@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTheme } from '../composables/useTheme';
-import { openFile } from "../utils/fileOpener";
 
 const { theme, updateTheme } = useTheme();
 defineProps<{

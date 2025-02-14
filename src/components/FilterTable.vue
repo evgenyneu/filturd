@@ -79,7 +79,7 @@ watch(() => props.blocks, () => {
         <td class="py-2 px-1 text-gray-900 dark:text-poe-text-400">{{ block.order }}</td>
         <td class="py-2 px-1">
           <span class="inline-block px-2 py-1 rounded" :class="{
-            'bg-green-800 text-green-100': block.name === 'Show',
+            'bg-green-700 text-green-100': block.name === 'Show',
             'bg-red-600 text-red-100': block.name === 'Hide'
           }">
             {{ block.name.toLowerCase() }}
