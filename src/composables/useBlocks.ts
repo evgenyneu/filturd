@@ -1,15 +1,13 @@
 import { ref } from "vue";
 import { openFile } from "../utils/fileOpener";
+import type { Block } from "../../src-tauri/bindings/Block";
 
 export function useBlocks() {
-    const blocks = ref<Array<{
-        order: number;
-        name: string;
-        items: Array<{ name: string; params: string[] }>;
-    }>>([]);
+    const blocks = ref<Block[]>([]);
 
     async function loadBlocks() {
         const result = await openFile();
+
         if (result) {
             blocks.value = result;
         }
