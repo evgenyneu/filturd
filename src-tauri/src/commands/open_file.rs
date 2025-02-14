@@ -10,12 +10,11 @@ fn save_sample_json(blocks: Vec<Block>) -> Result<(), Box<dyn std::error::Error>
     let mut rng = rand::rng();
     let mut random_blocks = blocks.clone();
     random_blocks.shuffle(&mut rng);
-    let random_blocks: Vec<Block> = random_blocks.into_iter().take(20).collect();
+    let random_blocks: Vec<Block> = random_blocks.into_iter().take(10).collect();
     let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     path.push("filter_examples/example_001.json");
     let mut file = File::create(path)?;
 
-    // write to json file, formatted with indentation for readability
     let json = serde_json::to_string_pretty(&random_blocks)?;
     file.write_all(json.as_bytes())?;
     Ok(())
