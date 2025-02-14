@@ -1,21 +1,72 @@
 <script setup lang="ts">
 import type { Block } from '../../src-tauri/bindings/Block';
+import { ref, computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   blocks: Block[]
 }>();
+
+type SortKey = 'order' | 'name' | null;
+type Direction = 'asc' | 'desc' | null;
+
+const sortKey = ref<SortKey>(null);
+const sortDirection = ref<Direction>(null);
+
+const sortedBlocks = computed(() => {
+  if (!sortKey.value) return props.blocks;
+
+  return [...props.blocks].sort((a, b) => {
+    const modifier = sortDirection.value === 'asc' ? 1 : -1;
+
+    if (sortKey.value === 'order') {
+      return (a.order - b.order) * modifier;
+    }
+    return (a.name.localeCompare(b.name)) * modifier;
+  });
+});
+
+function handleSort(key: SortKey) {
+  if (sortKey.value !== key) {
+    sortKey.value = key;
+    sortDirection.value = 'asc';
+  } else {
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
+  }
+}
 </script>
 
 <template>
   <table class="w-full border-collapse bg-white/5 dark:bg-poe-bg/20">
     <thead>
       <tr class="border-b border-gray-200 dark:border-poe-border">
-        <th class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal text-gray-600 dark:text-poe-text-400">#</th>
-        <th class="w-full py-2 px-1 text-left font-normal text-gray-600 dark:text-poe-text-400">Type</th>
+        <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal group">
+          <button class="flex items-center gap-1 hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+            <span>#</span>
+            <svg v-if="sortKey === 'order'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" class="size-4">
+              <path v-if="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+              <path v-if="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+            </svg>
+          </button>
+        </th>
+        <th @click="handleSort('name')" class="w-full py-2 px-1 text-left font-normal group">
+          <button class="flex items-center gap-1 hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+            <span>Type</span>
+            <svg v-if="sortKey === 'name'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="currentColor" class="size-4">
+              <path v-if="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+              <path v-if="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+            </svg>
+          </button>
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="block in blocks" :key="block.order" class="border-b border-gray-200/50 dark:border-poe-border/50
+      <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200/50 dark:border-poe-border/50
                  hover:bg-gray-50 dark:hover:bg-poe-border/30
                  transition-colors duration-150">
         <td class="py-2 px-1 text-gray-900 dark:text-poe-text-400">{{ block.order }}</td>
