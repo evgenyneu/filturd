@@ -47,25 +47,25 @@ watch(() => props.blocks, () => {
     <thead>
       <tr class="border-b border-gray-200 dark:border-poe-border">
         <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal group">
-          <button class="flex items-center gap-1 hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>#</span>
-            <svg v-if="sortKey === 'order'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="currentColor" class="size-4">
-              <path v-if="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
+              <path v-show="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
                 d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
-              <path v-if="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
+              <path v-show="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
                 d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
             </svg>
           </button>
         </th>
         <th @click="handleSort('name')" class="w-full py-2 px-1 text-left font-normal group">
-          <button class="flex items-center gap-1 hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>Type</span>
-            <svg v-if="sortKey === 'name'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="currentColor" class="size-4">
-              <path v-if="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
+              <path v-show="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
                 d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
-              <path v-if="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
+              <path v-show="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
                 d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
             </svg>
           </button>
