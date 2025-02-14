@@ -2,6 +2,7 @@
 import { useAppMenu } from './composables/useAppMenu';
 import { useBlocks } from './composables/useBlocks';
 import AppNav from './components/AppNav.vue';
+import FilterTable from './components/FilterTable.vue';
 
 useAppMenu();
 const { blocks, loadBlocks } = useBlocks();
@@ -11,7 +12,8 @@ const { blocks, loadBlocks } = useBlocks();
   <div class="h-screen flex flex-col bg-white dark:bg-gray-900">
     <AppNav @open-file="loadBlocks" />
 
-    <main class="flex-1 flex flex-col justify-center items-center">
+    <main class="flex-1 p-4 overflow-auto">
+      <FilterTable v-if="blocks.length" :blocks="blocks" />
     </main>
   </div>
 </template>
