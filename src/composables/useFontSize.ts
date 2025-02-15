@@ -1,40 +1,31 @@
 import { ref, onMounted } from "vue";
 
-export type FontSize = "normal" | "large" | "x-large";
-
-const fontSize = ref<FontSize>(localStorage.fontSize ?? "normal");
-
-const fontSizeMap = {
-  normal: "1rem",
-  large: "1.25rem",
-  "x-large": "1.5rem",
-};
+const fontSizeMultiplier = ref<number>(localStorage.fontSizeMultiplier ?? 1.0);
 
 export function useFontSize() {
-  const updateFontSize = (size: FontSize) => {
-    fontSize.value = size;
-    localStorage.fontSize = size;
+  const updateFontSize = (multiplier: number) => {
+    fontSizeMultiplier.value = multiplier;
+    localStorage.fontSizeMultiplier = multiplier;
 
     document.documentElement.style.setProperty(
       "--base-font-size",
-      fontSizeMap[size]
+      `${fontSizeMultiplier.value}rem`
     );
   };
 
   const cycleFontSize = () => {
-    const sizes = ["normal", "large", "x-large"] as const;
-    const currentIndex = sizes.indexOf(fontSize.value);
+    const sizes: number[] = [1.0, 1.25, 1.5];
+    const currentIndex = sizes.indexOf(fontSizeMultiplier.value);
     const nextSize = sizes[(currentIndex + 1) % sizes.length];
     updateFontSize(nextSize);
   };
 
   onMounted(() => {
-    updateFontSize(fontSize.value);
+    updateFontSize(fontSizeMultiplier.value);
   });
 
   return {
-    fontSize,
-    updateFontSize,
+    fontSizeMultiplier,
     cycleFontSize,
   };
 }

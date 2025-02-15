@@ -7,6 +7,7 @@ const props = defineProps<{
   blocks: Block[]
   usedItemNames: string[]
   items: Items
+  fontSizeMultiplier: number
 }>();
 
 type SortKey = string;
@@ -87,7 +88,8 @@ const itemColumnWidths = computed(() => {
 </script>
 
 <template>
-  <div :style="`grid-template-columns: auto auto ${itemColumnWidths.join(' ')}; width: ${usedItemNames.length * 150}px`"
+  <div
+    :style="`grid-template-columns: auto auto ${itemColumnWidths.join(' ')}; width: ${usedItemNames.length * 150 * fontSizeMultiplier}px`"
     class="grid bg-white dark:bg-gray-950">
     <!-- Header row -->
     <!-- Order header -->

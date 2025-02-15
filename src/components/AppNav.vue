@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useTheme } from '../composables/useTheme';
-import { useFontSize } from '../composables/useFontSize';
 
 const { theme, updateTheme } = useTheme();
-const { fontSize, cycleFontSize } = useFontSize();
 
 defineProps<{
   onOpenFile?: () => void
+  onCycleFontSize?: () => void
 }>();
 </script>
 
 <template>
   <nav
-    class="p-4 bg-gray-100 dark:bg-gray-900 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
+    class="p-2 bg-gray-100 dark:bg-gray-900 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
     <button @click="onOpenFile" class="rounded-lg border px-4 py-2 text-base font-medium
              bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-50
              border-transparent dark:border-gray-700
@@ -31,7 +30,7 @@ defineProps<{
     </button>
 
     <div class="flex gap-2">
-      <button @click="cycleFontSize" class="rounded-lg border p-2 text-base font-medium
+      <button @click="onCycleFontSize" class="rounded-lg border p-2 text-base font-medium
              bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-50
              border-transparent dark:border-gray-700
              hover:border-amber-700 hover:text-amber-700
