@@ -64,13 +64,13 @@ const sortedItemColumns = computed(() => {
 </script>
 
 <template>
-  <table class="w-full border-collapse bg-white/5 dark:bg-poe-bg/20">
+  <table class="w-full border-collapse bg-white/5 dark:bg-gray-900/20">
     <thead>
-      <tr class="border-b border-gray-200 dark:border-poe-border">
+      <tr class="border-b border-gray-200 dark:border-gray-700">
         <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-center font-normal group
-                   border-r border-gray-200 dark:border-poe-border">
+                   border-r border-gray-200 dark:border-gray-700">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-poe-text-accent-600 dark:hover:text-poe-text-accent-300 cursor-pointer text-gray-600 dark:text-poe-text-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
             <span>#</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
@@ -82,9 +82,9 @@ const sortedItemColumns = computed(() => {
           </button>
         </th>
         <th @click="handleSort('name')" class="py-2 px-1 text-center font-normal group
-                   border-r border-gray-200 dark:border-poe-border">
+                   border-r border-gray-200 dark:border-gray-700">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-poe-text-accent-600 dark:hover:text-poe-text-accent-300 cursor-pointer text-gray-600 dark:text-poe-text-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
             <span class="pl-2">Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
@@ -96,10 +96,10 @@ const sortedItemColumns = computed(() => {
           </button>
         </th>
         <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)" class="py-2 px-1 text-center font-normal whitespace-nowrap group
-                   border-r border-gray-200 dark:border-poe-border
+                   border-r border-gray-200 dark:border-gray-700
                    last:border-r-0">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-poe-text-accent-600 dark:hover:text-poe-text-accent-300 cursor-pointer text-gray-600 dark:text-poe-text-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
             <span class="pl-2">{{ item }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== item }">
@@ -113,15 +113,15 @@ const sortedItemColumns = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200/50 dark:border-poe-border/50
-                 hover:bg-gray-50 dark:hover:bg-poe-border/30
+      <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200/50 dark:border-gray-700/50
+                 hover:bg-gray-50 dark:hover:bg-gray-700/30
                  transition-colors duration-150">
-        <td class="py-2 px-1 text-gray-900 dark:text-poe-text-400
-                   border-r border-gray-200/50 dark:border-poe-border/50">
+        <td class="py-2 px-1 text-gray-900 dark:text-gray-400
+                   border-r border-gray-200/50 dark:border-gray-700/50">
           {{ block.order }}
         </td>
         <td class="py-2 px-1
-                   border-r border-gray-200/50 dark:border-poe-border/50 text-center">
+                   border-r border-gray-200/50 dark:border-gray-700/50 text-center">
           <span class="inline-block px-2 py-1 rounded" :class="{
             'bg-green-700 text-green-100': block.name === 'Show',
             'bg-red-600 text-red-100': block.name === 'Hide'
@@ -130,13 +130,13 @@ const sortedItemColumns = computed(() => {
           </span>
         </td>
         <td v-for="item in sortedItemColumns" :key="item" class="py-2 px-1
-                   border-r border-gray-200/50 dark:border-poe-border/50
+                   border-r border-gray-200/50 dark:border-gray-700/50
                    last:border-r-0 text-center">
           <template v-if="block.items[item]">
             <div v-for="(blockItem, index) in block.items[item]" :key="index" class="mb-1 last:mb-0">
               <span v-for="param in blockItem.params" :key="param" class="inline-block px-2 py-1 rounded mr-1 mb-1
-                           bg-gray-200/50 dark:bg-poe-border/20
-                           text-gray-700 dark:text-poe-text-400">
+                           bg-gray-200/50 dark:bg-gray-700/20
+                           text-gray-700 dark:text-gray-400">
                 {{ param }}
               </span>
             </div>

@@ -1,18 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-poe-bg: #1a1a1a;
-  --color-poe-border: #463c33;
-
-  /* Base text color */
-  --color-poe-text-50: #fff7e6;
-  --color-poe-text-400: #dfcfaf;
-  --color-poe-text-900: #8b7355;
-
-  /* Hover colors */
-  --color-poe-text-accent-300: #e6cc45;
-  --color-poe-text-accent-600: #8b7728;
-}
 
 @font-face {
   font-family: 'Fontin';
