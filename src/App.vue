@@ -13,7 +13,7 @@ useAppMenu(loadBlocks);
   <div class="h-screen flex flex-col bg-white dark:bg-gray-900">
     <AppNav @open-file="loadBlocks" />
 
-    <main class="flex-1 overflow-auto">
+    <main class="flex-1 overflow-auto bg-white dark:bg-gray-950">
       <FilterTable v-if="blocks.length" :blocks="blocks" :used-item-names="usedItemNames" :items="items" />
     </main>
   </div>
