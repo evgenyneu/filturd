@@ -134,7 +134,7 @@ const sortedItemColumns = computed(() => {
                    last:border-r-0">
           <template v-if="block.items[item]">
             <div v-for="(blockItem, index) in block.items[item]" :key="index" class="mb-1 last:mb-0">
-              <span v-for="param in blockItem.params" :key="param" class="inline-block px-2 py-1 rounded mr-1
+              <span v-for="param in blockItem.params" :key="param" class="inline-block px-2 py-1 rounded mr-1 mb-1
                            bg-gray-200/50 dark:bg-poe-border/20
                            text-gray-700 dark:text-poe-text-400">
                 {{ param }}
