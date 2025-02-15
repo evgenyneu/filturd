@@ -61,10 +61,30 @@ const sortedItemColumns = computed(() => {
   ];
 });
 
+const itemColumnWidths = computed(() => {
+  return sortedItemColumns.value.map(itemName => {
+    // Sum up lengths of all params in this column
+    let totalLength = 0;
+
+    for (const block of props.blocks) {
+      const blockItems = block.items[itemName] || [];
+      for (const blockItem of blockItems) {
+        totalLength += blockItem.params.join(' ').length;
+      }
+    }
+
+    // Assign fr units based on total length
+    if (totalLength > 200) return '8fr';
+    if (totalLength > 100) return '4fr';
+    console.log(`${itemName} ${totalLength}`);
+    return '1fr';
+  });
+});
+
 </script>
 
 <template>
-  <div :style="`grid-template-columns: auto auto repeat(${sortedItemColumns.length}, 1fr)`"
+  <div :style="`grid-template-columns: auto auto ${itemColumnWidths.join(' ')}; width: ${usedItemNames.length * 300}px`"
     class="grid bg-white dark:bg-gray-900">
     <!-- Header row -->
     <!-- Order header -->
