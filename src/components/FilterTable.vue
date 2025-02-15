@@ -94,7 +94,7 @@ const itemColumnWidths = computed(() => {
     <!-- Header row -->
     <!-- Order header -->
     <button @click="handleSort('order')"
-      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold">
+      class="sticky top-0 z-10 flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold bg-white dark:bg-gray-950">
       <span>#</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
@@ -107,7 +107,7 @@ const itemColumnWidths = computed(() => {
 
     <!-- Type header -->
     <button @click="handleSort('name')"
-      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold">
+      class="sticky top-0 z-10 flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold bg-white dark:bg-gray-950">
       <span class="pl-2">Type</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
@@ -120,7 +120,7 @@ const itemColumnWidths = computed(() => {
 
     <!-- Item headers -->
     <button v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)"
-      class="flex items-center justify-center p-2  hover:text-amber-700 dark:hover:text-amber-300 hover:underline cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0 font-bold">
+      class="sticky top-0 z-10 flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 hover:underline cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0 font-bold bg-white dark:bg-gray-950">
       <span class="pl-2">{{ item }}</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== item }">
