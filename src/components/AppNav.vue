@@ -13,7 +13,7 @@ defineProps<{
   <nav
     class="p-2 bg-gray-100 dark:bg-gray-900 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
     <button @click="onOpenFile" class="rounded-lg border px-4 py-2 text-base font-medium
-             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-50
+             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100
              border-transparent dark:border-gray-700
              hover:border-amber-700 hover:text-amber-700
              dark:hover:border-amber-300 dark:hover:text-amber-300
@@ -30,8 +30,8 @@ defineProps<{
     </button>
 
     <div class="flex gap-2">
-      <button @click="onCycleFontSize" class="rounded-lg border p-2 text-base font-medium
-             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-50
+      <button @click="onCycleFontSize" class="rounded-lg border p-2 text-base
+             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100
              border-transparent dark:border-gray-700
              hover:border-amber-700 hover:text-amber-700
              dark:hover:border-amber-300 dark:hover:text-amber-300
@@ -49,15 +49,14 @@ defineProps<{
 
       </button>
 
-      <button @click="updateTheme(theme === 'dark' ? 'light' : 'dark')" class="rounded-lg border p-2 text-base font-medium
-             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-50
+      <button @click="updateTheme(theme === 'dark' ? 'light' : 'dark')" class="rounded-lg border p-2
+             bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100
              border-transparent dark:border-gray-700
              hover:border-amber-700 hover:text-amber-700
              dark:hover:border-amber-300 dark:hover:text-amber-300
              active:bg-gray-200 dark:active:bg-gray-700
              shadow-sm cursor-pointer transition-colors duration-150
              focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-300"
-        :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
         v-tooltip="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
         <svg v-if="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">

@@ -94,7 +94,7 @@ const itemColumnWidths = computed(() => {
     <!-- Header row -->
     <!-- Order header -->
     <button @click="handleSort('order')"
-      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800">
+      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold">
       <span>#</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
@@ -107,7 +107,7 @@ const itemColumnWidths = computed(() => {
 
     <!-- Type header -->
     <button @click="handleSort('name')"
-      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800">
+      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 font-bold">
       <span class="pl-2">Type</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
@@ -120,7 +120,7 @@ const itemColumnWidths = computed(() => {
 
     <!-- Item headers -->
     <button v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)"
-      class="flex items-center justify-center p-2 hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0">
+      class="flex items-center justify-center p-2  hover:text-amber-700 dark:hover:text-amber-300 hover:underline cursor-pointer text-gray-900 dark:text-gray-100 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0 font-bold">
       <span class="pl-2">{{ item }}</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-4" :class="{ 'invisible': sortKey !== item }">
@@ -136,7 +136,7 @@ const itemColumnWidths = computed(() => {
     <template v-for="block in sortedBlocks">
       <!-- Order cell -->
       <div
-        class="flex items-center justify-center p-2 text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800">
+        class="flex items-center justify-center p-2 text-gray-900 dark:text-gray-200 border-b border-r border-gray-200 dark:border-gray-800">
         <div>{{ block.order }}</div>
       </div>
 
@@ -156,7 +156,7 @@ const itemColumnWidths = computed(() => {
         <template v-if="block.items[item]">
           <div v-for="(blockItem, index) in block.items[item]" :key="index" class="text-center mb-1 last:mb-0">
             <span v-for="param in blockItem.params" :key="param"
-              class="inline-block px-1 py-0.5 rounded mr-0.5 mb-0.5 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300 text-sm">
+              class="inline-block px-1 py-0.5 rounded mr-0.5 mb-0.5 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 text-sm">
               {{ param }}
             </span>
           </div>

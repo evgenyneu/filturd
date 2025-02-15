@@ -1,6 +1,8 @@
 import { ref, onMounted } from "vue";
 
-const fontSizeMultiplier = ref<number>(localStorage.fontSizeMultiplier ?? 1.0);
+const fontSizeMultiplier = ref<number>(
+  Number(localStorage.fontSizeMultiplier) || 1.0
+);
 
 export function useFontSize() {
   const updateFontSize = (multiplier: number) => {

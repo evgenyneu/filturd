@@ -4,17 +4,29 @@
 
 @font-face {
   font-family: 'Fontin';
-  src: url('/fonts/Fontin-Regular.ttf.woff') format('woff');
+  src: url('/fonts/fontin-regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fontin';
+  src: url('/fonts/fontin-bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fontin';
+  src: url('/fonts/fontin-italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
 }
 
 :root {
   font-family: 'Fontin', Inter, Avenir, Helvetica, Arial, sans-serif;
   --base-font-size: 1rem;
   font-size: var(--base-font-size);
-  line-height: 24px;
-  font-weight: 400;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
