@@ -156,7 +156,7 @@ const itemColumnWidths = computed(() => {
         <template v-if="block.items[item]">
           <div v-for="(blockItem, index) in block.items[item]" :key="index" class="text-center mb-1 last:mb-0">
             <span v-for="param in blockItem.params" :key="param"
-              class="inline-block px-1 py-0.5 rounded mr-0.5 mb-0.5 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 text-sm">
+              class="inline-block px-1 py-0.5 rounded mr-0.5 mb-0.5  border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-200 text-sm">
               {{ param }}
             </span>
           </div>
