@@ -7,8 +7,6 @@ import FilterTable from './components/FilterTable.vue';
 
 const { blocks, loadBlocks } = useBlocks();
 useAppMenu(loadBlocks);
-
-console.log(items);
 </script>
 
 <template>
