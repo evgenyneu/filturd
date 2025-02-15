@@ -44,11 +44,21 @@ watch(() => props.blocks, () => {
 });
 
 const sortedItemColumns = computed(() => {
-  return [...props.usedItemNames].sort((a, b) => {
+  const conditionalItems = props.usedItemNames.filter(name => props.items[name]?.is_condition);
+  const actionItems = props.usedItemNames.filter(name => !props.items[name]?.is_condition);
+
+  // Sort each group by frequency
+  const sortByFrequency = (a: string, b: string) => {
     const countA = props.items[a]?.frequency || 0;
     const countB = props.items[b]?.frequency || 0;
     return countB - countA;
-  });
+  };
+
+  // Return conditional items first, then non-conditional, both sorted by frequency
+  return [
+    ...conditionalItems.sort(sortByFrequency),
+    ...actionItems.sort(sortByFrequency)
+  ];
 });
 
 </script>
@@ -75,7 +85,7 @@ const sortedItemColumns = computed(() => {
                    border-r border-gray-200 dark:border-poe-border">
           <button
             class="flex items-center justify-center w-full hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
-            <span>Type</span>
+            <span class="pl-2">Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
               <path v-show="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
@@ -90,7 +100,7 @@ const sortedItemColumns = computed(() => {
                    last:border-r-0">
           <button
             class="flex items-center justify-center w-full hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
-            <span>{{ item }}</span>
+            <span class="pl-2">{{ item }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== item }">
               <path v-show="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
