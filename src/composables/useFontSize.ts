@@ -21,6 +21,13 @@ export function useFontSize() {
     );
   };
 
+  const cycleFontSize = () => {
+    const sizes = ["normal", "large", "x-large"] as const;
+    const currentIndex = sizes.indexOf(fontSize.value);
+    const nextSize = sizes[(currentIndex + 1) % sizes.length];
+    updateFontSize(nextSize);
+  };
+
   onMounted(() => {
     updateFontSize(fontSize.value);
   });
@@ -28,5 +35,6 @@ export function useFontSize() {
   return {
     fontSize,
     updateFontSize,
+    cycleFontSize,
   };
 }

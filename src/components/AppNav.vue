@@ -1,20 +1,13 @@
 <script setup lang="ts">
 import { useTheme } from '../composables/useTheme';
-import { useFontSize, FontSize } from '../composables/useFontSize';
+import { useFontSize } from '../composables/useFontSize';
 
 const { theme, updateTheme } = useTheme();
-const { fontSize, updateFontSize } = useFontSize();
+const { fontSize, cycleFontSize } = useFontSize();
 
 defineProps<{
   onOpenFile?: () => void
 }>();
-
-const cycleFontSize = () => {
-  const sizes = ["normal", "large", "x-large"];
-  const currentIndex = sizes.indexOf(fontSize.value);
-  const nextSize = sizes[(currentIndex + 1) % sizes.length];
-  updateFontSize(nextSize as FontSize);
-};
 </script>
 
 <template>
@@ -46,7 +39,7 @@ const cycleFontSize = () => {
              active:bg-gray-200 dark:active:bg-gray-700
              shadow-sm cursor-pointer transition-colors duration-150
              focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-300"
-        :title="'Current size: ' + fontSize + '. Click to cycle through sizes'">
+        :title="'Current font size: ' + fontSize + '. Click to cycle through sizes'">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-5">
           <path stroke-linecap="round" stroke-linejoin="round"
