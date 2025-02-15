@@ -1,0 +1,250 @@
+{
+  "Class": {
+    "is_condition": true,
+    "frequency": 247
+  },
+  "SetFontSize": {
+    "is_condition": false,
+    "frequency": 244
+  },
+  "SetBorderColor": {
+    "is_condition": false,
+    "frequency": 197
+  },
+  "SetBackgroundColor": {
+    "is_condition": false,
+    "frequency": 197
+  },
+  "BaseType": {
+    "is_condition": true,
+    "frequency": 166
+  },
+  "Rarity": {
+    "is_condition": true,
+    "frequency": 150
+  },
+  "AreaLevel": {
+    "is_condition": true,
+    "frequency": 135
+  },
+  "SetTextColor": {
+    "is_condition": false,
+    "frequency": 127
+  },
+  "PlayEffect": {
+    "is_condition": false,
+    "frequency": 127
+  },
+  "MinimapIcon": {
+    "is_condition": false,
+    "frequency": 120
+  },
+  "PlayAlertSound": {
+    "is_condition": false,
+    "frequency": 105
+  },
+  "ItemLevel": {
+    "is_condition": true,
+    "frequency": 56
+  },
+  "Corrupted": {
+    "is_condition": true,
+    "frequency": 39
+  },
+  "Continue": {
+    "is_condition": false,
+    "frequency": 39
+  },
+  "WaystoneTier": {
+    "is_condition": true,
+    "frequency": 36
+  },
+  "Quality": {
+    "is_condition": true,
+    "frequency": 33
+  },
+  "Mirrored": {
+    "is_condition": true,
+    "frequency": 32
+  },
+  "BaseEnergyShield": {
+    "is_condition": true,
+    "frequency": 12
+  },
+  "BaseEvasion": {
+    "is_condition": true,
+    "frequency": 12
+  },
+  "BaseArmour": {
+    "is_condition": true,
+    "frequency": 12
+  },
+  "Height": {
+    "is_condition": true,
+    "frequency": 10
+  },
+  "StackSize": {
+    "is_condition": true,
+    "frequency": 8
+  },
+  "DisableDropSound": {
+    "is_condition": false,
+    "frequency": 8
+  },
+  "Width": {
+    "is_condition": true,
+    "frequency": 6
+  },
+  "AnyEnchantment": {
+    "is_condition": true,
+    "frequency": 6
+  },
+  "DropLevel": {
+    "is_condition": true,
+    "frequency": 6
+  },
+  "Sockets": {
+    "is_condition": true,
+    "frequency": 5
+  },
+  "HasExplicitMod": {
+    "is_condition": true,
+    "frequency": 2
+  },
+  "AlternateQuality": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "ArchnemesisMod": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "BaseDefencePercentile": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "BaseWard": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "CorruptedMods": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "ElderItem": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "ElderMap": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "EnchantmentPassiveNode": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "EnchantmentPassiveNum": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "FracturedItem": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "GemLevel": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "GemQualityType": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasCruciblePassiveTree": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasEaterOfWorldsImplicit": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasEnchantment": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasImplicitMod": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasInfluence": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "HasSearingExarchImplicit": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "Identified": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "LinkedSockets": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "MapTier": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "Replica": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "Scourged": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "ShapedMap": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "ShaperItem": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "SocketGroup": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "SynthesisedItem": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "TransfiguredGem": {
+    "is_condition": true,
+    "frequency": 0
+  },
+  "PlayAlertSoundPositional": {
+    "is_condition": false,
+    "frequency": 0
+  },
+  "CustomAlertSound": {
+    "is_condition": false,
+    "frequency": 0
+  },
+  "CustomAlertSoundOptional": {
+    "is_condition": false,
+    "frequency": 0
+  },
+  "EnableDropSound": {
+    "is_condition": false,
+    "frequency": 0
+  },
+  "DisableDropSoundIfAlertSound": {
+    "is_condition": false,
+    "frequency": 0
+  },
+  "EnableDropSoundIfAlertSound": {
+    "is_condition": false,
+    "frequency": 0
+  }
+}

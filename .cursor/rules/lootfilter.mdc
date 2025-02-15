@@ -1,0 +1,1285 @@
+---
+description: Loot filter format
+globs: 
+---
+
+# Loot filter format
+
+Here is the official documentation (in html) from Path of Exile for the loot filter https://www.pathofexile.com/item-filter/about. Use this information when you need to understand the loot filter format.
+
+
+<div class="layoutBoxContent"><div class="">
+    <h3 class="item-filter-document-title">Blocks    </h3>
+    <p>The basic syntax is a collection of Show and Hide blocks that each specify conditions. Anything matched by a Show
+        block will be shown and anything matched by a Hide block will be hidden. If there are multiple conditions in a
+        block then all of them must be matched for the block to match an item.</p>
+    <div class="item-filter-document">
+        <div class="item-filter-document-header">
+            <div class="item-filter-document-name">Name            </div>
+            <div class="item-filter-document-description">Description            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Show            </div>
+            <div class="item-filter-document-description forumTable">
+                If any items are matched with the conditions in a "Show" Block, the item will be shown.<br>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Show
+                    Rarity &gt;= Rare</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Hide            </div>
+            <div class="item-filter-document-description forumTable">
+                If any items are matched with the conditions in a "Hide" Block, the item will be hidden. Only usable in Normal filters.<br>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Hide
+                    BaseType "Scroll of Wisdom"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Minimal            </div>
+            <div class="item-filter-document-description forumTable">
+                Matched items will have their label set to the minimum size with a transparent background. Only usable in Ruthless filters.<br>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Minimal
+                    BaseType "Scroll of Wisdom"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Continue            </div>
+            <div class="item-filter-document-description forumTable">
+                A "Show", "Hide", or "Minimal" block may use "Continue" to indicate that filter rule matching should not stop when an item matches this block. The example will hide all items dropped below level 85, unless they have 6 sockets and an item level above 80.<br>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Hide
+                    ItemLevel &lt; 85
+                    Continue
+
+                Show
+                    ItemLevel &gt; 80
+                    Sockets 6
+                    PlayEffect Blue</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Import            </div>
+            <div class="item-filter-document-description forumTable">
+                Imports the specified filter contents into the current item filter. Use Optional after the filename to skip the file if it does not exist.<br>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Examples</h5>
+                    <pre>Import "MyCustomRules.filter"
+Import "MyOptionalRules.filter" Optional</pre>
+                                </div>
+                            </div>
+        </div>
+            </div>
+
+    <h3 class="item-filter-document-title">Operators    </h3>
+    <div class="item-filter-document">
+        <div class="item-filter-document-header">
+            <div class="item-filter-document-name">Operator            </div>
+            <div class="item-filter-document-description">Description            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">=            </div>
+            <div class="item-filter-document-description">Equal            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">!            </div>
+            <div class="item-filter-document-description">Not equal            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">!=            </div>
+            <div class="item-filter-document-description">Not equal            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">&lt;=            </div>
+            <div class="item-filter-document-description">Less than or equal            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">&gt;=            </div>
+            <div class="item-filter-document-description">Greater than or equal            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">&lt;            </div>
+            <div class="item-filter-document-description">Less than            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">&gt;            </div>
+            <div class="item-filter-document-description">Greater than            </div>
+        </div>
+                <div class="item-filter-document-body">
+            <div class="item-filter-document-name">==            </div>
+            <div class="item-filter-document-description">Exact match            </div>
+        </div>
+            </div>
+
+    <h3 class="item-filter-document-title">Conditions    </h3>
+    <p>You can set conditions to show or hide items.</p>
+    <div class="item-filter-document">
+        <div class="item-filter-document-header">
+            <div class="item-filter-document-name">Name            </div>
+            <div class="item-filter-document-description">Description            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">AlternateQuality            </div>
+            <div class="item-filter-document-description  ">
+                Filter by items with Alternate Quality.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>AlternateQuality True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">AnyEnchantment            </div>
+            <div class="item-filter-document-description  ">
+                Filter by enchanted items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>AnyEnchantment True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ArchnemesisMod            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Archnemesis modifier name.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Archnemesis modifier name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ArchnemesisMod "Toxic"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">AreaLevel            </div>
+            <div class="item-filter-document-description  ">
+                Filter by items dropped in a particular level area/range. Primarily helps with leveling sections of item filters. This allows disabling leveling sections on high level characters, or showing wisdom scrolls and gems on stricter filters while leveling.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>AreaLevel &lt; 30</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseArmour            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base Armour.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseArmour &gt; 500</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseDefencePercentile            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base Defence percentile. For non-equipment, base Defence percentile is zero. For equipment, this defaults to 100, as nonrandom defences are considered to be 100th percentile. Otherwise, this is calculated to be the average percentile of all base defence type values.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseDefencePercentile &gt;= 90</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseEnergyShield            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base Energy Shield.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseEnergyShield &gt; 200</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseEvasion            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base Evasion Rating.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseEvasion &gt;= 153</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseType            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base type name.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Item name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseType "Thicket Bow"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BaseWard            </div>
+            <div class="item-filter-document-description  ">
+                Filter by base Ward.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BaseWard &gt;= 20</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">BlightedMap            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Blighted maps.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>BlightedMap False</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Class            </div>
+            <div class="item-filter-document-description  ">
+                Filter by item class name.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Item class name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Class Currency</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Corrupted            </div>
+            <div class="item-filter-document-description  ">
+                Filter by corrupted or non-corrupted items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Corrupted True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">CorruptedMods            </div>
+            <div class="item-filter-document-description  ">
+                Filter by number of corrupted modifiers.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>CorruptedMods &gt;= 1</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">DropLevel            </div>
+            <div class="item-filter-document-description  ">
+                Filter by the level that the item starts dropping at.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>DropLevel &gt; 65</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ElderItem            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Elder items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ElderItem True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ElderMap            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Elder influenced or non-Elder influenced maps.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ElderMap False</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">EnchantmentPassiveNode            </div>
+            <div class="item-filter-document-description  ">
+                Filter Cluster Jewels by enchantment type.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Cluster Jewel enchantment name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>EnchantmentPassiveNode "Damage over Time"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">EnchantmentPassiveNum            </div>
+            <div class="item-filter-document-description  ">
+                Filter Cluster Jewels by number of passive skills. This condition checks only the "Adds X passive skills" modifiers.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>EnchantmentPassiveNum &gt; 5</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">FracturedItem            </div>
+            <div class="item-filter-document-description  ">
+                Filter by fractured or non-fractured items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>FracturedItem True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">GemLevel            </div>
+            <div class="item-filter-document-description  ">
+                Filter by gem level.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>GemLevel &gt; 15</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="corner-ribbon FontinSmallCaps deleted">Deleted            </div>
+                        <div class="item-filter-document-name">GemQualityType            </div>
+            <div class="item-filter-document-description  ">
+                Filter by specific gem quality type.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Superior, Divergent, Anomalous, Phantasmal                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>GemQualityType Anomalous</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasCruciblePassiveTree            </div>
+            <div class="item-filter-document-description  ">
+                Filter by items that have a Crucible Passive Tree.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasCruciblePassiveTree True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasEaterOfWorldsImplicit            </div>
+            <div class="item-filter-document-description  ">
+                Filter by the Eater of Worlds implicit modifier tier (1:Lesser, 2:Greater, 3:Grand, 4:Exceptional, 5:Exquisite, 6:Perfect). The following example will show items that have Exceptional or higher Eater of Worlds implicit modifier tier.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasEaterOfWorldsImplicit &gt;= 4</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasEnchantment            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Enchantments.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric, Enchantment name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasEnchantment "Enchantment Bane Damage 2"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasExplicitMod            </div>
+            <div class="item-filter-document-description  ">
+                Filter by mod name with numeric condition for number of modifiers.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric, Mod name                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasExplicitMod &gt;=2 "of Haast" "of Tzteosh" "of Ephij"</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasImplicitMod            </div>
+            <div class="item-filter-document-description  ">
+                Filter by items that have at least one implicit modifier.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasImplicitMod True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasInfluence            </div>
+            <div class="item-filter-document-description  ">
+                Filter by influenced items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Shaper, Elder, Crusader, Hunter, Redeemer, Warlord, None                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasInfluence Shaper</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">HasSearingExarchImplicit            </div>
+            <div class="item-filter-document-description  ">
+                Filter by the Searing Exarch implicit modifier tier (1:Lesser, 2:Greater, 3:Grand, 4:Exceptional, 5:Exquisite, 6:Perfect). The following example will show items that have Grand or higher Searing Exarch implicit modifier tier.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>HasSearingExarchImplicit &gt;= 3</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Height            </div>
+            <div class="item-filter-document-description  ">
+                The height of the item in your inventory.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Height &lt;= 2</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Identified            </div>
+            <div class="item-filter-document-description  ">
+                Filter by identified items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Identified True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ItemLevel            </div>
+            <div class="item-filter-document-description  ">
+                Filter by item level.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ItemLevel &gt;= 65</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">LinkedSockets            </div>
+            <div class="item-filter-document-description  ">
+                Filter by the size of the largest group of linked sockets.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>LinkedSockets &gt;= 5</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">MapTier            </div>
+            <div class="item-filter-document-description  ">
+                Filter maps by Map Tier.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>MapTier &gt;= 15</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Mirrored            </div>
+            <div class="item-filter-document-description  ">
+                Filter by mirrored items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Mirrored False</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Quality            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Quality.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Quality &gt; 15</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Rarity            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Rarity.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Normal, Magic, Rare, Unique                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Rarity &gt; Magic</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Replica            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Replica unique items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Replica True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Scourged            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Scourged items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Scourged True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ShapedMap            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Shaped maps.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ShapedMap True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">ShaperItem            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Shaper items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>ShaperItem True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">SocketGroup            </div>
+            <div class="item-filter-document-description  ">
+                Filter by groups of linked sockets on an item. The following example will show items that have 5 or more linked sockets with at least 3 of them being green sockets.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric, R:Red, G:Green, B:Blue, A:Abyss, D:Delve, W:White                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>SocketGroup &gt;= 5GGG</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Sockets            </div>
+            <div class="item-filter-document-description  ">
+                Filter by number of sockets or colours on an item. The following example will show items that have 5 or more sockets with at least 3 of them being green sockets.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric, R:Red, G:Green, B:Blue, A:Abyss, D:Delve, W:White                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Sockets &gt;= 5GGG</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">StackSize            </div>
+            <div class="item-filter-document-description  ">
+                Filter Currency by stack size.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>StackSize &gt;= 5</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">SynthesisedItem            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Synthesised Items.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>SynthesisedItem True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">TransfiguredGem            </div>
+            <div class="item-filter-document-description  ">
+                Filter by transfigured gems.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>TransfiguredGem True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">UberBlightedMap            </div>
+            <div class="item-filter-document-description  ">
+                Filter by Blight Ravaged Maps.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        True / False                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>UberBlightedMap True</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="corner-ribbon FontinSmallCaps ">PoE2-only            </div>
+                        <div class="item-filter-document-name">WaystoneTier            </div>
+            <div class="item-filter-document-description  ">
+                Filter Waystones by tier.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>WaystoneTier &gt;= 15</pre>
+                                </div>
+                            </div>
+        </div>
+                <div class="item-filter-document-body">
+                        <div class="item-filter-document-name">Width            </div>
+            <div class="item-filter-document-description  ">
+                The width of the item in your inventory.<br>
+                <div class="">
+                    <h5 class="item-filter-document-description-header">Values                    </h5>
+                                        Numeric                                    </div>
+                                <div class="item-filter-document-sample-code">
+                                    <h5 class="item-filter-document-description-header">Example</h5>
+                    <pre>Width = 1</pre>
+                                </div>
+                            </div>
+        </div>
+            </div>
+
+    <h3 class="item-filter-document-title">Actions    </h3>
+    <p>Actions can modify dropped items' colours, icons, visual effects and sounds.</p>
+    <h4 class="item-filter-document-title">Drop Sound</h4>
+    
+<div class="item-filter-document actions">
+    <div class="item-filter-document-header">
+        <div class="item-filter-document-name">Name        </div>
+        <div class="item-filter-document-description">Description        </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">PlayAlertSound        </div>
+        <div class="item-filter-document-description  ">
+            Plays a built-in alert sound when the item appears. Can be disabled by specifying "None".<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Id                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        1                            - 16                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Volume                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 300                                                                                    <span class="">(Default Value:
+                                50)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                    <h5 class="item-filter-document-description-header">Disabled Value            </h5>
+            <div>
+                None            </div>
+                                    <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>PlayAlertSound 1 100</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">PlayAlertSoundPositional        </div>
+        <div class="item-filter-document-description  ">
+            Similar to PlayAlertSound, but plays the alert sound at the item's 3D location.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Id                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        1                            - 16                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Volume                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 300                                                                                    <span class="">(Default Value:
+                                50)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                    <h5 class="item-filter-document-description-header">Disabled Value            </h5>
+            <div>
+                None            </div>
+                                    <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>PlayAlertSoundPositional 16 50</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">CustomAlertSound        </div>
+        <div class="item-filter-document-description  ">
+            Plays the specified item alert sound file when the item appears. Multiple files can be specified, separated by a semicolon, in which case a random one will be played. Overrides PlayAlertSound and PlayAlertSoundPositional. Can be disabled by specifying "None".<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            File name / File path                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Volume                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 300                                                                                    <span class="">(Default Value:
+                                100)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                    <h5 class="item-filter-document-description-header">Disabled Value            </h5>
+            <div>
+                "None"            </div>
+                                    <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>CustomAlertSound "Map.mp3"</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">CustomAlertSoundOptional        </div>
+        <div class="item-filter-document-description  ">
+            Similar to CustomAlertSound, but if the specified file does not exist then this line is ignored and it does not override PlayAlertSound or PlayAlertSoundPositional.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            File name / File path                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Volume                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 300                                                                                    <span class="">(Default Value:
+                                100)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>CustomAlertSoundOptional "Map.mp3"</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">DisableDropSound        </div>
+        <div class="item-filter-document-description  ">
+            Disables the item drop sound that normally plays when the item hits the ground during its drop animation.<br>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>DisableDropSound</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">EnableDropSound        </div>
+        <div class="item-filter-document-description  ">
+            Re-enables the item drop sound.<br>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>EnableDropSound</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">DisableDropSoundIfAlertSound        </div>
+        <div class="item-filter-document-description  ">
+            Similar to DisableDropSound, but only disables the item drop sound if an alert sound is specified (e.g. with PlayAlertSound or CustomAlertSound). This flag is separate from DisableDropSound.<br>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>DisableDropSoundIfAlertSound</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">EnableDropSoundIfAlertSound        </div>
+        <div class="item-filter-document-description  ">
+            Re-enables drop sounds where an alert sound is specified.<br>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>EnableDropSoundIfAlertSound</pre>
+                        </div>
+                    </div>
+    </div>
+    </div>    <br>
+    <h4 class="item-filter-document-title">Other Actions</h4>
+    
+<div class="item-filter-document actions">
+    <div class="item-filter-document-header">
+        <div class="item-filter-document-name">Name        </div>
+        <div class="item-filter-document-description">Description        </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">MinimapIcon        </div>
+        <div class="item-filter-document-description  ">
+            Displays an icon on your minimap.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Size                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 2                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Colour                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        Red, Green, Blue, Brown, White, Yellow, Cyan, Grey, Orange, Pink, Purple                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Shape                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        Circle, Diamond, Hexagon, Square, Star, Triangle, Cross, Moon, Raindrop, Kite, Pentagon, UpsideDownHouse                                                                                </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                    <h5 class="item-filter-document-description-header">Disabled Value            </h5>
+            <div>
+                -1            </div>
+                                    <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>MinimapIcon 2 Cyan Diamond</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">PlayEffect        </div>
+        <div class="item-filter-document-description  ">
+            Displays a coloured beam of light above an item highlighted by an item filter. When the value is Temp, the beam only appears as the item drops, Otherwise the beam will be permanently visible.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Colour                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        Red, Green, Blue, Brown, White, Yellow, Cyan, Grey, Orange, Pink, Purple                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Temp                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        Temp                                                                                </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                    <h5 class="item-filter-document-description-header">Disabled Value            </h5>
+            <div>
+                None            </div>
+                                    <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>PlayEffect Red Temp</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">SetBackgroundColor        </div>
+        <div class="item-filter-document-description  ">
+            Sets the background colour of the item label.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Red                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Green                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Blue                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Alpha                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                    <span class="">(Default Value:
+                                240)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>SetBackgroundColor 255 255 255 255</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">SetBorderColor        </div>
+        <div class="item-filter-document-description  ">
+            Sets the border colour of the item label.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Red                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Green                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Blue                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Alpha                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                    <span class="">(Default Value:
+                                255)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>SetBorderColor 255 0 0</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">SetFontSize        </div>
+        <div class="item-filter-document-description  ">
+            Sets the font size of the item label.<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Size                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        1                            - 45                                                                                </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>SetFontSize 30</pre>
+                        </div>
+                    </div>
+    </div>
+        <div class="item-filter-document-body">
+                <div class="item-filter-document-name">SetTextColor        </div>
+        <div class="item-filter-document-description  ">
+            Sets the text colour of the item label. Ruthless filters must have an alpha value of 80 or above<br>
+                        <div class="item-filter-document-values-row">
+                <h5 class="item-filter-document-description-header">Values                </h5>
+                <table class="item-filter-document-table">
+                    <tbody><tr>
+                        <th>Name                        </th>
+                        <th>Required                        </th>
+                        <th>Value Options                        </th>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Red                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Green                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Blue                        </td>
+                        <td>
+                            <span class="item-filter-document-required"></span>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                </td>
+                    </tr>
+                                        <tr>
+                        <td>
+                            Alpha                        </td>
+                        <td>
+                                                    </td>
+                        <td>
+                                                        0                            - 255                                                                                    <span class="">(Default Value:
+                                255)</span>
+                                                    </td>
+                    </tr>
+                                    </tbody></table>
+            </div>
+                                                <div class="item-filter-document-sample-code">
+                            <h5 class="item-filter-document-description-header">Example</h5>
+                <pre>SetTextColor 0 0 0</pre>
+                        </div>
+                    </div>
+    </div>
+    </div></div>
+</div>

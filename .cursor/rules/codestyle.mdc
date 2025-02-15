@@ -77,3 +77,25 @@ if (sortKey.value === 'order') {
 return (a.name.localeCompare(b.name)) * modifier;
 ```
 
+### Yet another TS example :D
+
+Incorrect (single line statements should not be separated with empty lines)
+
+```TypeScript
+if (!path) return null;
+const blocks = await invoke<Block[]>("open_file", { path });
+
+printItemNameFrequencies(blocks);
+
+return blocks;
+```
+
+Correct (single lines statements are not separated):
+
+```TypeScript
+if (!path) return null;
+const blocks = await invoke<Block[]>("open_file", { path });
+printItemNameFrequencies(blocks);
+return blocks;
+```
+
