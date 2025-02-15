@@ -6,12 +6,13 @@ import FloatingVue from "floating-vue";
 let app = createApp(App);
 
 app.use(FloatingVue, {
+  preventOverflow: true,
   themes: {
     filturd: {
       $extend: "tooltip",
       delay: {
         show: 0,
-        hide: 0,
+        hide: 50,
       },
       distance: 10,
     },
