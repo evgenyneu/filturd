@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useAppMenu } from './composables/useAppMenu';
 import { useBlocks } from './composables/useBlocks';
+import { items } from './utils/items';
 import AppNav from './components/AppNav.vue';
 import FilterTable from './components/FilterTable.vue';
 
 const { blocks, loadBlocks } = useBlocks();
 useAppMenu(loadBlocks);
+
+console.log(items);
 </script>
 
 <template>
