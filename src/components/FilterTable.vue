@@ -113,9 +113,7 @@ const sortedItemColumns = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200 dark:border-gray-800
-                 hover:bg-gray-50 dark:hover:bg-gray-800
-                 transition-colors duration-150">
+      <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200 dark:border-gray-800">
         <td class="py-2 px-1 text-gray-800 dark:text-gray-400
                    border-r border-gray-200 dark:border-gray-800 text-center">
           {{ block.order }}
