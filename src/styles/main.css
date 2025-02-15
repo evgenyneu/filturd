@@ -36,3 +36,32 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Tooltip */
+
+
+/* Style */
+.v-popper--theme-my-theme .v-popper__inner {
+  background: #ffffff;
+  color: #e9e9e9;
+  border: 1px #e3e2e1 solid;
+}
+
+.v-popper--theme-my-theme .v-popper__arrow-inner {
+  visibility: hidden;
+}
+
+.dark .v-popper--theme-my-theme .v-popper__inner {
+  background: #00072d;
+  color: #fcdd72;
+  border: 1px #dfd61c solid;
+}
+
+.dark .v-popper--theme-my-theme .v-popper__arrow-outer {
+  border-color: #dfd61c;
+}
+
+.dark .v-popper--theme-my-theme .v-popper__arrow-inner {
+  visibility: visible;
+  border-color: #00072d;
+}
