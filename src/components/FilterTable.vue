@@ -57,7 +57,8 @@ const sortedItemColumns = computed(() => {
   <table class="w-full border-collapse bg-white/5 dark:bg-poe-bg/20">
     <thead>
       <tr class="border-b border-gray-200 dark:border-poe-border">
-        <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal group">
+        <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal group
+                   border-r border-gray-200 dark:border-poe-border">
           <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>#</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -69,7 +70,8 @@ const sortedItemColumns = computed(() => {
             </svg>
           </button>
         </th>
-        <th @click="handleSort('name')" class="py-2 px-1 text-left font-normal group">
+        <th @click="handleSort('name')" class="py-2 px-1 text-left font-normal group
+                   border-r border-gray-200 dark:border-poe-border ">
           <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -81,8 +83,9 @@ const sortedItemColumns = computed(() => {
             </svg>
           </button>
         </th>
-        <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)"
-          class="py-2 px-1 text-left font-normal whitespace-nowrap group">
+        <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)" class="py-2 px-1 text-left font-normal whitespace-nowrap group
+                   border-r border-gray-200 dark:border-poe-border
+                   last:border-r-0">
           <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>{{ item }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -100,8 +103,12 @@ const sortedItemColumns = computed(() => {
       <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200/50 dark:border-poe-border/50
                  hover:bg-gray-50 dark:hover:bg-poe-border/30
                  transition-colors duration-150">
-        <td class="py-2 px-1 text-gray-900 dark:text-poe-text-400">{{ block.order }}</td>
-        <td class="py-2 px-1">
+        <td class="py-2 px-1 text-gray-900 dark:text-poe-text-400
+                   border-r border-gray-200/50 dark:border-poe-border/50">
+          {{ block.order }}
+        </td>
+        <td class="py-2 px-1
+                   border-r border-gray-200/50 dark:border-poe-border/50">
           <span class="inline-block px-2 py-1 rounded" :class="{
             'bg-green-700 text-green-100': block.name === 'Show',
             'bg-red-600 text-red-100': block.name === 'Hide'
@@ -109,7 +116,9 @@ const sortedItemColumns = computed(() => {
             {{ block.name.toLowerCase() }}
           </span>
         </td>
-        <td v-for="item in sortedItemColumns" :key="item" class="py-2 px-1">
+        <td v-for="item in sortedItemColumns" :key="item" class="py-2 px-1
+                   border-r border-gray-200/50 dark:border-poe-border/50
+                   last:border-r-0">
           <template v-if="block.items.some(i => i.name === item)">
             <div v-for="blockItem in block.items.filter(i => i.name === item)"
               :key="`${blockItem.name}-${blockItem.params.join('-')}`" class="mb-1 last:mb-0">
