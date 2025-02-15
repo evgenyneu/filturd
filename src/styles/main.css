@@ -37,31 +37,36 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Tooltip */
+/* Tooltip
+-------------------------------- */
 
-
-/* Style */
-.v-popper--theme-my-theme .v-popper__inner {
-  background: #ffffff;
-  color: #e9e9e9;
-  border: 1px #e3e2e1 solid;
+/* Light mode */
+.v-popper--theme-filturd .v-popper__inner {
+  background-color: #ffffff;
+  color: #984700;
+  border: 1px #995900 solid;
 }
 
-.v-popper--theme-my-theme .v-popper__arrow-inner {
-  visibility: hidden;
+.v-popper--theme-filturd .v-popper__arrow-outer {
+  border-color: #995900;
 }
 
-.dark .v-popper--theme-my-theme .v-popper__inner {
-  background: #00072d;
-  color: #fcdd72;
+.v-popper--theme-filturd .v-popper__arrow-inner {
+  visibility: visible;
+  border-color: #ffffff;
+}
+
+/* Dark mode */
+.dark .v-popper--theme-filturd .v-popper__inner {
+  background-color: #00072d;
+  color: #dfd61c;
   border: 1px #dfd61c solid;
 }
 
-.dark .v-popper--theme-my-theme .v-popper__arrow-outer {
+.dark .v-popper--theme-filturd .v-popper__arrow-outer {
   border-color: #dfd61c;
 }
 
-.dark .v-popper--theme-my-theme .v-popper__arrow-inner {
-  visibility: visible;
+.dark .v-popper--theme-filturd .v-popper__arrow-inner {
   border-color: #00072d;
 }

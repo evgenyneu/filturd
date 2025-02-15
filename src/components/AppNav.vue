@@ -38,7 +38,10 @@ defineProps<{
              active:bg-gray-200 dark:active:bg-gray-700
              shadow-sm cursor-pointer transition-colors duration-150
              focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-300"
-        v-tooltip="'Change font size'">
+        v-tooltip.bottom-end="{
+          content: 'Change font size',
+          theme: 'filturd'
+        }">
 
         <svg fill="currentColor" stroke="none" class="size-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -57,7 +60,10 @@ defineProps<{
              active:bg-gray-200 dark:active:bg-gray-700
              shadow-sm cursor-pointer transition-colors duration-150
              focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 dark:focus-visible:ring-amber-300"
-        v-tooltip="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+        v-tooltip.bottom-end="{
+          content: (theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'),
+          theme: 'filturd'
+        }">
         <svg v-if="theme === 'dark'" xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
