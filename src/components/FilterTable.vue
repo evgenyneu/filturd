@@ -9,7 +9,7 @@ const props = defineProps<{
   items: Items
 }>();
 
-type SortKey = string | null;
+type SortKey = string;
 type Direction = 'asc' | 'desc' | null;
 
 const sortKey = ref<SortKey>('order');
@@ -57,9 +57,10 @@ const sortedItemColumns = computed(() => {
   <table class="w-full border-collapse bg-white/5 dark:bg-poe-bg/20">
     <thead>
       <tr class="border-b border-gray-200 dark:border-poe-border">
-        <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-left font-normal group
+        <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-center font-normal group
                    border-r border-gray-200 dark:border-poe-border">
-          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+          <button
+            class="flex items-center justify-center w-full hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>#</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
@@ -70,9 +71,10 @@ const sortedItemColumns = computed(() => {
             </svg>
           </button>
         </th>
-        <th @click="handleSort('name')" class="py-2 px-1 text-left font-normal group
-                   border-r border-gray-200 dark:border-poe-border ">
-          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+        <th @click="handleSort('name')" class="py-2 px-1 text-center font-normal group
+                   border-r border-gray-200 dark:border-poe-border">
+          <button
+            class="flex items-center justify-center w-full hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
@@ -83,10 +85,11 @@ const sortedItemColumns = computed(() => {
             </svg>
           </button>
         </th>
-        <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)" class="py-2 px-1 text-left font-normal whitespace-nowrap group
+        <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)" class="py-2 px-1 text-center font-normal whitespace-nowrap group
                    border-r border-gray-200 dark:border-poe-border
                    last:border-r-0">
-          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+          <button
+            class="flex items-center justify-center w-full hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>{{ item }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== item }">
