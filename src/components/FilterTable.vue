@@ -63,20 +63,23 @@ const sortedItemColumns = computed(() => {
 
 const itemColumnWidths = computed(() => {
   return sortedItemColumns.value.map(itemName => {
-    // Sum up lengths of all params in this column
-    let totalLength = 0;
+    let maxLength = 0;
 
     for (const block of props.blocks) {
       const blockItems = block.items[itemName] || [];
+
+      // Find longest text in this block
       for (const blockItem of blockItems) {
-        totalLength += blockItem.params.join(' ').length;
+        const itemLength = blockItem.params.join(' ').length;
+        if (itemLength > maxLength) {
+          maxLength = itemLength;
+        }
       }
     }
 
-    // Assign fr units based on total length
-    if (totalLength > 200) return '8fr';
-    if (totalLength > 100) return '4fr';
-    console.log(`${itemName} ${totalLength}`);
+    // Assign fr units based on max length
+    if (maxLength > 100) return '4fr';
+    if (maxLength > 50) return '2fr';
     return '1fr';
   });
 });
@@ -84,8 +87,8 @@ const itemColumnWidths = computed(() => {
 </script>
 
 <template>
-  <div :style="`grid-template-columns: auto auto ${itemColumnWidths.join(' ')}; width: ${usedItemNames.length * 300}px`"
-    class="grid bg-white dark:bg-gray-900">
+  <div :style="`grid-template-columns: auto auto ${itemColumnWidths.join(' ')}; width: ${usedItemNames.length * 150}px`"
+    class="grid bg-white dark:bg-gray-950">
     <!-- Header row -->
     <!-- Order header -->
     <button @click="handleSort('order')"
@@ -151,7 +154,7 @@ const itemColumnWidths = computed(() => {
         <template v-if="block.items[item]">
           <div v-for="(blockItem, index) in block.items[item]" :key="index" class="text-center mb-1 last:mb-0">
             <span v-for="param in blockItem.params" :key="param"
-              class="inline-block px-2 py-1 rounded mr-1 mb-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-400">
+              class="inline-block px-1 py-0.5 rounded mr-0.5 mb-0.5 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300 text-sm">
               {{ param }}
             </span>
           </div>
