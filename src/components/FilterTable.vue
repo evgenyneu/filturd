@@ -64,7 +64,7 @@ const sortedItemColumns = computed(() => {
 </script>
 
 <template>
-  <table class="w-full border-collapse bg-white dark:bg-gray-900">
+  <table class="border-collapse bg-white dark:bg-gray-900">
     <thead>
       <tr class="border-b border-gray-200 dark:border-gray-800">
         <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-center font-normal group
