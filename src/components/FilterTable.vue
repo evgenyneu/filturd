@@ -9,7 +9,7 @@ const props = defineProps<{
   items: Items
 }>();
 
-type SortKey = 'order' | 'name' | null;
+type SortKey = string | null;
 type Direction = 'asc' | 'desc' | null;
 
 const sortKey = ref<SortKey>('order');
@@ -81,8 +81,18 @@ const sortedItemColumns = computed(() => {
             </svg>
           </button>
         </th>
-        <th v-for="item in sortedItemColumns" :key="item" class="py-2 px-1 text-left font-normal whitespace-nowrap">
-          {{ item }}
+        <th v-for="item in sortedItemColumns" :key="item" @click="handleSort(item)"
+          class="py-2 px-1 text-left font-normal whitespace-nowrap group">
+          <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
+            <span>{{ item }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== item }">
+              <path v-show="sortDirection === 'asc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+              <path v-show="sortDirection === 'desc'" stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+            </svg>
+          </button>
         </th>
       </tr>
     </thead>
