@@ -70,7 +70,7 @@ const sortedItemColumns = computed(() => {
         <th @click="handleSort('order')" class="w-fit whitespace-nowrap py-2 px-1 text-center font-normal group
                    border-r border-gray-200 dark:border-gray-700">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400">
             <span>#</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'order' }">
@@ -84,7 +84,7 @@ const sortedItemColumns = computed(() => {
         <th @click="handleSort('name')" class="py-2 px-1 text-center font-normal group
                    border-r border-gray-200 dark:border-gray-700">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400">
             <span class="pl-2">Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== 'name' }">
@@ -99,7 +99,7 @@ const sortedItemColumns = computed(() => {
                    border-r border-gray-200 dark:border-gray-700
                    last:border-r-0">
           <button
-            class="flex items-center justify-center w-full hover:underline hover:text-amber-600 dark:hover:text-amber-300 cursor-pointer text-gray-600 dark:text-gray-400">
+            class="flex items-center justify-center w-full hover:underline hover:text-amber-700 dark:hover:text-amber-300 cursor-pointer text-gray-800 dark:text-gray-400">
             <span class="pl-2">{{ item }}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="size-4" :class="{ 'invisible': sortKey !== item }">
@@ -116,7 +116,7 @@ const sortedItemColumns = computed(() => {
       <tr v-for="block in sortedBlocks" :key="block.order" class="border-b border-gray-200/50 dark:border-gray-700/50
                  hover:bg-gray-50 dark:hover:bg-gray-700/30
                  transition-colors duration-150">
-        <td class="py-2 px-1 text-gray-900 dark:text-gray-400
+        <td class="py-2 px-1 text-gray-800 dark:text-gray-400
                    border-r border-gray-200/50 dark:border-gray-700/50">
           {{ block.order }}
         </td>
