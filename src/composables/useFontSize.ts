@@ -1,8 +1,8 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 export type FontSize = "normal" | "large" | "x-large";
 
-const fontSize = ref<FontSize>("normal");
+const fontSize = ref<FontSize>(localStorage.fontSize ?? "normal");
 
 const fontSizeMap = {
   normal: "1rem",
@@ -13,16 +13,17 @@ const fontSizeMap = {
 export function useFontSize() {
   const updateFontSize = (size: FontSize) => {
     fontSize.value = size;
+    localStorage.fontSize = size;
+
     document.documentElement.style.setProperty(
       "--base-font-size",
       fontSizeMap[size]
     );
   };
 
-  // Initialize on first load
-  if (fontSize.value === "normal") {
-    updateFontSize("normal");
-  }
+  onMounted(() => {
+    updateFontSize(fontSize.value);
+  });
 
   return {
     fontSize,
