@@ -111,12 +111,12 @@ const sortedItemColumns = computed(() => {
     <template v-for="block in sortedBlocks">
       <!-- Order cell -->
       <div
-        class="p-2 text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800 text-center">
-        {{ block.order }}
+        class="flex items-center justify-center p-2 text-gray-800 dark:text-gray-400 border-b border-r border-gray-200 dark:border-gray-800">
+        <div>{{ block.order }}</div>
       </div>
 
       <!-- Type cell -->
-      <div class="p-2 border-b border-r border-gray-200 dark:border-gray-800 text-center">
+      <div class="flex items-center justify-center p-2 border-b border-r border-gray-200 dark:border-gray-800">
         <span class="inline-block px-2 py-1 rounded" :class="{
           'bg-green-700 text-green-100': block.name === 'Show',
           'bg-red-600 text-red-100': block.name === 'Hide'
@@ -127,9 +127,9 @@ const sortedItemColumns = computed(() => {
 
       <!-- Item cells -->
       <div v-for="item in sortedItemColumns" :key="item"
-        class="p-2 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0 text-center">
+        class="flex items-center justify-center p-2 border-b border-r border-gray-200 dark:border-gray-800 last:border-r-0">
         <template v-if="block.items[item]">
-          <div v-for="(blockItem, index) in block.items[item]" :key="index" class="mb-1 last:mb-0">
+          <div v-for="(blockItem, index) in block.items[item]" :key="index" class="text-center mb-1 last:mb-0">
             <span v-for="param in blockItem.params" :key="param"
               class="inline-block px-2 py-1 rounded mr-1 mb-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-400">
               {{ param }}
