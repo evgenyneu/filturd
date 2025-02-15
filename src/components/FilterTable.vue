@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { Block } from '../../src-tauri/bindings/Block';
+import type { Items } from '../types/items';
 import { ref, computed, watch } from 'vue';
 
 const props = defineProps<{
   blocks: Block[]
+  usedItemNames: string[]
+  items: Items
 }>();
 
 type SortKey = 'order' | 'name' | null;
