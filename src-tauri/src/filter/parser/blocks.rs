@@ -2,6 +2,7 @@ use crate::filter::parser::block_item::{parse_block_item, BlockItem};
 use crate::filter::parser::blocks_with_lines::{BlockName, BlockWithLines};
 use crate::filter::parser::errors::ParseError;
 use ts_rs::TS;
+use std::collections::HashMap;
 
 /// Represents a parsed Block which holds a block name and its parsed block items.
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, TS)]
@@ -10,7 +11,7 @@ pub struct Block {
     // Position of the block in the file, starting from 1
     pub order: u16,
     pub name: BlockName,
-    pub items: Vec<BlockItem>,
+    pub items: HashMap<String, Vec<BlockItem>>,
 }
 
 /// Parses an array of `BlockWithLines` into an array of `Block` by parsing each line as a block item.
@@ -30,13 +31,13 @@ pub fn parse_block_with_lines(
     let mut blocks = Vec::new();
 
     for block in blocks_with_lines {
-        let mut items = Vec::new();
+        let mut items: HashMap<String, Vec<BlockItem>> = HashMap::new();
 
         for line in &block.lines {
             // Propagates error if parse_block_item fails.
             let item = parse_block_item(line)?;
 
-            items.push(item);
+            items.entry(item.name.clone()).or_default().push(item);
         }
 
         blocks.push(Block {
@@ -98,16 +99,20 @@ mod tests {
         let block = Block {
             order: 1,
             name: BlockName::Show,
-            items: vec![
-                BlockItem {
-                    name: "BaseType".to_string(),
-                    params: vec!["==".to_string(), "Mirror of Kalandra".to_string()],
-                },
-                BlockItem {
-                    name: "SetFontSize".to_string(),
-                    params: vec!["45".to_string()],
-                },
-            ],
+            items: HashMap::from([
+                ("BaseType".to_string(), vec![
+                    BlockItem {
+                        name: "BaseType".to_string(),
+                        params: vec!["==".to_string(), "Mirror of Kalandra".to_string()],
+                    },
+                ]),
+                ("SetFontSize".to_string(), vec![
+                    BlockItem {
+                        name: "SetFontSize".to_string(),
+                        params: vec!["45".to_string()],
+                    },
+                ]),
+            ]),
         };
 
         let json = serde_json::to_string(&block).unwrap();

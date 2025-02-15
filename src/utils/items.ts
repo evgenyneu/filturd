@@ -5,13 +5,7 @@ import itemsData from "./items.json";
 export const items: Items = itemsData;
 
 export function items_used_in_blocks(blocks: Block[]): string[] {
-  const uniqueItems = new Set<string>();
-
-  blocks.forEach((block) => {
-    block.items.forEach((item) => {
-      uniqueItems.add(item.name);
-    });
-  });
-
-  return Array.from(uniqueItems);
+  return Array.from(
+    new Set(blocks.flatMap((block) => Object.keys(block.items)))
+  );
 }

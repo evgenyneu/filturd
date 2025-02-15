@@ -5,4 +5,8 @@ import type { BlockName } from "./BlockName";
 /**
  * Represents a parsed Block which holds a block name and its parsed block items.
  */
-export type Block = { order: number; name: BlockName; items: Array<BlockItem> };
+export type Block = {
+  order: number;
+  name: BlockName;
+  items: { [key in string]?: Array<BlockItem> };
+};
