@@ -16,6 +16,7 @@
     "@tauri-apps/plugin-dialog": "^2.2.0",
     "@tauri-apps/plugin-global-shortcut": "^2.2.0",
     "@tauri-apps/plugin-opener": "^2",
+    "floating-vue": "^5.2.2",
     "tailwindcss": "^4.0.0",
     "vue": "^3.5.13"
   },
