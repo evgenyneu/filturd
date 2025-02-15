@@ -43,6 +43,14 @@ watch(() => props.blocks, () => {
   sortDirection.value = 'asc';
 });
 
+const sortedItemColumns = computed(() => {
+  return [...props.usedItemNames].sort((a, b) => {
+    const countA = props.items[a]?.frequency || 0;
+    const countB = props.items[b]?.frequency || 0;
+    return countB - countA;
+  });
+});
+
 </script>
 
 <template>
@@ -61,7 +69,7 @@ watch(() => props.blocks, () => {
             </svg>
           </button>
         </th>
-        <th @click="handleSort('name')" class="w-full py-2 px-1 text-left font-normal group">
+        <th @click="handleSort('name')" class="py-2 px-1 text-left font-normal group">
           <button class="flex items-center hover:underline cursor-pointer text-gray-600 dark:text-poe-text-400">
             <span>Type</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -72,6 +80,9 @@ watch(() => props.blocks, () => {
                 d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
             </svg>
           </button>
+        </th>
+        <th v-for="item in sortedItemColumns" :key="item" class="py-2 px-1 text-left font-normal whitespace-nowrap">
+          {{ item }}
         </th>
       </tr>
     </thead>
@@ -87,6 +98,18 @@ watch(() => props.blocks, () => {
           }">
             {{ block.name.toLowerCase() }}
           </span>
+        </td>
+        <td v-for="item in sortedItemColumns" :key="item" class="py-2 px-1">
+          <template v-if="block.items.some(i => i.name === item)">
+            <div v-for="blockItem in block.items.filter(i => i.name === item)"
+              :key="`${blockItem.name}-${blockItem.params.join('-')}`" class="mb-1 last:mb-0">
+              <span v-for="param in blockItem.params" :key="param" class="inline-block px-2 py-1 rounded mr-1
+                           bg-gray-200/50 dark:bg-poe-border/20
+                           text-gray-700 dark:text-poe-text-400">
+                {{ param }}
+              </span>
+            </div>
+          </template>
         </td>
       </tr>
     </tbody>
